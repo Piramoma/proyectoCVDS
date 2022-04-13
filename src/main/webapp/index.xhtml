@@ -12,6 +12,19 @@
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<style type="text/css">
+        body {
+            background-image:url(http://landing.escuelaing.edu.co/wp-content/uploads/2017/04/maestrias_v2.jpg);
+            background-size: 115%;
+        }
+		.row{
+		   margin: 8% 0 0 -4%;
+		}
+		.title {
+			font-size: 18px;
+			font-family: monospace;
+		}
+    </style>
 </h:head>
 <h:body styleClass="red lighten-1">
 	<div class="valign-wrapper" id="login-page">
@@ -21,11 +34,13 @@
 					<div class="col s6 offset-s3">
 						<div class="card">
 							<div class="card-content">
+
 								<img class="responsive-img" style="max-width: 64px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+								<p class="title">RECURSOS BIBLIOTECA</p>
 								<div class="left-align">
 									<h:form id="login-form">
 										<p:growl autoUpdate="true" />
-										<div class="row">
+										<div class="row" id="contenedor">
 											<div class="col s12 input-field">
 												<h:inputText id="username" required="true" requiredMessage="Username is required!" />
 												<h:outputLabel for="username" value="Username" />
