@@ -9,6 +9,7 @@
     <title>login</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
     <style type="text/css">
          body {
             font-family: Arial, Helvetica, sans-serif;
@@ -110,8 +111,8 @@
                 <i class="fas fa-key icon"></i>
                 <input type="password" placeholder="Password" required="true"/>
             </div>
-            <form action="recursos.xhtml">
-                <input type="submit" value="Login" class="button" />
+            <form action="recursos?servlet-redirect = true">
+                <input type="submit" value="Login" class="button" action="recursos?servlet-redirect = true" />
             </form>
             <p>Recuerda Devolver los Recursos en el plazo establecido.</p>
             <p>¿No tienes una cuenta? <a class="link" href="recursos.xhtml">Accede</a></p>
