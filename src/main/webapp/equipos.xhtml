@@ -8,7 +8,7 @@
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Libros</title>
+    <title>Equipos</title>
     <link rel="stylesheet" href="../style/bootstrap.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
     <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
@@ -41,7 +41,7 @@
             <div class="d-flex flex-column">
                 <div class="p-0 btn-group justify-content-lg-center">
                     <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas; text-align: center;">
-                        <h1 class="text align-self-center p-2">CONSULTAR LIBROS</h1>
+                        <h1 class="text align-self-center p-2">CONSULTAR EQUIPOS</h1>
                     </div>
                 </div>
                 <h:form class="data">
@@ -67,7 +67,7 @@
                         <p:column headerText="Nombre" style="text-align: center" filterBy="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}" sortBy="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}">
                             <h:outputText value="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}"/>
                         </p:column>
-                        <p:column headerText="Autor" style="text-align: center" filterBy="#{element.element_name}" sortBy="#{element.element_name}">
+                        <p:column headerText="Caracteristicas" style="text-align: center" filterBy="#{element.element_name}" sortBy="#{element.element_name}">
                             <h:outputText value="#{element.element_name}"/>
                         </p:column>
                         <p:column headerText="Tipo" style="text-align: center" filterBy="#{element.type}" sortBy="#{element.type}">
@@ -78,8 +78,7 @@
                         </p:column>
                     </p:dataTable>
                     <div class="p-2 row justify-content-center h-100">
-                        <p:button class="btn btn-danger" value="Atras" style="margin: 10px; font-family: Consolas;" outcome="recursos" />
-                    </div>
+                        <p:button class="btn btn-danger" value="Atras" style="margin: 10px; font-family: Consolas;" outcome="recursos" />                    </div>
                 </h:form>
             </div>
         </div>

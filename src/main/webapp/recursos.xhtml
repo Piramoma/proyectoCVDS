@@ -40,6 +40,7 @@
             display: flex;
             max-width: 1100px;
             margin: auto;
+            margin-top: 20px;
         }
         .title-cards{
             width: 100%;
@@ -83,20 +84,29 @@
             font-size: 14px;
             margin-bottom: 5px;
         }
-        .card .contenido-card a{
+        .card .contenido-card button{
+            width: 97px;
+            height: 50px;
+            font-size: 15px;
             display: inline-block;
             padding: 10px;
             margin-top: 10px;
             text-decoration: none;
             color: #2fb4cc;
             border: 1px solid #2fb4cc;
-            border-radius: 4px;
+            border-radius: 5px;
             transition: all 400ms ease;
             margin-bottom: 5px;
+            font-weight: normal;
         }
-        .card .contenido-card a:hover{
-            background: #2fb4cc;
-            color: #fff;
+        .listar:hover {
+            background: blue;
+        }
+        .agregar:hover {
+            background: green;
+        }
+        .eliminar:hover {
+            background: red;
         }
         @media only screen and (min-width:320px) and (max-width:768px){
             .container-card{
@@ -120,8 +130,10 @@
             </figure>
             <div class="contenido-card">
                 <h3>Libros</h3>
-                <p>Plataforma da acceso en línea a material de bibliografía básica en español de las editoriales Pearson, Cengage y McGraw Hill.</p>
-                <a href="libros.xhtml">Ver</a>
+                <p>Cuenta con mas de 1000 libros con editoriales Pearson, Cengage y McGraw Hill.</p>
+                <p:button class="listar" outcome="libros" value="Listar" />
+                <p:button class="agregar" outcome="addLibro" value="Agregar" />
+                <p:button class="eliminar" outcome="deleteLibro" value="Eliminar" />
             </div>
         </div>
         <div class="card">
@@ -130,8 +142,10 @@
             </figure>
             <div class="contenido-card">
                 <h3>Equipos</h3>
-                <p>Cuenta con 20 equipos con acceso a todos los recursos digitales.</p>
-                <a href="#">Ver</a>
+                <p>Cuenta con 20 equipos con acceso a internet y a todos los recursos digitales.</p>
+                <p:button class="listar" outcome="equipos" value="Listar" />
+                <p:button class="agregar" outcome="addEquipo" value="Agregar" />
+                <p:button class="eliminar" outcome="deleteEquipo" value="Eliminar" />
             </div>
         </div>
         <div class="card">
@@ -140,8 +154,10 @@
             </figure>
             <div class="contenido-card">
                 <h3>Salas de Estudio</h3>
-                <p>Cuenta con 4 salas de estudio, cada una con un maximo de 6 personas.</p>
-                <a href="#">Ver</a>
+                <p>Cuenta con 4 salas de estudio equipada con tablero y mesa para un maximo de 6 personas.</p>
+                <p:button class="listar" outcome="salas" value="Listar" />
+                <p:button class="agregar" outcome="addSala" value="Agregar" />
+                <p:button class="eliminar" outcome="deleteSala" value="Eliminar" />
             </div>
         </div>
     </div>
