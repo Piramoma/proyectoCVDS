@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Libros</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
+    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
+    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
+    <style type="text/css">
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: url(http://landing.escuelaing.edu.co/wp-content/uploads/2017/04/maestrias_v2.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .MyDialog.ui-dialog .ui-dialog-content {
+            padding: 0px !important;
+            background: aliceblue !important;
+            opacity: 1 !important;
+        }
+        .card {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Consolas;
+            text-align: center;
+            margin-left: 0px;
+            margin-right:0px;
+            margin-top:-20px;
+            margin-bottom: 20px;
+            border-radius: 10px;"
+        }
+        .tittle {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Consolas;
+            text-align: center;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        @media(min-width:768px)
+        {
+            .data {
+                margin-left: 30px;
+                margin-right: 30px;
+            }
+            .card {
+                background-color: #000000;
+                color: #ffffff;
+                font-family: Consolas;
+                text-align: center;
+                margin-left: 30px;
+                margin-right:30px;
+                margin-top:-20px;
+                margin-bottom: 20px;
+                border-radius: 10px;"
+            }
+            .tittle {
+                background-color: #000000;
+                color: #ffffff;
+                font-family: Consolas;
+                text-align: center;
+                margin-left: 30px;
+                margin-right:30px;
+            }
+        }
+    </style>
+</h:head>
+<h:body >
+    <div class="container h-100">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex flex-column">
+
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <div class="tittle" >
+                        <h1 class="text align-self-center p-2">CONSULTAR LIBROS</h1>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h:form >
+                        <p:growl id="messages"/>
+                        <p:menubar>
+                            <p:submenu label="Ubicacion" icon="pi pi-fw pi-file">
+                                <p:menuitem value="Bloque A" icon="pi pi-fw pi-trash"/>
+                                <p:menuitem value="Bloque B" icon="pi pi-fw pi-external-link"/>
+                            </p:submenu>
+
+                            <p:submenu label="Cantidad" icon="pi pi-fw pi-pencil">
+                                <p:menuitem value="menor a mayor" icon="pi pi-fw pi-align-left"/>
+                                <p:menuitem value="mayor a menor" icon="pi pi-fw pi-align-right"/>
+                            </p:submenu>
+
+                            <p:menuitem value="Salir" icon="pi pi-fw pi-power-off" outcome="recursos"/>
+                            <f:facet name="options" >
+                                <div class="input-contenedor">
+                                    <p:inputText placeholder="Buscar Libro"/>
+                                </div>
+                            </f:facet>
+                        </p:menubar>
+                    </h:form>
+                </div>
+
+                <h:form class="data">
+                    <p:dataTable id="tbl" var="element" value="#{elementBean.elementosBusquedaBasica}" rows="10"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,15"
+                                 styleClass="table-dark table-striped table-bordered justify-content-center"
+                                 rowKey="#{element.id}" selection="#{elementBean.elementosSeleccionados}">
+                        <f:facet name="{Exporters}">
+                            <div style="float:right;margin-right: 2%;">
+                                <h:commandLink>
+                                    <p:graphicImage url="../image/excel.png" width="22"/>
+                                    <p:dataExporter type="xls" target="tbl" fileName="element" encoding="UTF-8"/>
+                                </h:commandLink>
+                            </div>
+                        </f:facet>
+                        <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                        <p:column headerText="Id" style="text-align: center" >
+                            <h:outputText value="#{element.id}"/>
+                        </p:column>
+                        <p:column headerText="Nombre" style="text-align: center" >
+                            <h:outputText value="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}"/>
+                        </p:column>
+                        <p:column headerText="Autor" style="text-align: center" >
+                            <h:outputText value="#{element.element_name}"/>
+                        </p:column>
+                        <p:column headerText="Estado" style="text-align: center" >
+                            <h:outputText value="#{element.estado}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <div class="p-2 row justify-content-center h-100" style="text-align: center;">
+                        <p:button class="btn btn-danger" value="Reservar" style="margin: 10px; font-family: Consolas; "/>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

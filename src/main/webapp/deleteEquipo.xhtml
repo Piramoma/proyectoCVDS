@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <meta charset="UTF-8" />
-    <title>login</title>
+    <title>deleteEquipo</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
     <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
@@ -31,12 +31,14 @@
             padding: 3px;
         }
         h1{
+            background: red;
             text-align: center;
             color: #1a2537;
             font-size: 30px;
+            margin-left: -3px;
+            margin-right: -3px;
         }
-        input[type="text"],
-        input[type="password"]{
+        input[type="String"]{
             font-size: 20px;
             width: 82%;
             padding: 10px;
@@ -63,6 +65,20 @@
             font-weight: normal;
         }
         .button:hover{
+            background: cadetblue;
+        }
+        .buttonCancel{
+            width: 100%;
+            height: 60px;
+            color: white;
+            font-size: 20px;
+            background:  red;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        .buttonCancel:hover{
             background: cadetblue;
         }
         p{
@@ -94,20 +110,16 @@
     </header>
     <h:form class="formulario">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
-        <h1>Recursos Biblioteca</h1>
+        <h1>Eliminar Equipo</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <p:inputText type="text" placeholder="Carnet" required="true" />
+                <i class="fas fa fa-key icon"></i>
+                <p:inputText type="String" placeholder="ID Equipo" required="true" />
             </div>
-            <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
-                <p:inputText type="password" placeholder="Contraseña" required="true" />
-            </div>
-            <p:commandButton class="button" value="Login" action="recursos?servlet-redirect = true" />
-            <p>Recuerda Devolver los Recursos en el plazo establecido.</p>
+            <p:commandButton class="button" value="Eliminar" action="recursos?servlet-redirect = true" />
+            <p:button class="buttonCancel" value="Cancelar" outcome="recursos" />
+            <p>Verifique que el Equipo Exista en la opción Listar Equipos.</p>
         </div>
     </h:form>
 </h:body>
 </html>
-

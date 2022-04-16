@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>recursos</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: url(./imagen/Biblioteca.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        h4 {
+            margin-top: 20px;
+            font-size: 15px;
+        }
+        h2 {
+            color: white;
+            background: black;
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+        /*Cards*/
+        .container-card{
+            width: 100%;
+            display: flex;
+            max-width: 1100px;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .title-cards{
+            width: 100%;
+            max-width: 1080px;
+            margin: auto;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            color: black;
+            background: red;
+        }
+        .card{
+            width: 100%;
+            margin: 20px;
+            border-radius: 6px;
+            overflow: hidden;
+            background:#fff;
+            box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+            transition: all 400ms ease-out;
+            cursor: default;
+        }
+        .card:hover{
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+            transform: translateY(-3%);
+        }
+        .card img{
+            width: 100%;
+            height: 210px;
+        }
+        .card .contenido-card{
+            padding: 15px;
+            text-align: center;
+        }
+        .card .contenido-card h3{
+            margin-bottom: 15px;
+            color: #7a7a7a;
+        }
+        .card .contenido-card p{
+            line-height: 1.8;
+            color: #6a6a6a;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .card .contenido-card button{
+            width: 97px;
+            height: 50px;
+            font-size: 15px;
+            display: inline-block;
+            padding: 10px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #2fb4cc;
+            border: 1px solid #2fb4cc;
+            border-radius: 5px;
+            transition: all 400ms ease;
+            margin-bottom: 5px;
+            font-weight: normal;
+        }
+        .listar:hover {
+            background: blue;
+        }
+        .agregar:hover {
+            background: green;
+        }
+        .eliminar:hover {
+            background: red;
+        }
+        @media only screen and (min-width:320px) and (max-width:768px){
+            .container-card{
+                flex-wrap: wrap;
+            }
+            .card{
+                margin: 15px;
+            }
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="title-cards">
+        <h2>Recursos de la Biblioteca</h2>
+        <h4>La Biblioteca Jorge Álvarez Lleras es un sistema de información que cuenta con una amplia colección de recursos físicos y electrónicos que apoyan la labor académica e investigativa de la Institución en áreas relacionadas con Ingeniería, Administración, Economía, Matemáticas, Ciencias Puras y Ciencias Humanas, entre otras.</h4>
+    </div>
+    <div class="container-card">
+        <div class="card">
+            <figure>
+                <img src="./imagen/Libros.jpg" />
+            </figure>
+            <div class="contenido-card">
+                <h3>Libros</h3>
+                <p>Cuenta con mas de 1000 libros con editoriales Pearson, Cengage y McGraw Hill.</p>
+                <p:button class="listar" outcome="libros" value="Listar" />
+                <p:button class="agregar" outcome="addLibro" value="Agregar" />
+                <p:button class="eliminar" outcome="deleteLibro" value="Eliminar" />
+            </div>
+        </div>
+        <div class="card">
+            <figure>
+                <img src="./imagen/Equipos.jpg" />
+            </figure>
+            <div class="contenido-card">
+                <h3>Equipos</h3>
+                <p>Cuenta con 20 equipos con acceso a internet y a todos los recursos digitales.</p>
+                <p:button class="listar" outcome="equipos" value="Listar" />
+                <p:button class="agregar" outcome="addEquipo" value="Agregar" />
+                <p:button class="eliminar" outcome="deleteEquipo" value="Eliminar" />
+            </div>
+        </div>
+        <div class="card">
+            <figure>
+                <img src="./imagen/SalaEstudio.jpg" />
+            </figure>
+            <div class="contenido-card">
+                <h3>Salas de Estudio</h3>
+                <p>Cuenta con 4 salas de estudio equipada con tablero y mesa para un maximo de 6 personas.</p>
+                <p:button class="listar" outcome="salas" value="Listar" />
+                <p:button class="agregar" outcome="addSala" value="Agregar" />
+                <p:button class="eliminar" outcome="deleteSala" value="Eliminar" />
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>
