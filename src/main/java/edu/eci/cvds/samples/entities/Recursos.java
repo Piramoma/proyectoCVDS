@@ -14,12 +14,14 @@ public class Recursos implements Serializable{
     public Recursos(){
     }
 
-    public Recursos(int idRecurso,String nombre,boolean disponible,String tipo,String descripcion){
+    public Recursos(int idRecurso,String nombre,boolean disponible,String tipo,String descripcion,String ubicacion,int capacidad){
         this.idRecurso = idRecurso;
         this.nombre = nombre;
         this.disponible = disponible;
         this.tipo = tipo;
         this.descripcion = descripcion;
+        this.ubicacion = ubicacion;
+        this.capacidad = capacidad;
     }
 
     // getters
