@@ -1,4 +1,4 @@
-package edu.eci.cvds.services;
+package edu.eci.cvds.samples.services;
 
 public class ServicesException extends Exception {
 
