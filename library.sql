@@ -1,37 +1,45 @@
-CREATE TABLE Usuarios(
-    idUsuario NUMERIC(10) NOT NULL,
-    nombre VARCHAR(15) NOT NULL,
-    correo VARCHAR(30) NOT NULL,
-    CONSTRAINT "PK_Usuarios" PRIMARY KEY(carnet)
+CREATE TABLE disponibilidad (
+   id int4 NOT NULL,
+   idrecurso int4 NOT NULL,
+   fechainicio time NOT NULL,
+   fechafin time NOT NULL
 );
 
-CREATE TABLE Recursos(
-    idRecurso NUMERIC(15) NOT NULL,
-    nombre VARCHAR(50) NOT NULL,
-    disponible BOOLEAN NOT NULL,
-    tipo VARCHAR(30) NOT NULL,
-    descripcion VARCHAR(50) NOT NULL,
-    CONSTRAINT "PK_Recursos" PRIMARY KEY(id)
+CREATE TABLE recursos (
+     id int4 NOT NULL,
+     estado varchar(100) NOT NULL,
+     nombre varchar(100) NOT NULL,
+     ubicacion varchar(100) NOT NULL,
+     tipo varchar(100) NOT NULL,
+     capacidad int4 NOT NULL,
+     horainicio time NULL,
+     horafin time NULL
 );
 
-CREATE TABLE Reservas(
-    idReserva NUMERIC(15) NOT NULL,
-    idEstudiante NUMERIC(10) NOT NULL,
-    idRecurso NUMERIC(15) NOT NULL,
-    fechaInicio TIMESTAMP,
-    fechaFinal TIMESTAMP,
-    CONSTRAINT "PK_Reservas" PRIMARY KEY(id),
-    CONSTRAINT "FK_ReservaEstudiante" FOREIGN KEY(idEstudiante)
-        REFERENCES Usuarios(idUsuario),
-    CONSTRAINT "FK_ReservaRecurso" FOREIGN KEY(idRecurso)
-        REFERENCES Recursos(idRecurso)
+CREATE TABLE reservas (
+     id int4 NOT NULL,
+     id_usuario varchar(200) NULL,
+     id_recurso int4 NULL,
+     fecha_inicio_reserva timestamp NULL,
+     fecha_fin_reserva timestamp NULL,
+     fecha_solicitud date NULL,
+     tipo varchar NULL,
+     activa bool NULL
 );
 
-CREATE TABLE Devoluciones(
-    idDevolucion NUMERIC(15) NOT NULL,
-    idRecurso NUMERIC(15) NOT NULL,
-    fechaDevolucion TIMESTAMP,
-    CONSTRAINT "PK_Devoluciones" PRIMARY KEY(idDevolucion),
-    CONSTRAINT "FK_DevolucionRecurso" FOREIGN KEY(idRecurso)
-        REFERENCES Recursos(idRecurso)
+
+CREATE TABLE usuarios (
+    email varchar(200) NOT NULL,
+    nombre varchar(100) NOT NULL,
+    apellido varchar(100) NOT NULL,
+    contraseña varchar(32) NOT NULL,
+    tipo varchar(32) NULL
 );
+
+ALTER TABLE Tipo_Usuario add PRIMARY KEY (id);
+ALTER TABLE Usuarios add PRIMARY KEY (email);
+
+Alter table usuarios add constraint fk_usuarios_tipo_usuarios
+    foreign key (tipo_usuario_id)
+        references tipo_usuario(id)
+;
