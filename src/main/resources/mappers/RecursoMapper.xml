@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper">
+
+    <resultMap type='Recurso' id='RecursoResult'>
+        <id property='id' column='id' />
+        <result property='estado' column='estado'/>
+        <result property='nombre' column='nombre' />
+        <result property='ubicacion' column='ubicacion' />
+        <result property='tipo' column='tipo' />
+        <result property='capacidad' column='capacidad' />
+        <result property='horaInicio' column='horainicio' />
+        <result property='horaFin' column='horafin' />
+    </resultMap>
+
+    <select id="consultarLibros" resultMap="RecursoResult" >
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'libro'
+    </select>
+
+    <select id="consultarEquipos" resultMap="RecursoResult" >
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'equipo'
+    </select>
+
+    <select id="consultarSalasEstudio" resultMap="RecursoResult" >
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'sala'
+    </select>
+
+</mapper>

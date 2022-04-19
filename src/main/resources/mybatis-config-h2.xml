@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <typeAlias type='edu.eci.cvds.entities.Usuario' alias='Usuario'/>
+        <typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso'/>
+        <typeAlias type='edu.eci.cvds.entities.Horario' alias='Horario'/>
+        <typeAlias type='edu.eci.cvds.entities.Reserva' alias='Reserva'/>
+    </typeAliases>
+
+    <environments default="test">
+        <environment id="test">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="org.h2.Driver" />
+                <property name="url" value="jdbc:h2:file:./target/db/testdb;MODE=POSTGRESQL" />
+                <property name="username" value="sa" />
+                <property name="password" value="" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/UsuarioMapper.xml"></mapper>
+        <mapper resource="mappers/RecursoMapper.xml"></mapper>
+        <mapper resource="mappers/HorarioMapper.xml"></mapper>
+        <mapper resource="mappers/ReservaMapper.xml"></mapper>
+    </mappers>
+
+</configuration>
