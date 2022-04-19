@@ -7,10 +7,13 @@ import java.util.List;
 
 public interface RecursoDAO {
 
-
     public void save(Recurso recurso);
 
     public Recurso load(int id);
 
     public List<Recurso> consultarLibros();
+
+    public List<Recurso> consultarEquipos();
+
+    public List<Recurso> consultarSalasEstudio();
 }

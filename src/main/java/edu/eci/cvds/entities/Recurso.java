@@ -22,7 +22,6 @@ import javax.persistence.Id;
 
 public class Recurso implements Serializable{
 
-
     private int id;
     private String estado;
     private String nombre;
@@ -110,6 +109,5 @@ public class Recurso implements Serializable{
     public String toString() {
         return "Element { id: " + id + ", nombre: " + nombre + ", ubicacion: " + ubicacion + ", tipo: " + tipo + ", capacidad: " + capacidad + ", estado: " + estado + "}";
     }
-
 
 }

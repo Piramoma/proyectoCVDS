@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface ServiciosBiblioteca {
 
-    public List<Recurso> consultarLibros() throws PersistenceException;
+    public abstract List<Recurso> consultarLibros() ;
+
+    public abstract List<Recurso> consultarEquipos() ;
+
+    public abstract List<Recurso> consultarSalasEstudio() ;
+
 }

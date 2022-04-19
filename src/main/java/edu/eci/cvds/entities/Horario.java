@@ -17,7 +17,6 @@ public class Horario {
      * @param horaFin
      */
     public Horario(Time horaInicio,Time horaFin) {
-
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
     }

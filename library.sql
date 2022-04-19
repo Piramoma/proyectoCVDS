@@ -27,7 +27,6 @@ CREATE TABLE reservas (
      activa bool NULL
 );
 
-
 CREATE TABLE usuarios (
     email varchar(200) NOT NULL,
     nombre varchar(100) NOT NULL,
@@ -42,3 +41,4 @@ ALTER TABLE reservas add PRIMARY KEY (id);
 ALTER TABLE disponibilidad add PRIMARY KEY (id);
 
 insert into Recursos values (1, 'disponible','El quijote de la mancha', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+

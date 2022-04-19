@@ -6,6 +6,9 @@
 
     <typeAliases>
         <typeAlias type='edu.eci.cvds.entities.Usuario' alias='Usuario'/>
+        <typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso'/>
+        <typeAlias type='edu.eci.cvds.entities.Horario' alias='Horario'/>
+        <typeAlias type='edu.eci.cvds.entities.Reserva' alias='Reserva'/>
     </typeAliases>
 
     <environments default="test">

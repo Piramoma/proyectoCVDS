@@ -110,11 +110,5 @@ public class Reserva {
         return "Reserva{" + "idUsuario=" + idUsuario + ", tipo=" + tipo + ", id=" + id + ", idRecurso=" + idRecurso + ", fechaReserva=" + fechaReserva + ", fechaInicioReserva=" + fechaInicioReserva + ", fechaFinReserva=" + fechaFinReserva + ", activo=" + activo + '}';
     }
 
-
-
-
-
-
-
 }
 
