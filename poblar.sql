@@ -60,4 +60,5 @@ insert into Usuarios (idUsuario, nombre, correo) values (2161417, 'Mayne', 'mlau
 insert into Usuarios (idUsuario, nombre, correo) values (2161418, 'Wadsworth', 'wmiddlehursth@sitemeter.com');
 insert into Usuarios (idUsuario, nombre, correo) values (2161419, 'Dolores', 'dricardei@skyrock.com');
 insert into Usuarios (idUsuario, nombre, correo) values (2161420, 'Eliot', 'evausej@pinterest.com');
+insert into Usuarios (idUsuario, nombre, correo) values (2161421, 'Beckie', 'bmckerron0@accuweather.com');
 
