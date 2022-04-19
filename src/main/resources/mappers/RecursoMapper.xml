@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="edu.eci.cvds.persistance.mybatis.mappers.RecursoMapper">
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper">
 
     <resultMap type='Recurso' id='RecursoResult'>
         <id property='id' column='id' />
@@ -16,28 +16,10 @@
         <result property='horaFin' column='horafin' />
     </resultMap>
 
-    <select id="consultarRecurso" resultMap="RecursoResult" parameterType="map">
+    <select id="consultarLibros" resultMap="RecursoResult" parameterType="map">
         SELECT *
         FROM recursos
-        WHERE recursos.id = #{id}
+        WHERE tipo = 'libro'
     </select>
 
-    <select id="consultarRecursos" resultMap="RecursoResult" parameterType="map">
-        SELECT *
-        FROM recursos
-    </select>
-    <select id="consultarRecursosDisponibles" resultMap="RecursoResult" parameterType="map">
-        SELECT *
-        FROM recursos where estado = 'Disponible'
-    </select>
-
-    <insert id="addRecurso" parameterType="map">
-        INSERT INTO
-            recursos (nombre, ubicacion, tipo, capacidad, horainicio, horafin)
-        VALUES (#{rec.nombre}, #{rec.ubicacion}, #{rec.tipo}, #{rec.capacidad},#{rec.horaInicio},#{rec.horaFin})
-    </insert>
-
-    <delete id="eliminarUltimoRecursoTest"  parameterType="int">
-        DELETE FROM recursos WHERE id=(select max(id) from recursos)
-    </delete>
 </mapper>

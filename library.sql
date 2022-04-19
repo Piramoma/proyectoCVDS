@@ -1,8 +1,8 @@
 CREATE TABLE disponibilidad (
    id int4 NOT NULL,
    idrecurso int4 NOT NULL,
-   fechainicio time NOT NULL,
-   fechafin time NOT NULL
+   fechainicio timestamp NOT NULL,
+   fechafin timestamp NOT NULL
 );
 
 CREATE TABLE recursos (
@@ -12,8 +12,8 @@ CREATE TABLE recursos (
      ubicacion varchar(100) NOT NULL,
      tipo varchar(100) NOT NULL,
      capacidad int4 NOT NULL,
-     horainicio time NULL,
-     horafin time NULL
+     horainicio timestamp NULL,
+     horafin timestamp NULL
 );
 
 CREATE TABLE reservas (
@@ -36,10 +36,9 @@ CREATE TABLE usuarios (
     tipo varchar(32) NULL
 );
 
-ALTER TABLE Tipo_Usuario add PRIMARY KEY (id);
-ALTER TABLE Usuarios add PRIMARY KEY (email);
+ALTER TABLE usuarios add PRIMARY KEY (email);
+ALTER TABLE recursos add PRIMARY KEY (id);
+ALTER TABLE reservas add PRIMARY KEY (id);
+ALTER TABLE disponibilidad add PRIMARY KEY (id);
 
-Alter table usuarios add constraint fk_usuarios_tipo_usuarios
-    foreign key (tipo_usuario_id)
-        references tipo_usuario(id)
-;
+insert into Recursos values (1, 'disponible','El quijote de la mancha', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
