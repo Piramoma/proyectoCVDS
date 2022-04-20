@@ -29,9 +29,50 @@
             background: aliceblue !important;
             opacity: 1 !important;
         }
-        .data {
-            margin-left: 30px;
-            margin-right: 30px;
+        .card {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Consolas;
+            text-align: center;
+            margin-left: 0px;
+            margin-right:0px;
+            margin-top:-20px;
+            margin-bottom: 20px;
+            border-radius: 10px;"
+        }
+        .tittle {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Consolas;
+            text-align: center;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        @media(min-width:768px)
+        {
+            .data {
+                margin-left: 30px;
+                margin-right: 30px;
+            }
+            .card {
+                background-color: #000000;
+                color: #ffffff;
+                font-family: Consolas;
+                text-align: center;
+                margin-left: 30px;
+                margin-right:30px;
+                margin-top:-20px;
+                margin-bottom: 20px;
+                border-radius: 10px;"
+            }
+            .tittle {
+                background-color: #000000;
+                color: #ffffff;
+                font-family: Consolas;
+                text-align: center;
+                margin-left: 30px;
+                margin-right:30px;
+            }
         }
     </style>
 </h:head>
@@ -39,11 +80,37 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
+
                 <div class="p-0 btn-group justify-content-lg-center">
-                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas; text-align: center;">
+                    <div class="tittle" >
                         <h1 class="text align-self-center p-2">CONSULTAR LIBROS</h1>
                     </div>
                 </div>
+
+                <div class="card">
+                    <h:form >
+                        <p:growl id="messages"/>
+                        <p:menubar>
+                            <p:submenu label="Ubicacion" icon="pi pi-fw pi-file">
+                                <p:menuitem value="Bloque A" icon="pi pi-fw pi-trash"/>
+                                <p:menuitem value="Bloque B" icon="pi pi-fw pi-external-link"/>
+                            </p:submenu>
+
+                            <p:submenu label="Cantidad" icon="pi pi-fw pi-pencil">
+                                <p:menuitem value="menor a mayor" icon="pi pi-fw pi-align-left"/>
+                                <p:menuitem value="mayor a menor" icon="pi pi-fw pi-align-right"/>
+                            </p:submenu>
+
+                            <p:menuitem value="Salir" icon="pi pi-fw pi-power-off" outcome="recursos"/>
+                            <f:facet name="options" >
+                                <div class="input-contenedor">
+                                    <p:inputText placeholder="Buscar Libro"/>
+                                </div>
+                            </f:facet>
+                        </p:menubar>
+                    </h:form>
+                </div>
+
                 <h:form class="data">
                     <p:dataTable id="tbl" var="element" value="#{elementBean.elementosBusquedaBasica}" rows="10"
                                  paginator="true"
@@ -61,24 +128,21 @@
                             </div>
                         </f:facet>
                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                        <p:column headerText="Id" style="text-align: center" filterBy="#{element.id}" sortBy="#{element.id}">
+                        <p:column headerText="Id" style="text-align: center" >
                             <h:outputText value="#{element.id}"/>
                         </p:column>
-                        <p:column headerText="Nombre" style="text-align: center" filterBy="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}" sortBy="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}">
+                        <p:column headerText="Nombre" style="text-align: center" >
                             <h:outputText value="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}"/>
                         </p:column>
-                        <p:column headerText="Autor" style="text-align: center" filterBy="#{element.element_name}" sortBy="#{element.element_name}">
+                        <p:column headerText="Autor" style="text-align: center" >
                             <h:outputText value="#{element.element_name}"/>
                         </p:column>
-                        <p:column headerText="Tipo" style="text-align: center" filterBy="#{element.type}" sortBy="#{element.type}">
-                            <h:outputText value="#{element.type}"/>
-                        </p:column>
-                        <p:column headerText="Estado" style="text-align: center" filterBy="#{element.estado}" sortBy="#{element.estado}">
+                        <p:column headerText="Estado" style="text-align: center" >
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
                     </p:dataTable>
-                    <div class="p-2 row justify-content-center h-100">
-                        <p:button class="btn btn-danger" value="Atras" style="margin: 10px; font-family: Consolas;" outcome="recursos" />
+                    <div class="p-2 row justify-content-center h-100" style="text-align: center;">
+                        <p:button class="btn btn-danger" value="Reservar" style="margin: 10px; font-family: Consolas; "/>
                     </div>
                 </h:form>
             </div>
