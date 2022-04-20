@@ -26,4 +26,15 @@ public class MyBATISRecursoDAO implements RecursoDAO {
     public List<Recurso> consultarLibros() {
         return recursoMapper.consultarLibros();
     }
+
+    @Override
+    public List<Recurso> consultarEquipos() {
+        return recursoMapper.consultarEquipos();
+    }
+
+    @Override
+    public List<Recurso> consultarSalasEstudio() {
+        return recursoMapper.consultarSalasEstudio();
+    }
+
 }

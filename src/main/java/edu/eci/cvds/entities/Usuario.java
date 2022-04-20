@@ -26,7 +26,6 @@ public class Usuario implements Serializable{
         this.tipo = tipo;
     }
 
-
     public String getCorreo() {
         return correo;
     }
@@ -63,7 +62,5 @@ public class Usuario implements Serializable{
     public String toString() {
         return "Usuario{" + "correo=" + correo + ", nombre=" + nombre + ", apellido=" + apellido + ", tipo=" + tipo + '}';
     }
-
-
 
 }

@@ -6,10 +6,7 @@
 	<properties resource="config.properties">
 	</properties>
 	<typeAliases>
-		<typeAlias type='edu.eci.cvds.entities.Usuario' alias='Usuario'/>
 		<typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso'/>
-		<typeAlias type='edu.eci.cvds.entities.Horario' alias='Horario'/>
-		<typeAlias type='edu.eci.cvds.entities.Reserva' alias='Reserva'/>
 	</typeAliases>
 
 	<environments default="development">
@@ -17,7 +14,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="org.postgresql.Driver" />
-				<property name ="url" value="jdbc:postgresql://ec2-34-197-84-74.compute-1.amazonaws.com:5432/d43l90cujpo82v?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory" />
+<property name ="url" value="jdbc:postgresql://ec2-34-197-84-74.compute-1.amazonaws.com:5432/d43l90cujpo82v?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&amp;sslmode=require" />
 				<property name="username" value="eanjtusqacxmqi" />
 				<property name="password" value="4db64dff78a90452389b0e21aa089965316832b3fc9fb7771a487552ce3e789a" />
 			</dataSource>
@@ -25,11 +22,7 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="mappers/UsuarioMapper.xml"></mapper>
 		<mapper resource="mappers/RecursoMapper.xml"></mapper>
-		<mapper resource="mappers/HorarioMapper.xml"></mapper>
-		<mapper resource="mappers/ReservaMapper.xml"></mapper>
 	</mappers>
-
 
 </configuration>

@@ -6,7 +6,6 @@ import org.mybatis.guice.XMLMyBatisModule;
 import edu.eci.cvds.persistence.*;
 import edu.eci.cvds.persistence.mybatisimpl.*;
 import edu.eci.cvds.services.*;
-
 import java.util.Optional;
 
 import static com.google.inject.Guice.createInjector;
@@ -22,11 +21,12 @@ public class ServiciosBibliotecaFactory {
             protected void initialize() {
                 setEnvironmentId(env);
                 setClassPathResource(pathResource);
+                bind(ServiciosBiblioteca.class).to(ServiciosBibliotecaImpl.class);
                 //bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(RecursoDAO.class).to(MyBATISRecursoDAO.class);
                 //bind(ReservaDAO.class).to(MyBATISReservaDAO.class);
                 //bind(HorarioDAO.class).to(MyBATISHorarioDAO.class);
-                bind(ServiciosBiblioteca.class).to(ServiciosBibliotecaImpl.class);
+
             }
         });
     }
@@ -42,16 +42,6 @@ public class ServiciosBibliotecaFactory {
 
         return optInjector.get().getInstance(ServiciosBiblioteca.class);
     }
-
-
-//    public RecursosBiblioteca getServiciosAlquilerTesting(){
-//        if (!optInjector.isPresent()) {
-//            optInjector = Optional.of(myBatisInjector("test","mybatis-config-h2.xml"));
-//        }
-//
-//        return optInjector.get().getInstance(ServiciosAlquiler.class);
-//    }
-
 
     public static ServiciosBibliotecaFactory getInstance(){
         return instance;

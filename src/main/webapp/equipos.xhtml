@@ -112,39 +112,41 @@
                 </div>
 
                 <h:form class="data">
-                    <p:dataTable id="tbl" var="element" value="#{elementBean.elementosBusquedaBasica}" rows="10"
+                    <p:dataTable id="tbl" var="element" value="#{recursosBean.getEquipos()}" rows="10"
                                  paginator="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                                  rowsPerPageTemplate="5,10,15"
                                  styleClass="table-dark table-striped table-bordered justify-content-center"
-                                 rowKey="#{element.id}" selection="#{elementBean.elementosSeleccionados}">
-                        <f:facet name="{Exporters}">
-                            <div style="float:right;margin-right: 2%;">
-                                <h:commandLink>
-                                    <p:graphicImage url="../image/excel.png" width="22"/>
-                                    <p:dataExporter type="xls" target="tbl" fileName="element" encoding="UTF-8"/>
-                                </h:commandLink>
-                            </div>
-                        </f:facet>
-                        <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                                 class="valor">
+
                         <p:column headerText="Id" style="text-align: center" >
                             <h:outputText value="#{element.id}"/>
                         </p:column>
+
                         <p:column headerText="Nombre" style="text-align: center" >
-                            <h:outputText value="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}"/>
+                            <h:outputText value="#{element.nombre}"/>
                         </p:column>
-                        <p:column headerText="Caracteristicas" style="text-align: center" >
-                            <h:outputText value="#{element.element_name}"/>
+
+                        <p:column headerText="Ubicacion" style="text-align: center" >
+                            <h:outputText value="#{element.ubicacion}"/>
                         </p:column>
+
+                        <p:column headerText="Disponibilidad" style="text-align: center" >
+                            <h:outputText value="#{element.capacidad}"/>
+                        </p:column>
+
                         <p:column headerText="Estado" style="text-align: center" >
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
+
                     </p:dataTable>
+
                     <div class="p-2 row justify-content-center h-100" style="text-align: center;">
                         <p:button class="btn btn-danger" value="Reservar" style="margin: 10px; font-family: Consolas; "/>
                     </div>
                 </h:form>
+
             </div>
         </div>
     </div>

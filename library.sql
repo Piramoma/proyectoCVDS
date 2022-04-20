@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 CREATE TABLE disponibilidad (
    id int4 NOT NULL,
    idrecurso int4 NOT NULL,
@@ -27,8 +26,6 @@ CREATE TABLE reservas (
      tipo varchar NULL,
      activa bool NULL
 );
-
-
 CREATE TABLE usuarios (
     email varchar(200) NOT NULL,
     nombre varchar(100) NOT NULL,
@@ -43,6 +40,7 @@ ALTER TABLE reservas add PRIMARY KEY (id);
 ALTER TABLE disponibilidad add PRIMARY KEY (id);
 
 insert into Recursos values (1, 'disponible','El quijote de la mancha', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+
 
 insert into Reservas (idReserva, idEstudiante, idRecurso, fechaInicio, fechaFinal) values ('R1', 2161401, 1, '2022-04-11 09:08:39', '2022-04-27 11:55:31');
 insert into Reservas (idReserva, idEstudiante, idRecurso, fechaInicio, fechaFinal) values ('R2', 2161402, 2, '2022-04-03 02:32:53', '2022-04-20 15:49:51');
@@ -97,3 +95,4 @@ insert into Recursos (idRecurso, nombre, disponible, tipo, descripcion, ubicacio
 insert into Recursos (idRecurso, nombre, disponible, tipo, descripcion, ubicacion, capacidad) values (18, 'Principios de Economia', true, 'Libro', 'Libro escrito por Gregory Mankiw, publicado en 2009', 'Bloque B', 2);
 insert into Recursos (idRecurso, nombre, disponible, tipo, descripcion, ubicacion, capacidad) values (19, 'Sala de estudio 7', true, 'Sala de estudio', 'Sala destudio con 1 mesa y 2 sillas', 'Bloque B', 1);
 insert into Recursos (idRecurso, nombre, disponible, tipo, descripcion, ubicacion, capacidad) values (20, 'Algebra de Baldor', false, 'Libro', 'Libro escrito por Aurelio Baldor, publicado en 1941', 'Bloque B', 4);
+

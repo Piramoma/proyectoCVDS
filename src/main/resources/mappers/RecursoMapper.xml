@@ -16,10 +16,22 @@
         <result property='horaFin' column='horafin' />
     </resultMap>
 
-    <select id="consultarLibros" resultMap="RecursoResult" parameterType="map">
+    <select id="consultarLibros" resultMap="RecursoResult" >
         SELECT *
-        FROM recursos
+        FROM public.recursos
         WHERE tipo = 'libro'
+    </select>
+
+    <select id="consultarEquipos" resultMap="RecursoResult" >
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'equipo'
+    </select>
+
+    <select id="consultarSalasEstudio" resultMap="RecursoResult" >
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'sala'
     </select>
 
 </mapper>
