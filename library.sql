@@ -28,7 +28,6 @@ CREATE TABLE reservas (
      tipo varchar NULL,
      activa bool NULL
 );
-
 CREATE TABLE usuarios (
     email varchar(200) NOT NULL,
     nombre varchar(100) NOT NULL,
