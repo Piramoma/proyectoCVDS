@@ -28,4 +28,8 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         return recursoDAO.consultarSalasEstudio();
     }
 
+    @Override
+    public void insertarRecurso(Recurso recurso) {
+        recursoDAO.save(recurso);
+    }
 }

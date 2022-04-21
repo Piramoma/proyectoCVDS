@@ -13,4 +13,6 @@ public interface ServiciosBiblioteca {
 
     public abstract List<Recurso> consultarSalasEstudio() ;
 
+    public void insertarRecurso(Recurso recurso);
+    
 }
