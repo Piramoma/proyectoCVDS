@@ -1,0 +1,16 @@
+Logearse
+aparecer quien está logueado
+Terminar registro
+Control de errores de login, de registrar recursos (Validaciones de formulario) y de consultar recursos
+Pruebas unitarias de login y registro
+Cuando uno quiere hacer reserva tener que llevarlo a logearse si no lo est
+Tener diferentes cuetnas, admin y estudiante, con diferentes vistas cada uno
+Modificar las vista de registrar recurso, solo el admin puede ver los registrar (añadir, eliminar y modificar)
+Capacidad a la hora de agregar datos
+Por nada del mundo mostrar un error feo al usuario
+
+Errores que pueden suceder:
+poner numeros grandes
+poner tipos que no son
+no poner nada
+poner espcios 
