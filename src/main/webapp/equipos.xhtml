@@ -91,22 +91,7 @@
                     <h:form >
                         <p:growl id="messages"/>
                         <p:menubar>
-                            <p:submenu label="Ubicacion" icon="pi pi-fw pi-file">
-                                <p:menuitem value="Bloque A" icon="pi pi-fw pi-trash"/>
-                                <p:menuitem value="Bloque B" icon="pi pi-fw pi-external-link"/>
-                            </p:submenu>
-
-                            <p:submenu label="Cantidad" icon="pi pi-fw pi-pencil">
-                                <p:menuitem value="menor a mayor" icon="pi pi-fw pi-align-left"/>
-                                <p:menuitem value="mayor a menor" icon="pi pi-fw pi-align-right"/>
-                            </p:submenu>
-
-                            <p:menuitem value="Salir" icon="pi pi-fw pi-power-off" outcome="recursos"/>
-                            <f:facet name="options" >
-                                <div class="input-contenedor">
-                                    <p:inputText placeholder="Buscar Libro"/>
-                                </div>
-                            </f:facet>
+                            <p:menuitem value="Salir" outcome="recursos"/>
                         </p:menubar>
                     </h:form>
                 </div>
@@ -124,15 +109,15 @@
                             <h:outputText value="#{element.id}"/>
                         </p:column>
 
-                        <p:column headerText="Nombre" style="text-align: center" >
+                        <p:column headerText="Nombre" style="text-align: center" filterBy="#{element.nombre}" filterStyle="width: 100px;" filterMatchMode="contains">
                             <h:outputText value="#{element.nombre}"/>
                         </p:column>
 
-                        <p:column headerText="Ubicacion" style="text-align: center" >
+                        <p:column headerText="Ubicacion" style="text-align: center" filterBy="#{element.ubicacion}" filterStyle="width: 100px;" filterMatchMode="contains">
                             <h:outputText value="#{element.ubicacion}"/>
                         </p:column>
 
-                        <p:column headerText="Disponibilidad" style="text-align: center" >
+                        <p:column headerText="Capacidad" style="text-align: center" sortBy="#{element.capacidad}" filterBy="#{element.capacidad}" filterStyle="width: 100px;" filterMatchMode="contains" >
                             <h:outputText value="#{element.capacidad}"/>
                         </p:column>
 
@@ -140,11 +125,16 @@
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
 
+                        <p:column headerText="Haga su reserva" style="text-align: center">
+                            <p:button outcome="reservas" value="Ver horarios disponibles">
+                            </p:button>
+                        </p:column>
+
                     </p:dataTable>
 
-                    <div class="p-2 row justify-content-center h-100" style="text-align: center;">
-                        <p:button class="btn btn-danger" value="Reservar" style="margin: 10px; font-family: Consolas; "/>
-                    </div>
+<!--                    <div class="p-2 row justify-content-center h-100" style="text-align: center;">-->
+<!--                        <p:button class="btn btn-danger" value="Reservar" style="margin: 10px; font-family: Consolas; "/>-->
+<!--                    </div>-->
                 </h:form>
 
             </div>
