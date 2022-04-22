@@ -17,6 +17,7 @@ public class Usuario implements Serializable{
     private String correo;
     private String nombre;
     private String apellido;
+    private String constraseña;
     private String tipo;
 
     public Usuario(String correo,String nombre, String apellido,String tipo){
@@ -63,4 +64,11 @@ public class Usuario implements Serializable{
         return "Usuario{" + "correo=" + correo + ", nombre=" + nombre + ", apellido=" + apellido + ", tipo=" + tipo + '}';
     }
 
+    public String getConstraseña() {
+        return constraseña;
+    }
+
+    public void setConstraseña(String constraseña) {
+        this.constraseña = constraseña;
+    }
 }

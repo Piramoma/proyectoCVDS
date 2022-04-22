@@ -98,13 +98,15 @@
         <div class="contenedor">
             <div class="input-contenedor">
                 <i class="fas fa-envelope icon"></i>
-                <p:inputText type="text" placeholder="idUsuario" required="true" />
+                <p:inputText id="user_name" type="text" placeholder="correo" required="true" value="#{loginBean.user}"/>
+                <p:watermark for="user_name" value="example@mail.com" id="user_w" />
             </div>
             <div class="input-contenedor">
                 <i class="fas fa-key icon"></i>
-                <p:inputText type="password" placeholder="Contraseña" required="true" />
+                <p:inputText type="password" placeholder="Contraseña" required="true" value="#{loginBean.passwd}"/>
             </div>
-            <p:commandButton class="button" value="Login" action="recursos?servlet-redirect = true" />
+<!--            <p:commandButton class="button" value="Login" action="recursos?servlet-redirect = true" />-->
+            <p:commandButton id="boton_ingresar" styleClass="rounded-button ui-button-secondary" value="Ingresar" alig="center" actionListener="#{loginBean.login}" />
             <p>Recuerda Devolver los Recursos en el plazo establecido.</p>
         </div>
     </h:form>
