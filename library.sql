@@ -36,7 +36,7 @@ CREATE TABLE usuarios (
     tipo varchar(32) NULL
 );
 
-ALTER TABLE usuarios add PRIMARY KEY (email);
+ALTER TABLE usuarios add PRIMARY KEY (correo);
 ALTER TABLE recursos add PRIMARY KEY (id);
 ALTER TABLE reservas add PRIMARY KEY (id);
 ALTER TABLE disponibilidad add PRIMARY KEY (id);
