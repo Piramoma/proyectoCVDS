@@ -1,27 +1,27 @@
 
-insert into Recursos values (1, 'disponible','El quijote de la mancha', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (2, 'disponible','El Principito', 'Bloque A', 'libro', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (3, 'disponible','Aprendiendo a Programar', 'Bloque G', 'libro', 3, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (4, 'disponible','El señor de los anillos', 'Bloque G', 'libro', 3, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (5, 'disponible','Lady masacre', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (6, 'disponible','Motomami', 'Bloque G', 'libro', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (7, 'disponible','La Zorra', 'Bloque A', 'libro', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','El quijote de la mancha', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','El Principito', 'Bloque A', 'libro', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Aprendiendo a Programar', 'Bloque G', 'libro', 3, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','El señor de los anillos', 'Bloque G', 'libro', 3, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Lady masacre', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Motomami', 'Bloque G', 'libro', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','La Zorra', 'Bloque A', 'libro', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
 
-insert into Recursos values (8, 'disponible', 'Sala de Estudio 1', 'Bloque A', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (9, 'disponible', 'Sala de Estudio 2', 'Bloque A', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (10, 'disponible','Sala de Estudio 3', 'Bloque G', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (11, 'disponible','Sala de Estudio 4', 'Bloque G', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (12, 'disponible','Sala de Estudio 5', 'Bloque G', 'sala', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (13, 'disponible','Sala de Estudio 6', 'Bloque G', 'sala', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (14, 'disponible','Sala de Estudio 7', 'Bloque A', 'sala', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible', 'Sala de Estudio 1', 'Bloque A', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible', 'Sala de Estudio 2', 'Bloque A', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Sala de Estudio 3', 'Bloque G', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Sala de Estudio 4', 'Bloque G', 'sala', 6, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Sala de Estudio 5', 'Bloque G', 'sala', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Sala de Estudio 6', 'Bloque G', 'sala', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Sala de Estudio 7', 'Bloque A', 'sala', 4, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
 
-insert into Recursos values (15, 'disponible','Equipo-1', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (16, 'disponible','Equipo-2', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (17, 'disponible','Equipo-3', 'Bloque G', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (18, 'disponible','Equipo-4', 'Bloque G', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (19, 'disponible','Equipo-5', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (20, 'disponible','Equipo-6', 'Bloque G', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
-insert into Recursos values (21, 'disponible','Equipo-7', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Equipo-1', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Equipo-2', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Equipo-3', 'Bloque G', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Equipo-4', 'Bloque G', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Equipo-5', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Equipo-6', 'Bloque G', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','Equipo-7', 'Bloque A', 'equipo', 1, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
 
 insert into Devoluciones (idDevolucion, idRecurso, fechaDevolucion) values ('D1', 'R1', '3/8/2022');
 insert into Devoluciones (idDevolucion, idRecurso, fechaDevolucion) values ('D2', 'R2', '3/6/2022');

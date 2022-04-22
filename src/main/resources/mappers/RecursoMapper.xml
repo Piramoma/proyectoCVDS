@@ -34,4 +34,9 @@
         WHERE tipo = 'sala'
     </select>
 
+    <insert id="insertarRecurso" parameterType="map">
+        insert into recursos (estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values
+        (#{r.estado}, #{r.nombre}, #{r.ubicacion}, #{r.tipo}, #{r.capacidad}, #{r.horainicio}, #{r.horafin})
+    </insert>
+
 </mapper>

@@ -14,7 +14,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
 
     @Override
     public void save(Recurso recurso) {
-        //recursoMapper.insertarRecurso(recurso);
+        recursoMapper.insertarRecurso(recurso);
     }
 
     @Override

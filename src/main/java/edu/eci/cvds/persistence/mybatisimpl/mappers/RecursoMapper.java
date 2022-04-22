@@ -4,6 +4,8 @@ import edu.eci.cvds.entities.Recurso;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface RecursoMapper {
 
     /**
@@ -23,5 +25,11 @@ public interface RecursoMapper {
      * @return lista de las Salas de Estudio disponibles en la plataforma
      */
     public List<Recurso> consultarSalasEstudio();
+
+    /**
+     * Agregar recurso a la plataforma
+     * @param r recurso
+     */
+    public void insertarRecurso(@Param ("r") Recurso r);
 
 }

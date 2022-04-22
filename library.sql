@@ -1,3 +1,5 @@
+CREATE SEQUENCE idRecurso INCREMENT BY 1 START WITH 1;
+
 CREATE TABLE disponibilidad (
    id int4 NOT NULL,
    idrecurso int4 NOT NULL,
@@ -6,7 +8,7 @@ CREATE TABLE disponibilidad (
 );
 
 CREATE TABLE recursos (
-     id int4 NOT NULL,
+     id int4 AUTO_INCREMENT NOT NULL,
      estado varchar(100) NOT NULL,
      nombre varchar(100) NOT NULL,
      ubicacion varchar(100) NOT NULL,
@@ -38,3 +40,5 @@ ALTER TABLE usuarios add PRIMARY KEY (email);
 ALTER TABLE recursos add PRIMARY KEY (id);
 ALTER TABLE reservas add PRIMARY KEY (id);
 ALTER TABLE disponibilidad add PRIMARY KEY (id);
+
+insert into Recursos(estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values ('disponible','El quijote de la mancha', 'Bloque A', 'libro', 2, '2022-06-22 19:10:25-07', '2022-06-23 19:10:25-07');
