@@ -27,7 +27,6 @@ public class LoginBean implements Serializable{
         Subject userActual = SecurityUtils.getSubject();
         UsernamePasswordToken uPToken = new UsernamePasswordToken(getUser(), getPasswd());
         try{
-            System.out.println(uPToken.getPassword());
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
             redirect();
