@@ -14,63 +14,21 @@ import java.sql.Timestamp;
  * @author LEVIATAN
  */
 public class Reserva {
-    private String idUsuario,tipo;
-    private int id,idRecurso;
-    Date fechaReserva;
+    private int id;
+    private String idUsuario;
+    private int idRecurso;
     Timestamp fechaInicioReserva,fechaFinReserva;
+    Date fechaReserva;
     boolean activo;
-    int serial;
 
-    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaReserva, String tipo,boolean activo, int serial) {
+    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaReserva, boolean activo) {
         this.id=id;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
         this.fechaReserva=fechaReserva;
-        this.tipo = tipo;
         this.activo=activo;
-        this.serial=serial;
-    }
-
-    public int getSerial() {
-        return serial;
-    }
-
-    public void setSerial(int serial) {
-        this.serial = serial;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public Date getFechaReserva() {
-        return fechaReserva;
-    }
-
-    public void setFechaReserva(Date fechaReserva) {
-        this.fechaReserva = fechaReserva;
-    }
-
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public int getId() {
@@ -79,6 +37,14 @@ public class Reserva {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getIdRecurso() {
@@ -105,10 +71,33 @@ public class Reserva {
         this.fechaFinReserva = fechaFinReserva;
     }
 
-    @Override
-    public String toString() {
-        return "Reserva{" + "idUsuario=" + idUsuario + ", tipo=" + tipo + ", id=" + id + ", idRecurso=" + idRecurso + ", fechaReserva=" + fechaReserva + ", fechaInicioReserva=" + fechaInicioReserva + ", fechaFinReserva=" + fechaFinReserva + ", activo=" + activo + '}';
+    public Date getFechaReserva() {
+        return fechaReserva;
     }
 
+    public void setFechaReserva(Date fechaReserva) {
+        this.fechaReserva = fechaReserva;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id=" + id +
+                ", idUsuario='" + idUsuario + '\'' +
+                ", idRecurso=" + idRecurso +
+                ", fechaInicioReserva=" + fechaInicioReserva +
+                ", fechaFinReserva=" + fechaFinReserva +
+                ", fechaReserva=" + fechaReserva +
+                ", activo=" + activo +
+                '}';
+    }
 }
 
