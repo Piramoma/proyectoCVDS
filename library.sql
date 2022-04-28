@@ -16,13 +16,13 @@ CREATE TABLE recursos (
 );
 
 CREATE TABLE reservas (
-     id serial NOT NULL,
-     id_usuario varchar(200) NULL,
-     id_recurso int4 NULL,
-     fecha_inicio_reserva timestamp NULL,
-     fecha_fin_reserva timestamp NULL,
-     fecha_solicitud date NULL,
-     activa bool NULL
+      id serial NOT NULL,
+      idUsuario varchar(200) NULL,
+      idRecurso int4 NULL,
+      fechaInicioReserva timestamp NULL,
+      fechaFinReserva timestamp NULL,
+      fechaSolicitud date NULL,
+      estado varchar(20) NULL
 );
 
 CREATE TABLE usuarios (
@@ -41,9 +41,9 @@ ALTER TABLE usuarios add PRIMARY KEY (email);
 
 ALTER TABLE RECURSOS ADD CONSTRAINT UK_RECURSOS_idInterno UNIQUE (idInterno);
 
-ALTER TABLE RESERVAS ADD CONSTRAINT FK_RESERVAS_USUARIOS FOREIGN KEY ( id_usuario )
+ALTER TABLE RESERVAS ADD CONSTRAINT FK_RESERVAS_USUARIOS FOREIGN KEY ( idUsuario )
 REFERENCES USUARIOS ( email );
-ALTER TABLE RESERVAS ADD CONSTRAINT FK_RESERVAS_RECURSOS FOREIGN KEY ( id_recurso )
+ALTER TABLE RESERVAS ADD CONSTRAINT FK_RESERVAS_RECURSOS FOREIGN KEY ( idRecurso )
 REFERENCES RECURSOS ( id );
 ALTER TABLE DISPONIBILIDAD ADD CONSTRAINT FK_DISPONIBILIDAD_idRecurso FOREIGN KEY ( idrecurso )
 REFERENCES RECURSOS ( id );

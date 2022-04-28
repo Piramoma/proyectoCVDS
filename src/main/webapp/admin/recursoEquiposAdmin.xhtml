@@ -55,6 +55,7 @@
                 </div>
 
                 <h:form class="data">
+
                     <p:dataTable id="tbl" var="element" value="#{recursosBean.getEquipos()}" rows="10"
                                  paginator="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
@@ -83,7 +84,7 @@
                         </p:column>
 
                         <p:column headerText="Haga su reserva" style="text-align: center">
-                            <p:button outcome="/public/reservas" value="Ver horarios disponibles">
+                            <p:button outcome="/public/verHorarios" value="Ver horarios disponibles">
                             </p:button>
                         </p:column>
                     </p:dataTable>

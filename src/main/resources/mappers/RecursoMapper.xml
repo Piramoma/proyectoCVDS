@@ -18,19 +18,19 @@
     <select id="consultarLibros" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
-        WHERE tipo = 'libro'
+        WHERE tipo = 'libro' and estado = 'disponible'
     </select>
 
     <select id="consultarEquipos" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
-        WHERE tipo = 'equipo'
+        WHERE tipo = 'equipo' and estado = 'disponible'
     </select>
 
     <select id="consultarSalasEstudio" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
-        WHERE tipo = 'sala'
+        WHERE tipo = 'sala' and estado = 'disponible'
     </select>
 
 <!--    <insert id="insertarRecurso" parameterType="map">-->

@@ -29,6 +29,7 @@ public class RecursosTest {
         List<Recurso> recursosLibros = serviciosBiblioteca.consultarLibros();
         for(Recurso libro:recursosLibros){
             Assert.assertEquals("libro", libro.getTipo());
+            Assert.assertEquals("disponible", libro.getEstado());
         }
     }
 
@@ -37,6 +38,7 @@ public class RecursosTest {
         List<Recurso> recursosSalas = serviciosBiblioteca.consultarSalasEstudio();
         for (Recurso sala:recursosSalas){
             Assert.assertEquals("sala", sala.getTipo());
+            Assert.assertEquals("disponible", sala.getEstado());
         }
     }
 
@@ -45,6 +47,7 @@ public class RecursosTest {
         List<Recurso> recursosEquipos = serviciosBiblioteca.consultarEquipos();
         for (Recurso equipo:recursosEquipos){
             Assert.assertEquals("equipo",equipo.getTipo());
+            Assert.assertEquals("disponible", equipo.getEstado());
         }
     }
 

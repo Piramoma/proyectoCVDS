@@ -8,7 +8,7 @@
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Salas</title>
+    <title>Equipos</title>
     <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script
@@ -47,12 +47,12 @@
 
                 <div class="p-0 btn-group justify-content-lg-center">
                     <div class="tittle" >
-                        <h1 class="text align-self-center p-2">CONSULTAR SALAS ESTUDIO</h1>
+                        <h1 class="text align-self-center p-2">CONSULTAR EQUIPOS</h1>
                     </div>
                 </div>
 
                 <h:form class="data">
-                    <p:dataTable id="tbl" var="element" value="#{recursosBean.getSalasEstudio()}" rows="10"
+                    <p:dataTable id="tbl" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" rows="10"
                                  paginator="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -61,30 +61,8 @@
                                  class="valor">
 
                         <p:column headerText="Id" style="text-align: center" >
-                            <h:outputText value="#{element.id}"/>
-                        </p:column>
-
-                        <p:column headerText="Nombre" style="text-align: center" filterBy="#{element.nombre}" filterStyle="width: 100px;" filterMatchMode="contains">
-                            <h:outputText value="#{element.nombre}"/>
-                        </p:column>
-
-                        <p:column headerText="Ubicacion" style="text-align: center" filterBy="#{element.ubicacion}" filterStyle="width: 100px;" filterMatchMode="contains">
-                            <h:outputText value="#{element.ubicacion}"/>
-                        </p:column>
-
-                        <p:column headerText="Capacidad" style="text-align: center" sortBy="#{element.capacidad}" filterBy="#{element.capacidad}" filterStyle="width: 100px;" filterMatchMode="contains">
-                            <h:outputText value="#{element.capacidad}"/>
-                        </p:column>
-
-                        <p:column headerText="Estado" style="text-align: center" >
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
-
-                        <p:column headerText="Haga su reserva" style="text-align: center">
-                            <p:button outcome="verHorarios" value="Ver horarios disponibles">
-                            </p:button>
-                        </p:column>
-
                     </p:dataTable>
                 </h:form>
             </div>

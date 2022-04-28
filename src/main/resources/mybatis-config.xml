@@ -7,6 +7,7 @@
 	</properties>
 	<typeAliases>
 		<typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso'/>
+		<typeAlias type='edu.eci.cvds.entities.Reserva' alias='Reserva'/>
 	</typeAliases>
 
 	<environments default="development">
@@ -23,6 +24,7 @@
 
 	<mappers>
 		<mapper resource="mappers/RecursoMapper.xml"></mapper>
+		<mapper resource="mappers/ReservaMapper.xml"></mapper>
 	</mappers>
 
 </configuration>

@@ -40,14 +40,14 @@ insert into Disponibilidad (idrecurso, fechainicio, fechafin) values ('6', '2022
 insert into Disponibilidad (idrecurso, fechainicio, fechafin) values ('7', '2022-04-11 09:08:39', '2022-04-11 10:08:39');
 insert into Disponibilidad (idrecurso, fechainicio, fechafin) values ('8', '2022-04-11 09:08:39', '2022-04-11 10:08:39');
 
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 11, '2022-04-11 09:08:39', '2022-04-27 11:55:31', '2022-04-27', true);
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 12, '2022-04-03 02:32:53', '2022-04-20 15:49:51', '2022-04-27', true);
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 13, '2022-04-10 15:52:32', '2022-04-19 11:49:48', '2022-04-27', true);
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 14, '2022-04-11 01:16:05', '2022-04-29 03:50:27', '2022-04-27', true);
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 15, '2022-04-02 09:18:34', '2022-04-29 02:05:22', '2022-04-27', true);
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 16, '2022-04-14 20:32:40', '2022-04-28 20:00:31', '2022-04-27', true);
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 17, '2022-04-05 16:01:02', '2022-04-27 06:59:15', '2022-04-27', true);
-insert into Reservas (id_usuario, id_recurso, fecha_inicio_reserva, fecha_fin_reserva, fecha_solicitud, activa) values ('yesid.mora', 17, '2022-04-01 12:28:57', '2022-04-25 08:28:52', '2022-04-27', true);
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 11, '2022-04-11 09:08:39', '2022-04-27 11:55:31', '2022-04-27', 'cancelado');
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 12, '2022-04-03 02:32:53', '2022-04-20 15:49:51', '2022-04-27', 'activa');
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 13, '2022-04-10 15:52:32', '2022-04-19 11:49:48', '2022-04-27', 'terminada');
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 14, '2022-04-11 01:16:05', '2022-04-29 03:50:27', '2022-04-27', 'activa');
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 15, '2022-04-02 09:18:34', '2022-04-29 02:05:22', '2022-04-27', 'cancelado');
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 16, '2022-04-14 20:32:40', '2022-04-28 20:00:31', '2022-04-27', 'cancelado');
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 17, '2022-04-05 16:01:02', '2022-04-27 06:59:15', '2022-04-27', 'terminada');
+insert into Reservas (idUsuario, idRecurso, fechaInicioReserva, fechaFinReserva, fechaSolicitud, estado) values ('yesid.mora', 17, '2022-04-01 12:28:57', '2022-04-25 08:28:52', '2022-04-27', 'terminada');
 
 insert into Devoluciones (idDevolucion, idRecurso, fechaDevolucion) values ('D1', 'R1', '3/8/2022');
 insert into Devoluciones (idDevolucion, idRecurso, fechaDevolucion) values ('D2', 'R2', '3/6/2022');

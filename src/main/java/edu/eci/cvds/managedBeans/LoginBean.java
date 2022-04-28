@@ -6,6 +6,7 @@ import java.util.logging.Level;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -22,6 +23,7 @@ public class LoginBean implements Serializable{
     private String user;
     private String passwd;
     public boolean logeado = false;
+    public String showError = "";
 
     public void login() {
         Subject userActual = SecurityUtils.getSubject();
@@ -29,24 +31,17 @@ public class LoginBean implements Serializable{
         try{
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
+
             redirect();
             setLogeado(true);
         } catch (UnknownAccountException ex) {
-            String errorMessage = "El usuario no se encuentra registrado";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
+            showError = "El usuario no se encuentra registrado";
         } catch (IncorrectCredentialsException ex) {
-            String errorMessage = "La contraseña que ingreso no es correcta";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
+            showError = "La contraseña que ingreso no es correcta";
         } catch (LockedAccountException ex) {
-            String errorMessage = "El usuario esta deshabilitado para el ingreso";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
+            showError = "El usuario esta deshabilitado para el ingreso";
         } catch (AuthenticationException ex) {
-            String errorMessage = "Error inesperado";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
+            showError = "Error inesperado";
         }
     }
 
@@ -75,7 +70,7 @@ public class LoginBean implements Serializable{
     }
 
     private void error(String message) {
-        FacesContext.getCurrentInstance().addMessage("Shiro", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", message));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", message));
     }
 
     public void logOut() {
@@ -100,5 +95,9 @@ public class LoginBean implements Serializable{
             error("Unknown error: " + ex.getMessage());
             log.error(ex.getMessage(), ex);
         }
+    }
+
+    public String showError(){
+        return showError;
     }
 }

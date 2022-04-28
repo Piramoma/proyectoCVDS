@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * @param fechaReserva Fecha actual en la que la reserva esta tomando lugar
  * @param fechaInicioReserva Fecha en la que la reserva comenzara a ser vigente
  * @param fechaFinReserva Fecha en la que la reserva dejara de ser vigente
- * @param activo Booleano que indica si una reserva sigue activa. True si sigue activa False de lo contrario
+ * @param estado Booleano que indica si una reserva sigue activa. True si sigue activa False de lo contrario
  * @author LEVIATAN
  */
 public class Reserva {
@@ -19,16 +19,19 @@ public class Reserva {
     private int idRecurso;
     Timestamp fechaInicioReserva,fechaFinReserva;
     Date fechaReserva;
-    boolean activo;
+    String estado;
 
-    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaReserva, boolean activo) {
+    public Reserva(){
+        super();
+    }
+    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaReserva, String estado) {
         this.id=id;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
         this.fechaReserva=fechaReserva;
-        this.activo=activo;
+        this.estado=estado;
     }
 
     public int getId() {
@@ -79,12 +82,12 @@ public class Reserva {
         this.fechaReserva = fechaReserva;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setEstado(String  estado) {
+        this.estado = estado;
     }
 
     @Override
@@ -96,7 +99,7 @@ public class Reserva {
                 ", fechaInicioReserva=" + fechaInicioReserva +
                 ", fechaFinReserva=" + fechaFinReserva +
                 ", fechaReserva=" + fechaReserva +
-                ", activo=" + activo +
+                ", estado=" + estado +
                 '}';
     }
 }
