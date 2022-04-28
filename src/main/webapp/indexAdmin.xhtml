@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>BibliotecaECI</title>
+    <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+            src="https://kit.fontawesome.com/7e5b2d153f.js"
+            crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style/index.css" />
+</h:head>
+<h:body>
+    <header class="header">
+        <nav class="nav">
+            <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+            <h1 class="logo nav-link" >Biblioteca ECI</h1>
+            <button class="nav-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li class="nav-menu-item">
+                    <a href="#" class="nav-menu-link nav-link">Recursos</a>
+                </li>
+                <li class="nav-menu-item">
+                    <a href="#" class="nav-menu-link nav-link">Reporte</a>
+                </li>
+                <li class="nav-menu-item">
+                    <a href="faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Cerra Sesion</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="title-cards">
+            <h2>Plataforma Gestión Recursos de la Biblioteca</h2>
+            <h4>La Biblioteca Jorge Álvarez Lleras es un sistema de información que cuenta con una amplia colección de recursos físicos y electrónicos que apoyan la labor académica e investigativa de la Institución en áreas relacionadas con Ingeniería, Administración, Economía, Matemáticas, Ciencias Puras y Ciencias Humanas, entre otras.</h4>
+        </div>
+        <div class="container-card">
+            <div class="card">
+                <figure>
+                    <img src="https://cdn.discordapp.com/attachments/690979978824777744/969000213241024532/Libros.jpg" />
+                </figure>
+                <div class="contenido-card">
+                    <h3>Libros</h3>
+                    <p>Cuenta con mas de 1000 libros con editoriales Pearson, Cengage y McGraw Hill.</p>
+                    <a href="/faces/admin/recursoLibrosAdmin.xhtml">Ver</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <figure>
+                    <img src="https://cdn.discordapp.com/attachments/690979978824777744/969000212834172968/Equipos.jpg" />
+                </figure>
+                <div class="contenido-card">
+                    <h3>Equipos</h3>
+                    <p>Cuenta con 20 equipos con acceso a internet y a todos los recursos digitales.</p>
+                    <a href="/faces/admin/recursoEquiposAdmin.xhtml">Ver</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <figure>
+                    <img src="https://cdn.discordapp.com/attachments/690979978824777744/969000213693988864/SalaEstudio.jpg" />
+                </figure>
+                <div class="contenido-card">
+                    <h3>Salas de Estudio</h3>
+                    <p>Cuenta con 4 salas de estudio equipada con tablero y mesa para un maximo de 6 personas.</p>
+                    <a href="/faces/admin/recursoSalasAdmin.xhtml">Ver</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</h:body>
+</html>

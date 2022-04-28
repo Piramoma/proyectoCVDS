@@ -47,4 +47,6 @@ public class RecursosTest {
             Assert.assertEquals("equipo",equipo.getTipo());
         }
     }
+
+
 }
