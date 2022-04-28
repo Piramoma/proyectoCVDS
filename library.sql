@@ -29,14 +29,14 @@ CREATE TABLE reservas (
      activa bool NULL
 );
 CREATE TABLE usuarios (
-    correo varchar(200) NOT NULL,
+    email varchar(200) NOT NULL,
     nombre varchar(100) NOT NULL,
     apellido varchar(100) NOT NULL,
     contraseña varchar(32) NOT NULL,
     tipo varchar(32) NULL
 );
 
-ALTER TABLE usuarios add PRIMARY KEY (correo);
+ALTER TABLE usuarios add PRIMARY KEY (email);
 ALTER TABLE recursos add PRIMARY KEY (id);
 ALTER TABLE reservas add PRIMARY KEY (id);
 ALTER TABLE disponibilidad add PRIMARY KEY (id);

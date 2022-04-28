@@ -23,21 +23,23 @@ import javax.persistence.Id;
 public class Recurso implements Serializable{
 
     private int id;
-    private int idInterno;
     private String estado;
     private String nombre;
     private String ubicacion;
     private String tipo;
     private int capacidad;
+    private Time horaInicio;
+    private Time horaFin;
 
-    public Recurso(int id, int idInterno,String estado, String nombre, String ubicacion, String tipo, int capacidad) {
+    public Recurso(int id, String estado, String nombre, String ubicacion, String tipo, int capacidad,Time horaInicio,Time horaFin) {
         this.id = id;
-        this.idInterno = idInterno;
         this.estado = estado;
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.tipo = tipo;
         this.capacidad = capacidad;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
     }
 
     public int getId() {
@@ -87,20 +89,25 @@ public class Recurso implements Serializable{
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
-
-    public int getIdInterno() {
-        return idInterno;
+    public Time getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setIdInterno(int idInterno) {
-        this.idInterno = idInterno;
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
+    public Time getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
+    }
 
     @Override
     public String toString() {
         return "Element { id: " + id + ", nombre: " + nombre + ", ubicacion: " + ubicacion + ", tipo: " + tipo + ", capacidad: " + capacidad + ", estado: " + estado + "}";
     }
-
 
 }
