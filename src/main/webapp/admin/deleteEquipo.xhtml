@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>deleteEquipo</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
+    <link rel="stylesheet" href="../style/admin.css" />
+</h:head>
+<h:body>
+    <header>
+    </header>
+    <h:form class="formulario">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+        <h1>Eliminar Equipo</h1>
+        <div class="contenedor">
+            <div class="input-contenedor">
+                <i class="fas fa fa-key icon"></i>
+                <p:inputText type="String" placeholder="ID Equipo" required="true" />
+            </div>
+            <p:commandButton class="button" value="Eliminar" action="recursoEquiposAdmin?servlet-redirect = true" />
+            <p:button class="buttonCancel" value="Cancelar" outcome="recursoEquiposAdmin" />
+            <p>Verifique que el Equipo Exista en la opción Listar Equipos.</p>
+        </div>
+    </h:form>
+</h:body>
+</html>

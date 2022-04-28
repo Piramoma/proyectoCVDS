@@ -92,15 +92,9 @@ public class LoginBean implements Serializable{
         try {
             Subject user = SecurityUtils.getSubject();
             if (user.hasRole("estudiante")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/libros.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
             } else if (user.hasRole("admin")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/salas.xhtml");
-            } else if (user.hasRole("Administrativo")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/administrativo.xhtml");
-            } else if (user.hasRole("Egresado")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/egresado.xhtml");
-            } else if (user.hasRole("Profesor")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/profesor.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/indexAdmin.xhtml");
             }
         } catch (IOException ex) {
             error("Unknown error: " + ex.getMessage());
