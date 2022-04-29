@@ -35,7 +35,7 @@ public class main {
             System.out.println(u.toString());
         }
         System.out.println("Reservas con mucha informacion");
-        List<Reserva> reservaMuchaInfo = instance.consultarPorUsuarioMuchaInfo("yesid.mora");
+        List<Reserva> reservaMuchaInfo = instance.consultarPorUsuarioMuchaInfo("yesid.mora", 2);
         for(Reserva r: reservaMuchaInfo){
             System.out.println(r.toString());
         }

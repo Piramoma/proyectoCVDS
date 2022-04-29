@@ -25,7 +25,7 @@
     <select id="consultarPorUsuarioMuchaInfo" resultMap="ReservaResult" parameterType="map">
         SELECT public.reservas.id, idusuario, fechasolicitud, fechainicioreserva, fechafinreserva, public.recursos.nombre, public.recursos.ubicacion, public.recursos.tipo
         FROM public.reservas INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
-        where public.reservas.estado = 'activa' and idUsuario = #{idUsuario}
+        where public.reservas.estado = 'activa' and idUsuario = #{idUsuario} and public.reservas.id = #{idreserva}
     </select>
 
 </mapper>

@@ -28,14 +28,12 @@
                 <p:inputText type="password" placeholder="Contraseña" required="true" value="#{loginBean.passwd}" />
             </div>
             <div class="login">
-                <p:commandButton id="mybutton" class="button1" value="Ingresar" alig="center" actionListener="#{loginBean.login}" />
-
-                <p:button  class="button2" value="Cancelar" outcome="index" />
+                <p:commandButton id="mybutton" class="button1"  value="Ingresar" alig="center" actionListener="#{loginBean.login}"/>
+                <p:commandButton  class="button2" value="Cancelar" onclick="history.back()" />
                 <p>Recuerda Devolver los Recursos en el plazo establecido.</p>
                 <h:outputText id = "message" value="#{loginBean.showError()}">
                     <p:autoUpdate/>
                 </h:outputText>
-
             </div>
         </div>
     </h:form>

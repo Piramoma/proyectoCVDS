@@ -25,6 +25,7 @@ public class LoginBean implements Serializable{
     private String passwd;
     public boolean logeado = false;
     public String showError = "";
+    public String ultimaPagina = "";
 
     public void login() {
         Subject userActual = SecurityUtils.getSubject();
@@ -32,7 +33,6 @@ public class LoginBean implements Serializable{
         try{
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
-
             redirect();
             setLogeado(true);
         } catch (UnknownAccountException ex) {
@@ -78,7 +78,7 @@ public class LoginBean implements Serializable{
         setLogeado(false);
         SecurityUtils.getSubject().logout();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,8 +104,17 @@ public class LoginBean implements Serializable{
 
     public boolean isAdmin() {
         Subject user = SecurityUtils.getSubject();
-        System.out.println(user.hasRole("admin"));
         return user.hasRole("admin");
+    }
+
+    public boolean isEstudiante() {
+        Subject user = SecurityUtils.getSubject();
+        return user.hasRole("estudiante");
+    }
+
+    public boolean isVisitante() {
+        Subject user = SecurityUtils.getSubject();
+        return !(user.hasRole("estudiante") || user.hasRole("admin"));
     }
 
 }

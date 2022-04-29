@@ -8,6 +8,6 @@ public interface ReservaDAO {
 
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario);
 
-    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario);
+    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario, int id);
 
 }

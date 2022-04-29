@@ -45,8 +45,8 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     }
 
     @Override
-    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario) {
-        return reservaDAO.consultarPorUsuarioMuchaInfo(idUsuario);
+    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario, int id) {
+        return reservaDAO.consultarPorUsuarioMuchaInfo(idUsuario, id);
     }
 
     @Override

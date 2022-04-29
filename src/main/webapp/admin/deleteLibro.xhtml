@@ -24,7 +24,7 @@
                 <p:inputText type="String" placeholder="ID Libro" required="true" />
             </div>
             <p:commandButton class="button" value="Eliminar" action="recursoLibrosAdmin?servlet-redirect = true" />
-            <p:button class="buttonCancel" value="Cancelar" outcome="recursoLibrosAdmin" />
+            <p:commandButton  class="buttonCancel" value="Cancelar" onclick="history.back()" />
             <p>Verifique que el Libro Exista en la opción Listar Libros.</p>
         </div>
     </h:form>

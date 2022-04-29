@@ -21,6 +21,7 @@ public class UsuariosBean extends BasePageBean {
     private String programa;
     private String contraseña;
     private String tipo;
+    private long numReservas;
 
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;

@@ -19,7 +19,7 @@ public interface ServiciosBiblioteca {
 
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario);
 
-    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario);
+    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario, int id);
 
     public abstract List<Usuario> consultarUsuariosConReservas() ;
 

@@ -44,7 +44,7 @@
                 <p:inputText type="String" placeholder="Tipo" required="true" value="Equipo"/>
             </div>
             <p:commandButton class="button" value="Registrar" action="recursoEquiposAdmin?servlet-redirect = true" />
-            <p:button class="buttonCancel" value="Cancelar" outcome="recursoEquiposAdmin" />
+            <p:commandButton  class="buttonCancel" value="Cancelar" onclick="history.back()" />
             <p>Todos los campos tienen que estar completados.</p>
         </div>
     </h:form>

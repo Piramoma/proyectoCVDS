@@ -4,6 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <meta charset="UTF-8" />
@@ -16,14 +17,18 @@
             crossorigin="anonymous"
     ></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="../style/recursos.css" />
+    <link rel="stylesheet" href="../style/recursosF.css" />
 
 </h:head>
 <h:body >
     <header class="header">
         <nav class="nav">
-            <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
-            <h1 class="logo nav-link" >Biblioteca ECI</h1>
+
+            <div class="logos">
+                <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                <h1 class="tittleLogo" >Biblioteca ECI</h1>
+            </div>
+
             <button class="nav-toggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
             </button>
@@ -31,12 +36,34 @@
                 <li class="nav-menu-item">
                     <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
                 </li>
-                <li class="nav-menu-item">
-                    <a href="#" class="nav-menu-link nav-link">Mis Reservas</a>
-                </li>
-                <li class="nav-menu-item">
-                    <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesion</a>
-                </li>
+
+                <c:if  test="#{loginBean.isVisitante()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesion</a>
+                    </li>
+                </c:if>
+
+                <c:if  test="#{loginBean.isEstudiante()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link">Mis Reservas</a>
+                    </li>
+
+                    <li class="nav-menu-item">
+                        <a href="#" class="nav-menu-link nav-link nav-menu-link_active" >Cerra Sesion</a>
+                    </li>
+                </c:if>
+
+                <c:if  test="#{loginBean.isAdmin()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/admin/addLibro.xhtml" class="nav-menu-link nav-link">Añadir</a>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a href="/faces/admin/deleteLibro.xhtml" class="nav-menu-link nav-link">Eliminar</a>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a href="#" class="nav-menu-link nav-link nav-menu-link_active">Cerrar Sesion</a>
+                    </li>
+                </c:if>
             </ul>
         </nav>
     </header>
@@ -79,12 +106,12 @@
                         <p:column headerText="Estado" style="text-align: center" >
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
-
-                        <p:column headerText="Haga su reserva" style="text-align: center">
-                            <p:button outcome="verHorarios" value="Ver horarios disponibles">
-                            </p:button>
-                        </p:column>
-
+                        <c:if  test="#{!loginBean.isVisitante()}">
+                            <p:column headerText="Haga su reserva" style="text-align: center">
+                                <p:button outcome="verHorarios" value="Ver horarios disponibles">
+                                </p:button>
+                            </p:column>
+                        </c:if>
                     </p:dataTable>
                 </h:form>
             </div>

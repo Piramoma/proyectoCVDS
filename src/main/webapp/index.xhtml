@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://shiro.apache.org/tags">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:my="http://Java.Sun.com/jsf/composite/my">
 <h:head>
     <meta charset="UTF-8" />
     <title>BibliotecaECI</title>
@@ -15,28 +16,51 @@
             src="https://kit.fontawesome.com/7e5b2d153f.js"
             crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="style/indexF.css" />
 </h:head>
 <h:body>
     <header class="header">
         <nav class="nav">
-            <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
-            <h1 class="logo nav-link" >Biblioteca ECI</h1>
+            <div class="logos">
+                <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                <h1 class="tittleLogo" >Biblioteca ECI</h1>
+            </div>
+
             <button class="nav-toggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
             </button>
+
             <ul class="nav-menu">
-                <li class="nav-menu-item">
-                    <a href="#" class="nav-menu-link nav-link" >Recursos</a>
-                </li>
 
-                <li class="nav-menu-item ">
-                    <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link" >Mis Reservas</a>
-                </li>
+                <c:if  test="#{loginBean.isVisitante()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesion</a>
+                    </li>
+                </c:if>
 
-                <li class="nav-menu-item">
-                    <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesion</a>
-                </li>
+                <c:if  test="#{loginBean.isEstudiante()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link">Mis Reservas</a>
+                    </li>
+
+                    <li class="nav-menu-item">
+                        <a href="#" class="nav-menu-link nav-link nav-menu-link_active" >Cerra Sesion</a>
+                    </li>
+                </c:if>
+
+                <c:if  test="#{loginBean.isAdmin()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/admin/userReservas.xhtml" class="nav-menu-link nav-link">Consultar Reservas</a>
+                    </li>
+
+                    <li class="nav-menu-item">
+                        <a href="#" class="nav-menu-link nav-link">Reporte</a>
+                    </li>
+
+                    <li class="nav-menu-item">
+                        <a href="#" class="nav-menu-link nav-link nav-menu-link_active">Cerra Sesion</a>
+                    </li>
+                </c:if>
             </ul>
         </nav>
     </header>
