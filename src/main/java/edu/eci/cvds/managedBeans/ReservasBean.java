@@ -2,6 +2,8 @@ package edu.eci.cvds.managedBeans;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -30,5 +32,7 @@ public class ReservasBean extends BasePageBean {
     private ServiciosBiblioteca serviciosBiblioteca;
 
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario){return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);}
+
+    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario){return serviciosBiblioteca.consultarPorUsuarioMuchaInfo(idUsuario);}
 
 }

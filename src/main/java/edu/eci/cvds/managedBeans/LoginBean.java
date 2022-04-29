@@ -2,6 +2,7 @@ package edu.eci.cvds.managedBeans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.Security;
 import java.util.logging.Level;
 
 import javax.faces.application.FacesMessage;
@@ -89,7 +90,7 @@ public class LoginBean implements Serializable{
             if (user.hasRole("estudiante")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
             } else if (user.hasRole("admin")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/indexAdmin.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
             }
         } catch (IOException ex) {
             error("Unknown error: " + ex.getMessage());
@@ -100,4 +101,11 @@ public class LoginBean implements Serializable{
     public String showError(){
         return showError;
     }
+
+    public boolean isAdmin() {
+        Subject user = SecurityUtils.getSubject();
+        System.out.println(user.hasRole("admin"));
+        return user.hasRole("admin");
+    }
+
 }

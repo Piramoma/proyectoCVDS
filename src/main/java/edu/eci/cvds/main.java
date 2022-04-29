@@ -1,7 +1,10 @@
 package edu.eci.cvds;
 
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
+import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import edu.eci.cvds.services.ServiciosBibliotecaFactory;
 
@@ -24,6 +27,16 @@ public class main {
         System.out.println("Recursos Salas");
         List<Recurso> RecursosSalas = instance.consultarSalasEstudio();
         for(Recurso r: RecursosSalas){
+            System.out.println(r.toString());
+        }
+        System.out.println("Usuarios con Reservas");
+        List<Usuario> usuariosConReservas = instance.consultarUsuariosConReservas();
+        for(Usuario u: usuariosConReservas){
+            System.out.println(u.toString());
+        }
+        System.out.println("Reservas con mucha informacion");
+        List<Reserva> reservaMuchaInfo = instance.consultarPorUsuarioMuchaInfo("yesid.mora");
+        for(Reserva r: reservaMuchaInfo){
             System.out.println(r.toString());
         }
     }

@@ -2,6 +2,8 @@ package edu.eci.cvds.managedBeans;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import edu.eci.cvds.services.ServiciosBiblioteca;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "recursosBean")
-@SessionScoped
+@ApplicationScoped
 public class RecursosBean extends BasePageBean {
 
     private String nombre;

@@ -17,4 +17,9 @@ public class MyBATISReservaDAO implements ReservaDAO {
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario) {
         return reservaMapper.consultarPorUsuarioPocaInfo(idUsuario);
     }
+
+    @Override
+    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario) {
+        return reservaMapper.consultarPorUsuarioMuchaInfo(idUsuario);
+    }
 }

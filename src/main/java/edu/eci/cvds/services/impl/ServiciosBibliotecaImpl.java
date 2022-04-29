@@ -3,6 +3,7 @@ package edu.eci.cvds.services.impl;
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.*;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import javax.ejb.Singleton;
@@ -15,6 +16,8 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     private RecursoDAO recursoDAO;
     @Inject
     private ReservaDAO reservaDAO;
+    @Inject
+    private UsuarioDAO usuarioDAO;
 
     @Override
     public List<Recurso> consultarLibros() {
@@ -41,5 +44,14 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         return reservaDAO.consultarPorUsuarioPocaInfo(idUsuario);
     }
 
+    @Override
+    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario) {
+        return reservaDAO.consultarPorUsuarioMuchaInfo(idUsuario);
+    }
+
+    @Override
+    public List<Usuario> consultarUsuariosConReservas() {
+        return usuarioDAO.consultarUsuariosConReservas();
+    }
 
 }

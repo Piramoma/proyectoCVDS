@@ -2,12 +2,13 @@ package edu.eci.cvds.entities;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Objeto de una reserva de un recurso especifico hecha por un usuario registrado
  * @param idUsuario String con el e-mail de un usuario registrado, este e-mail identifica al usuario
  * @param id Numero de identificacion del recurso que el usuario esta reservando
- * @param fechaReserva Fecha actual en la que la reserva esta tomando lugar
+ * @param fechaSolicitud Fecha actual en la que la reserva esta tomando lugar
  * @param fechaInicioReserva Fecha en la que la reserva comenzara a ser vigente
  * @param fechaFinReserva Fecha en la que la reserva dejara de ser vigente
  * @param estado Booleano que indica si una reserva sigue activa. True si sigue activa False de lo contrario
@@ -18,19 +19,24 @@ public class Reserva {
     private String idUsuario;
     private int idRecurso;
     Timestamp fechaInicioReserva,fechaFinReserva;
-    Date fechaReserva;
+    private Date fechaSolicitud;
     String estado;
+
+    private Recurso recurso;
+
+    private Usuario usuario;
 
     public Reserva(){
         super();
     }
-    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaReserva, String estado) {
+
+    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaSolicitud, String estado) {
         this.id=id;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
-        this.fechaReserva=fechaReserva;
+        this.fechaSolicitud=fechaSolicitud;
         this.estado=estado;
     }
 
@@ -74,12 +80,28 @@ public class Reserva {
         this.fechaFinReserva = fechaFinReserva;
     }
 
-    public Date getFechaReserva() {
-        return fechaReserva;
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
-        this.fechaReserva = fechaReserva;
+    public void setFechaSolicitud(Date fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
+    }
+
+    public Recurso getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getEstado() {
@@ -98,8 +120,9 @@ public class Reserva {
                 ", idRecurso=" + idRecurso +
                 ", fechaInicioReserva=" + fechaInicioReserva +
                 ", fechaFinReserva=" + fechaFinReserva +
-                ", fechaReserva=" + fechaReserva +
+                ", fechaReserva=" + fechaSolicitud +
                 ", estado=" + estado +
+                ", nombreRecurso=" + recurso.getNombre() +
                 '}';
     }
 }

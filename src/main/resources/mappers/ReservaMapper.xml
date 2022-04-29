@@ -7,12 +7,13 @@
 
     <resultMap type='Reserva' id='ReservaResult'>
         <id property='id' column='id' />
-        <result property="idUsuario" column="id_usuario"/>
-        <result property='idRecurso' column='id_recurso'/>
-        <result property='fechaInicioReserva' column='fecha_inicio_reserva' />
-        <result property='fechaFinReserva' column='fecha_fin_reserva' />
-        <result property='fechaReserva' column='fecha_solicitud' />
+        <result property="idUsuario" column="idUsuario"/>
+        <result property='idRecurso' column='idRecurso'/>
+        <result property='fechaInicioReserva' column='fechaInicioReserva' />
+        <result property='fechaFinReserva' column='fechaFinReserva' />
+        <result property='fechaSolicitud' column='fechaSolicitud' />
         <result property='estado' column='estado' />
+        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" />
     </resultMap>
 
     <select id="consultarPorUsuarioPocaInfo" resultMap="ReservaResult" parameterType="map">
@@ -20,4 +21,11 @@
         FROM public.reservas
         where estado = 'activa' and idUsuario = #{idUsuario}
     </select>
+
+    <select id="consultarPorUsuarioMuchaInfo" resultMap="ReservaResult" parameterType="map">
+        SELECT public.reservas.id, idusuario, fechasolicitud, fechainicioreserva, fechafinreserva, public.recursos.nombre, public.recursos.ubicacion, public.recursos.tipo
+        FROM public.reservas INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        where public.reservas.estado = 'activa' and idUsuario = #{idUsuario}
+    </select>
+
 </mapper>

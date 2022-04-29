@@ -22,7 +22,7 @@ public class ServiciosBibliotecaFactory {
                 setEnvironmentId(env);
                 setClassPathResource(pathResource);
                 bind(ServiciosBiblioteca.class).to(ServiciosBibliotecaImpl.class);
-                //bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
+                bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(RecursoDAO.class).to(MyBATISRecursoDAO.class);
                 bind(ReservaDAO.class).to(MyBATISReservaDAO.class);
                 //bind(HorarioDAO.class).to(MyBATISHorarioDAO.class);

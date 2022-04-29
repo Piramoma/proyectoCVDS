@@ -30,6 +30,10 @@ public class Recurso implements Serializable{
     private String tipo;
     private int capacidad;
 
+    public Recurso() {
+        super();
+    }
+
     public Recurso(int id, int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad) {
         this.id = id;
         this.idInterno = id;

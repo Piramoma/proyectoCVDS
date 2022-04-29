@@ -61,8 +61,17 @@
                                  class="valor">
 
                         <p:column headerText="Id" style="text-align: center" >
+                            <h:outputText value="#{element.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado" style="text-align: center" >
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
+
+                        <p:column headerText="fecha" style="text-align: center" >
+                            <h:outputText value="#{element.fechaSolicitud}"/>
+                        </p:column>
+
                     </p:dataTable>
                 </h:form>
             </div>

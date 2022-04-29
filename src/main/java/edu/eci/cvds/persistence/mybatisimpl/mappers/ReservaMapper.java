@@ -9,4 +9,6 @@ public interface ReservaMapper {
 
     public List<Reserva> consultarPorUsuarioPocaInfo(@Param("idUsuario") String idUsuario);
 
+    public List<Reserva> consultarPorUsuarioMuchaInfo(@Param("idUsuario") String idUsuario);
+
 }

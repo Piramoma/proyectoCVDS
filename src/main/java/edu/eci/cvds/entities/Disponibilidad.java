@@ -7,8 +7,6 @@ public class Disponibilidad {
     private int idRecurso;
     private Time horaInicio;
     private Time horaFin;
-
-
     /**
      * El constructor de Horario toma la franja (con hora inicial y final) en forma de String y la
      * convierte a hora tipo Date.
