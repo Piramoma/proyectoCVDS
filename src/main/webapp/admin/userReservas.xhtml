@@ -79,8 +79,9 @@
                             <h:outputText value="#{element.numReservas}"/>
                         </p:column>
 
-                        <p:column headerText="Detalles" style="text-align: center">
-                            <p:button value="Ver Mas"></p:button>
+                        <p:column headerText="Informacion" style="text-align: center">
+                            <p:commandButton icon="pi pi-search" value="Ver Mas" title="View" action="#{usuariosBean.masInfoReserva(element)}">
+                            </p:commandButton>
                         </p:column>
 
                     </p:dataTable>

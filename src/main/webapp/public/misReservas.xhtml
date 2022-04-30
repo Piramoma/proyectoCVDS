@@ -31,6 +31,7 @@
             <button class="nav-toggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
             </button>
+
             <ul class="nav-menu">
                 <li class="nav-menu-item">
                     <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
@@ -51,39 +52,110 @@
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
 
-                <div class="p-0 btn-group justify-content-lg-center">
-                    <div class="tittle" >
-                        <h1 class="text align-self-center p-2">MIS RESERVAS ACTIVAS</h1>
+                <c:if  test="#{loginBean.isAdmin()}">
+                    <div class="p-0 btn-group justify-content-lg-center">
+                        <div class="tittle" >
+                            <h1 class="text align-self-center p-2">RESERVAS USUARIO</h1>
+                        </div>
                     </div>
-                </div>
+                </c:if>
+
+                <c:if  test="#{loginBean.isEstudiante()}">
+                    <div class="p-0 btn-group justify-content-lg-center">
+                        <div class="tittle" >
+                            <h1 class="text align-self-center p-2">MIS RESERVAS</h1>
+                        </div>
+                    </div>
+                </c:if>
 
                 <h:form class="data">
-                    <p:dataTable id="tbl" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" rows="10"
-                                 paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                                 rowsPerPageTemplate="5,10,15"
-                                 styleClass="table-dark table-striped table-bordered justify-content-center"
-                                 class="valor">
 
-                        <p:column headerText="Id" style="text-align: center" >
-                            <h:outputText value="#{element.id}"/>
-                        </p:column>
+                    <c:if  test="#{loginBean.isAdmin()}">
+                        <p:dataTable id="tbl" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(usuariosBean.getUsuarioReservas().email)}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15"
+                                     styleClass="table-dark table-striped table-bordered justify-content-center"
+                                     class="valor">
+                            <p:column headerText="Id" style="text-align: center" >
+                                <h:outputText value="#{element.id}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().tipo}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().nombre}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Entrega" style="text-align: center" >
+                                <h:outputText value="#{element.fechaFinReserva}"/>
+                            </p:column>
+                            <p:column headerText="Detalles" style="text-align: center">
+                                <p:commandButton icon="pi pi-search" title="button" onclick="PF('dlg2').show();"></p:commandButton>
+                                <p:dialog header="Informacion Reserva" widgetVar="dlg2" modal="true" height="175" width="800">
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputLabel for="id" value="Id Recurso:" />
+                                        <h:outputText id="id" value="#{element.getRecurso().id}"/>
+                                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
 
-                        <p:column headerText="Fecha Solicitud" style="text-align: center" >
-                            <h:outputText value="#{element.fechaSolicitud}"/>
-                        </p:column>
+                                        <h:outputText id="ubicacion" value="#{element.getRecurso().ubicacion}"/>
+                                        <h:outputLabel for="capacidad" value="Capacidad:" />
+                                        <h:outputText id="capacidad" value="#{element.getRecurso().capacidad}"/>
 
-                        <p:column headerText="Estado" style="text-align: center" >
-                            <h:outputText value="#{element.estado}"/>
-                        </p:column>
+                                        <h:outputLabel for="fechaInicio" value="Fecha Inicio:" />
+                                        <h:outputText id="fechaInicio" value="#{element.fechaInicioReserva}"/>
 
-                        <p:column headerText="Detalles" style="text-align: center">
-                            <p:commandButton icon="pi pi-search" title="View" action="#{reservasBean.masInfoRecurso(element)}">
-                            </p:commandButton>
-                        </p:column>
+                                        <h:outputLabel for="fechaSolicitud" value="Fecha Solicitud:" />
+                                        <h:outputText id="fechaSolicitud" value="#{element.fechaSolicitud}"/>
+                                    </h:panelGrid>
+                                </p:dialog>
+                            </p:column>
+                        </p:dataTable>
+                    </c:if>
 
-                    </p:dataTable>
+                    <c:if  test="#{loginBean.isEstudiante()}">
+                        <p:dataTable id="tbl" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15"
+                                     styleClass="table-dark table-striped table-bordered justify-content-center"
+                                     class="valor">
+                            <p:column headerText="Id" style="text-align: center" >
+                                <h:outputText value="#{element.id}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().tipo}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().nombre}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Entrega" style="text-align: center" >
+                                <h:outputText value="#{element.fechaFinReserva}"/>
+                            </p:column>
+                            <p:column headerText="Detalles" style="text-align: center">
+                                <p:commandButton icon="pi pi-search" title="button" onclick="PF('dlg2').show();"></p:commandButton>
+                                <p:dialog header="Informacion Reserva" widgetVar="dlg2" modal="true" height="175" width="800">
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputLabel for="id" value="Id Recurso:" />
+                                        <h:outputText id="id" value="#{element.getRecurso().id}"/>
+                                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
+
+                                        <h:outputText id="ubicacion" value="#{element.getRecurso().ubicacion}"/>
+                                        <h:outputLabel for="capacidad" value="Capacidad:" />
+                                        <h:outputText id="capacidad" value="#{element.getRecurso().capacidad}"/>
+
+                                        <h:outputLabel for="fechaInicio" value="Fecha Inicio:" />
+                                        <h:outputText id="fechaInicio" value="#{element.fechaInicioReserva}"/>
+
+                                        <h:outputLabel for="fechaSolicitud" value="Fecha Solicitud:" />
+                                        <h:outputText id="fechaSolicitud" value="#{element.fechaSolicitud}"/>
+                                    </h:panelGrid>
+                                </p:dialog>
+                            </p:column>
+                        </p:dataTable>
+                    </c:if>
+
                 </h:form>
             </div>
         </div>

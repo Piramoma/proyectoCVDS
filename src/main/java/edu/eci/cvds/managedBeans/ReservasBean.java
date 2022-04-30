@@ -24,45 +24,12 @@ import java.io.IOException;
 @SessionScoped
 public class ReservasBean extends BasePageBean {
 
-    private int id;
-
-    private String idUsuario;
-    private int idRecurso;
-    Timestamp fechaInicioReserva,fechaFinReserva;
-    Date fechaReserva;
-    String estado;
-    private List<Reserva> reservas;
-
-    private Recurso recursoEspecifico;
+    private Reserva reservaActual;
 
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
 
-    public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario){return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);}
-
-    public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario, int id){
-        System.out.println("User: " + idUsuario + " IdReserva: " + id);
-        return serviciosBiblioteca.consultarPorUsuarioMuchaInfo(idUsuario, id);}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void masInfoRecurso(Reserva reserva) {
-        this.recursoEspecifico = reserva.getRecurso();
-        System.out.println(recursoEspecifico.getNombre());
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/infoReserva.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Recurso getRecursoEspecifico(){
-        return recursoEspecifico;
+    public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario){
+        return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
     }
 }

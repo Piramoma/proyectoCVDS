@@ -5,8 +5,12 @@ import com.google.inject.Inject;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.ServiciosBiblioteca;
+
+import java.io.IOException;
 import java.util.List;
 
 
@@ -15,13 +19,7 @@ import java.util.List;
 @ApplicationScoped
 public class UsuariosBean extends BasePageBean {
 
-    private String email;
-    private String nombre;
-    private String apellido;
-    private String programa;
-    private String contraseña;
-    private String tipo;
-    private long numReservas;
+    private Usuario usuarioReservas;
 
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
@@ -29,4 +27,18 @@ public class UsuariosBean extends BasePageBean {
     public List<Usuario> getUsuariosConReservas() {
         return serviciosBiblioteca.consultarUsuariosConReservas();
     }
+
+    public void masInfoReserva(Usuario usuarioReservas) {
+        this.usuarioReservas = usuarioReservas;
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/misReservas.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Usuario getUsuarioReservas() {
+        return usuarioReservas;
+    }
+
 }
