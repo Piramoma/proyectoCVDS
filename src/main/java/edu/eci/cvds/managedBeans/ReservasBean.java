@@ -6,6 +6,7 @@ import edu.eci.cvds.entities.Recurso;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
@@ -15,6 +16,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
+import java.io.IOException;
 
 
 @SuppressWarnings("deprecation")
@@ -29,9 +31,9 @@ public class ReservasBean extends BasePageBean {
     Timestamp fechaInicioReserva,fechaFinReserva;
     Date fechaReserva;
     String estado;
+    private List<Reserva> reservas;
 
-    private int perro;
-
+    private Recurso recursoEspecifico;
 
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
@@ -48,5 +50,19 @@ public class ReservasBean extends BasePageBean {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void masInfoRecurso(Reserva reserva) {
+        this.recursoEspecifico = reserva.getRecurso();
+        System.out.println(recursoEspecifico.getNombre());
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/infoReserva.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Recurso getRecursoEspecifico(){
+        return recursoEspecifico;
     }
 }

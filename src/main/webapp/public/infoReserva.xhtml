@@ -56,7 +56,7 @@
                 </div>
 
                 <h:form class="data">
-                    <p:dataTable id="tbl" var="element" value="#{reservasBean.consultarPorUsuarioMuchaInfo(loginBean.user,reservasBean.id)}" rows="10"
+                    <p:dataTable id="tbl" var="element" value="#{reservasBean.getRecursoEspecifico()}" rows="10"
                                  paginator="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -64,12 +64,16 @@
                                  styleClass="table-dark table-striped table-bordered justify-content-center"
                                  class="valor">
 
-                        <p:column headerText="Id" style="text-align: center" >
+                        <p:column headerText="IdRecurso" style="text-align: center" >
                             <h:outputText value="#{element.id}"/>
                         </p:column>
 
-                        <p:column headerText="Fecha Solicitud" style="text-align: center" >
-                            <h:outputText value="#{element.fechaSolicitud}"/>
+                        <p:column headerText="Estado" style="text-align: center" >
+                            <h:outputText value="#{element.estado}"/>
+                        </p:column>
+
+                        <p:column headerText="Ubicacion" style="text-align: center" >
+                            <h:outputText value="#{element.ubicacion}"/>
                         </p:column>
 
                     </p:dataTable>
