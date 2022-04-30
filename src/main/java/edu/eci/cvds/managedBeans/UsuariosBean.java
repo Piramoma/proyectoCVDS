@@ -19,7 +19,7 @@ import java.util.List;
 @ApplicationScoped
 public class UsuariosBean extends BasePageBean {
 
-    private Usuario usuarioReservas;
+    private String usuarioReservas;
 
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
@@ -28,7 +28,7 @@ public class UsuariosBean extends BasePageBean {
         return serviciosBiblioteca.consultarUsuariosConReservas();
     }
 
-    public void masInfoReserva(Usuario usuarioReservas) {
+    public void masInfoReserva(String usuarioReservas) {
         this.usuarioReservas = usuarioReservas;
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/misReservas.xhtml");
@@ -37,7 +37,7 @@ public class UsuariosBean extends BasePageBean {
         }
     }
 
-    public Usuario getUsuarioReservas() {
+    public String getUsuarioReservas() {
         return usuarioReservas;
     }
 
