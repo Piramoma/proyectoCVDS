@@ -1,5 +1,6 @@
 package edu.eci.cvds.services;
 
+import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
@@ -22,5 +23,8 @@ public interface ServiciosBiblioteca {
     public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario, int id);
 
     public abstract List<Usuario> consultarUsuariosConReservas() ;
+
+    public abstract List<Horario> consultarHorarios() ;
+
 
 }

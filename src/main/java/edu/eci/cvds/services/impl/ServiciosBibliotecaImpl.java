@@ -1,6 +1,7 @@
 package edu.eci.cvds.services.impl;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
@@ -18,6 +19,8 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     private ReservaDAO reservaDAO;
     @Inject
     private UsuarioDAO usuarioDAO;
+    @Inject
+    private HorarioDAO horarioDAO;
 
     @Override
     public List<Recurso> consultarLibros() {
@@ -52,6 +55,11 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     @Override
     public List<Usuario> consultarUsuariosConReservas() {
         return usuarioDAO.consultarUsuariosConReservas();
+    }
+
+    @Override
+    public List<Horario> consultarHorarios() {
+        return horarioDAO.consultarHorarios();
     }
 
 }

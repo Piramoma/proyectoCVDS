@@ -91,11 +91,12 @@
                                 <h:outputText value="#{element.fechaFinReserva}"/>
                             </p:column>
                             <p:column headerText="Detalles" style="text-align: center">
-                                <p:commandButton icon="pi pi-search" title="button" onclick="PF('dlg2').show();"></p:commandButton>
+                                <p:commandButton icon="pi pi-search" title="button" action="#{reservasBean.setReservaActual(element)}" onclick="PF('dlg2').show();"></p:commandButton>
+
                                 <p:dialog header="Informacion Reserva" widgetVar="dlg2" modal="true" height="175" width="800">
                                     <h:panelGrid columns="2" cellpadding="5">
                                         <h:outputLabel for="id" value="Id Recurso:" />
-                                        <h:outputText id="id" value="#{element.getRecurso().id}"/>
+                                        <h:outputText id="id" value="#{reservasBean.getReservaActual.getRecurso().id}"/>
                                         <h:outputLabel for="ubicacion" value="Ubicacion:" />
 
                                         <h:outputText id="ubicacion" value="#{element.getRecurso().ubicacion}"/>
@@ -114,13 +115,7 @@
                     </c:if>
 
                     <c:if  test="#{loginBean.isEstudiante()}">
-                        <p:dataTable id="tbl" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" rows="10"
-                                     paginator="true"
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                                     rowsPerPageTemplate="5,10,15"
-                                     styleClass="table-dark table-striped table-bordered justify-content-center"
-                                     class="valor">
+                        <p:dataTable id="basicDT" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" >
                             <p:column headerText="Id" style="text-align: center" >
                                 <h:outputText value="#{element.id}"/>
                             </p:column>
@@ -133,15 +128,18 @@
                             <p:column headerText="Fecha Entrega" style="text-align: center" >
                                 <h:outputText value="#{element.fechaFinReserva}"/>
                             </p:column>
+
                             <p:column headerText="Detalles" style="text-align: center">
-                                <p:commandButton icon="pi pi-search" title="button" onclick="PF('dlg2').show();"></p:commandButton>
+                                <p:commandButton icon="pi pi-search" title="button" action="#{reservasBean.setReservaActual(element)}" onclick="PF('dlg2').show();"></p:commandButton>
+
                                 <p:dialog header="Informacion Reserva" widgetVar="dlg2" modal="true" height="175" width="800">
                                     <h:panelGrid columns="2" cellpadding="5">
                                         <h:outputLabel for="id" value="Id Recurso:" />
-                                        <h:outputText id="id" value="#{element.getRecurso().id}"/>
-                                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
+                                        <h:outputText id="id" value="#{element.getReservaActual()}"/>
 
+                                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
                                         <h:outputText id="ubicacion" value="#{element.getRecurso().ubicacion}"/>
+
                                         <h:outputLabel for="capacidad" value="Capacidad:" />
                                         <h:outputText id="capacidad" value="#{element.getRecurso().capacidad}"/>
 
@@ -154,6 +152,7 @@
                                 </p:dialog>
                             </p:column>
                         </p:dataTable>
+
                     </c:if>
 
                 </h:form>

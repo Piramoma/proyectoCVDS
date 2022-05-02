@@ -25,7 +25,7 @@ public class ServiciosBibliotecaFactory {
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(RecursoDAO.class).to(MyBATISRecursoDAO.class);
                 bind(ReservaDAO.class).to(MyBATISReservaDAO.class);
-                //bind(HorarioDAO.class).to(MyBATISHorarioDAO.class);
+                bind(HorarioDAO.class).to(MyBATISHorarioDAO.class);
 
             }
         });

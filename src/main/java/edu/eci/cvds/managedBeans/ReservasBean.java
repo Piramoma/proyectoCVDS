@@ -32,4 +32,14 @@ public class ReservasBean extends BasePageBean {
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario){
         return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
     }
+
+    public int getReservaActual() {
+        System.out.println("Si llego aqui");
+        return reservaActual.getId();
+    }
+
+    public void setReservaActual(Reserva reservaActual) {
+        this.reservaActual = reservaActual;
+        System.out.println(this.reservaActual.getId() + " BEBE");
+    }
 }
