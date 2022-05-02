@@ -26,31 +26,29 @@
                 <h1 class="tittleLogo" >Biblioteca ECI</h1>
             </div>
 
-            <button class="nav-toggle" aria-label="Abrir menú">
-                <i class="fas fa-bars"></i>
-            </button>
+
 
             <ul class="nav-menu">
 
                 <c:if  test="#{loginBean.isVisitante()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesion</a>
+                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Iniciar Sesion</a>
                     </li>
                 </c:if>
 
                 <c:if  test="#{loginBean.isEstudiante()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link">Mis Reservas</a>
+                        <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Mis Reservas</a>
                     </li>
 
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" >Cerrar Sesion</a>
+                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}"/>
                     </li>
                 </c:if>
 
                 <c:if  test="#{loginBean.isAdmin()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/admin/userReservas.xhtml" class="nav-menu-link nav-link">Consultar Reservas</a>
+                        <a href="/faces/admin/userReservas.xhtml" class="nav-menu-link nav-link" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Consultar Reservas</a>
                     </li>
 
                     <li class="nav-menu-item">
@@ -58,7 +56,7 @@
                     </li>
 
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Cerrar Sesion</a>
+                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoLibros.xhtml')}"/>
                     </li>
                 </c:if>
             </ul>

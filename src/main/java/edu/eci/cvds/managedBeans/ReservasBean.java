@@ -6,6 +6,7 @@ import edu.eci.cvds.entities.Recurso;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import edu.eci.cvds.entities.Reserva;
@@ -21,7 +22,7 @@ import java.io.IOException;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "reservasBean")
-@SessionScoped
+@ApplicationScoped
 public class ReservasBean extends BasePageBean {
 
     private Reserva reservaActual;

@@ -6,6 +6,8 @@ import edu.eci.cvds.entities.Recurso;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+
 import edu.eci.cvds.services.ServiciosBiblioteca;
 
 import java.sql.Time;
