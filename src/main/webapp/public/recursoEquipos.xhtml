@@ -48,7 +48,7 @@
                     </li>
 
                     <li class="nav-menu-item">
-                        <a href="#" class="nav-menu-link nav-link nav-menu-link_active" >Cerra Sesion</a>
+                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoEquipos.xhtml')}"/>
                     </li>
                 </c:if>
 
@@ -60,7 +60,7 @@
                         <a href="/faces/admin/deleteLibro.xhtml" class="nav-menu-link nav-link">Eliminar</a>
                     </li>
                     <li class="nav-menu-item">
-                        <a href="#" class="nav-menu-link nav-link nav-menu-link_active">Cerrar Sesion</a>
+                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoEquipos.xhtml')}"/>
                     </li>
                 </c:if>
             </ul>

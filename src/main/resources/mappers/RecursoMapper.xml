@@ -13,6 +13,7 @@
         <result property='ubicacion' column='ubicacion' />
         <result property='tipo' column='tipo' />
         <result property='capacidad' column='capacidad' />
+        <result property='descripcion' column='descripcion' />
     </resultMap>
 
     <select id="consultarLibros" resultMap="RecursoResult" >
@@ -33,9 +34,8 @@
         WHERE tipo = 'sala' and estado = 'disponible'
     </select>
 
-<!--    <insert id="insertarRecurso" parameterType="map">-->
-<!--        insert into recursos (estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values-->
-<!--        (#{r.estado}, #{r.nombre}, #{r.ubicacion}, #{r.tipo}, #{r.capacidad}, #{r.horainicio}, #{r.horafin})-->
-<!--    </insert>-->
+    <insert parameterType="map" id="nuevoRecurso">
+        insert into Recursos(idInterno, estado, nombre, ubicacion, tipo, capacidad, descripcion) values (#{idInterno}, #{estado}, #{nombre}, #{ubicacion}, #{tipo}, #{capacidad}, #{descripcion})
+    </insert>
 
 </mapper>

@@ -16,7 +16,7 @@ public interface ServiciosBiblioteca {
 
     public abstract List<Recurso> consultarSalasEstudio() ;
 
-    public void insertarRecurso(Recurso recurso);
+    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion);
 
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario);
 

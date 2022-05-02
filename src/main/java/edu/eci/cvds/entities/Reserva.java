@@ -6,21 +6,18 @@ import java.util.ArrayList;
 
 /**
  * Objeto de una reserva de un recurso especifico hecha por un usuario registrado
- * @param idUsuario String con el e-mail de un usuario registrado, este e-mail identifica al usuario
- * @param id Numero de identificacion del recurso que el usuario esta reservando
- * @param fechaSolicitud Fecha actual en la que la reserva esta tomando lugar
- * @param fechaInicioReserva Fecha en la que la reserva comenzara a ser vigente
- * @param fechaFinReserva Fecha en la que la reserva dejara de ser vigente
- * @param estado Booleano que indica si una reserva sigue activa. True si sigue activa False de lo contrario
- * @author LEVIATAN
  */
 public class Reserva {
     private int id;
     private String idUsuario;
     private int idRecurso;
-    Timestamp fechaInicioReserva,fechaFinReserva;
     private Date fechaSolicitud;
-    String estado;
+    private Timestamp fechaInicioReserva;
+    private Timestamp fechaFinReserva;
+    private boolean recurrente;
+    private Timestamp proximaocurrencia;
+    private String estado;
+    private Timestamp diaActual;
 
     private Recurso recurso;
 
@@ -29,16 +26,6 @@ public class Reserva {
 
     public Reserva(){
         super();
-    }
-
-    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaSolicitud, String estado) {
-        this.id=id;
-        this.idUsuario = idUsuario;
-        this.idRecurso = idRecurso;
-        this.fechaInicioReserva = fechaInicioReserva;
-        this.fechaFinReserva = fechaFinReserva;
-        this.fechaSolicitud=fechaSolicitud;
-        this.estado=estado;
     }
 
     public int getId() {
@@ -65,6 +52,14 @@ public class Reserva {
         this.idRecurso = idRecurso;
     }
 
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
+    }
+
+    public void setFechaSolicitud(Date fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
+    }
+
     public Timestamp getFechaInicioReserva() {
         return fechaInicioReserva;
     }
@@ -81,12 +76,36 @@ public class Reserva {
         this.fechaFinReserva = fechaFinReserva;
     }
 
-    public Date getFechaSolicitud() {
-        return fechaSolicitud;
+    public boolean isRecurrente() {
+        return recurrente;
     }
 
-    public void setFechaSolicitud(Date fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
+    public void setRecurrente(boolean recurrente) {
+        this.recurrente = recurrente;
+    }
+
+    public Timestamp getProximarecurrencia() {
+        return proximaocurrencia;
+    }
+
+    public void setProximarecurrencia(Timestamp proximarecurrencia) {
+        this.proximaocurrencia = proximarecurrencia;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Timestamp getDiaActual() {
+        return diaActual;
+    }
+
+    public void setDiaActual(Timestamp diaActual) {
+        this.diaActual = diaActual;
     }
 
     public Recurso getRecurso() {
@@ -105,25 +124,19 @@ public class Reserva {
         this.usuario = usuario;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String  estado) {
-        this.estado = estado;
-    }
-
     @Override
     public String toString() {
         return "Reserva{" +
                 "id=" + id +
                 ", idUsuario='" + idUsuario + '\'' +
                 ", idRecurso=" + idRecurso +
+                ", fechaSolicitud=" + fechaSolicitud +
                 ", fechaInicioReserva=" + fechaInicioReserva +
                 ", fechaFinReserva=" + fechaFinReserva +
-                ", fechaReserva=" + fechaSolicitud +
-                ", estado=" + estado +
-                ", nombreRecurso=" + recurso.getNombre() +
+                ", recurrente=" + recurrente +
+                ", proximarecurrencia=" + proximaocurrencia +
+                ", estado='" + estado + '\'' +
+                ", diaActual=" + diaActual +
                 '}';
     }
 }

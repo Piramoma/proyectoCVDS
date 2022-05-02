@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RecursoDAO {
 
-    public void save(Recurso recurso);
+    public void save(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion);
 
     public Recurso load(int id);
 
@@ -16,4 +16,6 @@ public interface RecursoDAO {
     public List<Recurso> consultarEquipos();
 
     public List<Recurso> consultarSalasEstudio();
+
+    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion);
 }

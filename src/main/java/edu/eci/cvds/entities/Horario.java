@@ -1,25 +1,32 @@
 package edu.eci.cvds.entities;
 
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Horario {
     private int id;
     private int idrecurso;
-    private Timestamp fechainicio;
-    private Timestamp fechafin;
+    private Date fechainicio;
+    private String horainicio;
+    private Date fechafin;
+    private String horafin;
 
     /**
      * El constructor de Horario toma la franja (con hora inicial y final) en forma de String y la
      * convierte a hora tipo Date.
-     * @param horaInicio
-     * @param horaFin
      */
-    public Horario(int id, int idRecurso, Timestamp horaInicio, Timestamp horaFin) {
+    public Horario(int id, int idRecurso, Date fechainicio, String horainicio, Date fechafin, String horafin) {
         this.id = id;
         this.idrecurso = idRecurso;
-        this.fechainicio = horaInicio;
-        this.fechafin = horaFin;
+        this.fechainicio = fechainicio;
+        this.horainicio = horainicio;
+        this.fechafin = fechafin;
+        this.horafin = horafin;
+    }
+
+    public Horario() {
+        super();
     }
 
     public int getId() {
@@ -30,37 +37,55 @@ public class Horario {
         this.id = id;
     }
 
-    public int getIdRecurso() {
+    public int getIdrecurso() {
         return idrecurso;
     }
 
-    public void setIdRecurso(int idRecurso) {
-        this.idrecurso = idRecurso;
+    public void setIdrecurso(int idrecurso) {
+        this.idrecurso = idrecurso;
     }
 
-    public Timestamp getHoraInicio() {
+    public Date getFechainicio() {
         return fechainicio;
     }
 
-    public void setHoraInicio(Timestamp horaInicio) {
-        this.fechainicio = horaInicio;
+    public void setFechainicio(Date fechainicio) {
+        this.fechainicio = fechainicio;
     }
 
-    public Timestamp getHoraFin() {
+    public String getHorainicio() {
+        return horainicio;
+    }
+
+    public void setHorainicio(String horainicio) {
+        this.horainicio = horainicio;
+    }
+
+    public Date getFechafin() {
         return fechafin;
     }
 
-    public void setHoraFin(Timestamp horaFin) {
-        this.fechafin = horaFin;
+    public void setFechafin(Date fechafin) {
+        this.fechafin = fechafin;
+    }
+
+    public String getHorafin() {
+        return horafin;
+    }
+
+    public void setHorafin(String horafin) {
+        this.horafin = horafin;
     }
 
     @Override
     public String toString() {
-        return "Disponibilidad{" +
+        return "Horario{" +
                 "id=" + id +
-                ", idRecurso=" + idrecurso +
-                ", horaInicio=" + fechainicio +
-                ", horaFin=" + fechafin +
+                ", idrecurso=" + idrecurso +
+                ", fechainicio=" + fechainicio +
+                ", horainicio='" + horainicio + '\'' +
+                ", fechafin=" + fechafin +
+                ", horafin='" + horafin + '\'' +
                 '}';
     }
 }

@@ -9,6 +9,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -18,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="loginBean")
-@SessionScoped
+@ApplicationScoped
 public class LoginBean implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(LoginBean.class);
     private String user;
@@ -33,6 +35,7 @@ public class LoginBean implements Serializable{
         try{
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
+            showError="";
             redirect();
             setLogeado(true);
         } catch (UnknownAccountException ex) {
@@ -41,8 +44,6 @@ public class LoginBean implements Serializable{
             showError = "La contraseña que ingreso no es correcta";
         } catch (LockedAccountException ex) {
             showError = "El usuario esta deshabilitado para el ingreso";
-        } catch (AuthenticationException ex) {
-            showError = "Error inesperado";
         }
     }
 
@@ -70,17 +71,29 @@ public class LoginBean implements Serializable{
         this.logeado = logeado;
     }
 
+    public void setUltimaPagina(String ultimaPagina) {
+        this.ultimaPagina = ultimaPagina;
+    }
+
+    public String getUltimaPagina() {
+        return ultimaPagina;
+    }
+
     private void error(String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", message));
     }
 
-    public void logOut() {
+    public void logOut(String redirect) {
+        setUser("");
+        setPasswd("");
+        showError="";
         setLogeado(false);
         SecurityUtils.getSubject().logout();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(redirect);
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+            error("Unknown error: " + ex.getMessage());
+            log.error(ex.getMessage(), ex);
         }
     }
 

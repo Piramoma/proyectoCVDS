@@ -42,7 +42,7 @@
                     </li>
                 </c:if>
                 <li class="nav-menu-item">
-                    <a href="#" class="nav-menu-link nav-link nav-menu-link_active">Cerrar Sesion</a>
+                    <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}"/>
                 </li>
             </ul>
         </nav>
@@ -71,7 +71,7 @@
                 <h:form class="data">
 
                     <c:if  test="#{loginBean.isAdmin()}">
-                        <p:dataTable id="tbl" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(usuariosBean.getUsuarioReservas())}" rows="10"
+                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(usuariosBean.getUsuarioReservas())}" rows="10"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -115,7 +115,17 @@
                     </c:if>
 
                     <c:if  test="#{loginBean.isEstudiante()}">
+<<<<<<< HEAD
                         <p:dataTable id="basicDT" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" >
+=======
+                        <p:dataTable id="tblE" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15"
+                                     styleClass="table-dark table-striped table-bordered justify-content-center"
+                                     class="valor">
+>>>>>>> Ramitos
                             <p:column headerText="Id" style="text-align: center" >
                                 <h:outputText value="#{element.id}"/>
                             </p:column>

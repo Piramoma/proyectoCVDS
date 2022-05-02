@@ -27,9 +27,19 @@ public interface RecursoMapper {
     public List<Recurso> consultarSalasEstudio();
 
     /**
-     * Agregar recurso a la plataforma
-     * @param r recurso
+     * Agregar a la base de datos
+     * @param idInterno idInterno
+     * @param estado estado
+     * @param nombre nombre
+     * @param ubicacion ubicacion
+     * @param tipo tipo
+     * @param capacidad capacidad
      */
-    public void insertarRecurso(@Param ("r") Recurso r);
-
+    public void nuevoRecurso(@Param("idInterno") int idInterno,
+                             @Param("estado") String  estado,
+                             @Param("nombre") String nombre,
+                             @Param("ubicacion") String ubicacion,
+                             @Param("tipo") String tipo,
+                             @Param("capacidad")int capacidad,
+                             @Param("descripcion")String descripcion);
 }

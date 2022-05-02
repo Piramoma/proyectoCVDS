@@ -9,12 +9,14 @@
         <id property='id' column='id' />
         <result property="idrecurso" column="idrecurso"/>
         <result property='fechainicio' column='fechainicio'/>
+        <result property='horainicio' column='horainicio'/>
         <result property='fechafin' column='fechafin' />
+        <result property='horafin' column='horafin' />
     </resultMap>
 
     <select id="consultarHorarios" resultMap="HorarioResult" parameterType="map">
         select *
-        from public.horario
+        from public.horarios
     </select>
 
 </mapper>

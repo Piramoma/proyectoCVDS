@@ -15,6 +15,9 @@ import java.util.List;
 public class main {
     public static void main(String[] args) throws PersistenceException {
         ServiciosBiblioteca instance = ServiciosBibliotecaFactory.getInstance().getServiciosBiblioteca();
+
+        instance.nuevoRecurso(1001, "disponible", "Awa", "Bloque G", "libro", 5, "Daniel Ramos");
+
         System.out.println("Recursos Libros");
         List<Recurso> Recursolibros = instance.consultarLibros();
         for(Recurso r: Recursolibros){
@@ -40,5 +43,6 @@ public class main {
         for(Horario h: horarios){
             System.out.println(h.toString());
         }
+
     }
 }
