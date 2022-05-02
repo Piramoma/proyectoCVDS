@@ -107,8 +107,8 @@ public class RecursosBean extends BasePageBean {
         return serviciosBiblioteca.consultarSalasEstudio();
     }
 
-    public void insertarRecurso(Recurso recurso){
-        serviciosBiblioteca.insertarRecurso(recurso);
+    public void nuevoRecurso(Recurso recurso){
+
     }
 
 }

@@ -35,8 +35,8 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     }
 
     @Override
-    public void insertarRecurso(Recurso recurso) {
-        recursoDAO.save(recurso);
+    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad) {
+        recursoDAO.nuevoRecurso(idInterno,estado,nombre,ubicacion,tipo,capacidad);
     }
 
     @Override

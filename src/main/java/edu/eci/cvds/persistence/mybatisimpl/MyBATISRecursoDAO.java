@@ -13,8 +13,8 @@ public class MyBATISRecursoDAO implements RecursoDAO {
     private RecursoMapper recursoMapper;
 
     @Override
-    public void save(Recurso recurso) {
-        recursoMapper.insertarRecurso(recurso);
+    public void save(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad) {
+        recursoMapper.nuevoRecurso(idInterno,estado,nombre,ubicacion,tipo,capacidad);
     }
 
     @Override
@@ -36,5 +36,11 @@ public class MyBATISRecursoDAO implements RecursoDAO {
     public List<Recurso> consultarSalasEstudio() {
         return recursoMapper.consultarSalasEstudio();
     }
+
+    @Override
+    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad) {
+        recursoMapper.nuevoRecurso(idInterno,estado,nombre,ubicacion,tipo,capacidad);
+    }
+
 
 }
