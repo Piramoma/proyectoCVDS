@@ -12,13 +12,16 @@
         <result property='programa' column='programa' />
         <result property='contraseña' column='contraseña' />
         <result property='tipo' column='tipo' />
+        <result property='tipo' column='tipo' />
+        <result property='numReservas' column='numReservas' />
     </resultMap>
 
     <select id="consultarUsuariosConReservas" resultMap="UsuarioResult" parameterType="map">
-        SELECT email, nombre, apellido, programa, count(*) AS num_reservas
+        SELECT email, nombre, apellido, programa, count(*) AS numReservas
         FROM public.usuarios INNER JOIN public.reservas ON public.usuarios.email = public.reservas.idusuario
         where public.reservas.estado = 'activa'
         GROUP BY email
+        ORDER BY numReservas desc
     </select>
 
 </mapper>

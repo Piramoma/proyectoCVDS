@@ -9,7 +9,7 @@
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mis Reservas</title>
+    <title>Reservas Terminadas</title>
     <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script
@@ -34,30 +34,16 @@
             </button>
 
             <ul class="nav-menu">
-
-                <c:if  test="#{loginBean.isAdmin()}">
-                    <li class="nav-menu-item">
-                        <a href="/faces/admin/userReservas.xhtml" class="nav-menu-link nav-link">Atras</a>
-                    </li>
-                </c:if>
-
-                <c:if  test="#{loginBean.isEstudiante()}">
-                    <li class="nav-menu-item">
-                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
-                    </li>
-                </c:if>
-
-
                 <li class="nav-menu-item">
-                    <a href="/faces/public/historialcanceladas.xhtml" class="nav-menu-link nav-link" >Canceladas</a>
+                    <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
                 </li>
 
                 <li class="nav-menu-item">
-                    <a href="/faces/public/historialterminadas.xhtml" class="nav-menu-link nav-link">Terminadas</a>
+                    <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
                 </li>
 
                 <li class="nav-menu-item">
-                    <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" />
+                    <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}"/>
                 </li>
 
             </ul>
@@ -68,27 +54,16 @@
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
 
-                <c:if  test="#{loginBean.isAdmin()}">
-                    <div class="p-0 btn-group justify-content-lg-center">
-                        <div class="tittle" >
-                            <h1 class="text align-self-center p-2">RESERVAS USUARIO</h1>
-                        </div>
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <div class="tittle" >
+                        <h1 class="text align-self-center p-2">RESERVAS CANCELADAS</h1>
                     </div>
-                </c:if>
-
-                <c:if  test="#{loginBean.isEstudiante()}">
-                    <div class="p-0 btn-group justify-content-lg-center">
-                        <div class="tittle" >
-                            <h1 class="text align-self-center p-2">MIS RESERVAS</h1>
-                        </div>
-                    </div>
-                </c:if>
+                </div>
 
                 <h:form class="data">
 
-                    <c:if  test="#{loginBean.isAdmin()}">
-
-                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(usuariosBean.getUsuarioReservas())}" rows="10"
+                    <c:if  test="#{loginBean.isEstudiante()}">
+                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarReservasPasadas(loginBean.user)}" rows="10"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -105,20 +80,16 @@
                                 <h:outputText value="#{element.getRecurso().nombre}"/>
                             </p:column>
 
-                            <p:column headerText="Fecha Inicio" style="text-align: center" >
-                                <h:outputText value="#{element.fechaInicioReserva}"/>
+                            <p:column headerText="Fecha Solicitud" style="text-align: center" >
+                                <h:outputText value="#{element.fechaSolicitud}"/>
                             </p:column>
 
-                            <p:column headerText="Fecha Fin" style="text-align: center" >
-                                <h:outputText value="#{element.fechaFinReserva}"/>
+                            <p:column headerText="Fecha Cancelacion" style="text-align: center" >
+                                <h:outputText value="#{element.fechaSolicitud}"/>
                             </p:column>
 
-                            <p:column headerText="Detalles" style="text-align: center; width:7rem;" >
+                            <p:column headerText="Detalles" style="text-align: center; width:10rem;" >
                                 <p:rowToggler/>
-                            </p:column>
-
-                            <p:column headerText="Cancelar" style="text-align: center; width:12rem;" >
-                                <p:button outcome="/faces/public/cancelarReserva.xhtml" value="Cancelar" style="background: red;"/>
                             </p:column>
 
                             <p:rowExpansion>
@@ -136,32 +107,23 @@
                                         <h:outputLabel for="Descripcion" value="Descripcion:" />
                                         <h:outputText id="Descripcion" value="#{element.recurso.descripcion}"/>
 
-                                        <h:outputLabel for="fechaSolicitud" value="Fecha Solicitud:" />
-                                        <h:outputText id="fechaSolicitud" value="#{element.fechaSolicitud}"/>
-
                                         <h:outputLabel for="recurente" value="Recurrente:" />
                                         <h:outputText id="recurente" value="#{element.recurrente}"/>
-
-                                        <h:outputLabel for="fechare" value="Proxima Ocurrencia:" />
-                                        <h:outputText id="fechare" value="#{element.getProximarecurrencia()}"/>
 
                                     </h:panelGrid>
                                 </center>
                             </p:rowExpansion>
-
                         </p:dataTable>
                     </c:if>
 
-                    <c:if  test="#{loginBean.isEstudiante()}">
-
-                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" rows="10"
+                    <c:if  test="#{loginBean.isAdmin()}">
+                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarReservasPasadas(usuariosBean.getUsuarioReservas())}" rows="10"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                                      rowsPerPageTemplate="5,10,15"
                                      styleClass="table-dark table-striped table-bordered justify-content-center"
                                      class="valor">
-
                             <p:column headerText="Id" style="text-align: center" >
                                 <h:outputText value="#{element.id}"/>
                             </p:column>
@@ -172,20 +134,16 @@
                                 <h:outputText value="#{element.getRecurso().nombre}"/>
                             </p:column>
 
-                            <p:column headerText="Fecha Inicio" style="text-align: center" >
-                                <h:outputText value="#{element.fechaInicioReserva}"/>
+                            <p:column headerText="Fecha Solicitud" style="text-align: center" >
+                                <h:outputText value="#{element.fechaSolicitud}"/>
                             </p:column>
 
-                            <p:column headerText="Fecha Fin" style="text-align: center" >
-                                <h:outputText value="#{element.fechaFinReserva}"/>
+                            <p:column headerText="Fecha Cancelacion" style="text-align: center" >
+                                <h:outputText value="#{element.fechaSolicitud}"/>
                             </p:column>
 
-                            <p:column headerText="Detalles" style="text-align: center; width:7rem;" >
+                            <p:column headerText="Detalles" style="text-align: center; width:10rem;" >
                                 <p:rowToggler/>
-                            </p:column>
-
-                            <p:column headerText="Cancelar" style="text-align: center; width:12rem;" >
-                                <p:button outcome="/faces/public/cancelarReserva.xhtml" value="Cancelar" style="background: red;"/>
                             </p:column>
 
                             <p:rowExpansion>
@@ -203,21 +161,13 @@
                                         <h:outputLabel for="Descripcion" value="Descripcion:" />
                                         <h:outputText id="Descripcion" value="#{element.recurso.descripcion}"/>
 
-                                        <h:outputLabel for="fechaSolicitud" value="Fecha Solicitud:" />
-                                        <h:outputText id="fechaSolicitud" value="#{element.fechaSolicitud}"/>
-
                                         <h:outputLabel for="recurente" value="Recurrente:" />
                                         <h:outputText id="recurente" value="#{element.recurrente}"/>
-
-                                        <h:outputLabel for="fechare" value="Proxima Ocurrencia:" />
-                                        <h:outputText id="fechare" value="#{element.getProximarecurrencia()}"/>
 
                                     </h:panelGrid>
                                 </center>
                             </p:rowExpansion>
-
                         </p:dataTable>
-
                     </c:if>
 
                 </h:form>

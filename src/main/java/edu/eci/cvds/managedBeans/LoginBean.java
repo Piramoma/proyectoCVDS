@@ -3,6 +3,7 @@ package edu.eci.cvds.managedBeans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.security.Security;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import javax.faces.application.FacesMessage;
@@ -32,18 +33,32 @@ public class LoginBean implements Serializable{
     public void login() {
         Subject userActual = SecurityUtils.getSubject();
         UsernamePasswordToken uPToken = new UsernamePasswordToken(getUser(), getPasswd());
+        if (Objects.equals(this.user, "") || Objects.equals(this.passwd, "")) {
+            showError = "Algunos de los campos es nulo";}
         try{
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
             showError="";
-            redirect();
+            FacesContext.getCurrentInstance().getExternalContext().redirect(this.ultimaPagina);
             setLogeado(true);
         } catch (UnknownAccountException ex) {
-            showError = "El usuario no se encuentra registrado";
+            if (Objects.equals(this.user, "") || Objects.equals(this.passwd, "")) {
+                showError = "El campo Correo esta nulo";}
+            else {
+                showError = "El usuario no se encuentra registrado";
+            }
         } catch (IncorrectCredentialsException ex) {
-            showError = "La contraseña que ingreso no es correcta";
+            if (Objects.equals(this.user, "") || Objects.equals(this.passwd, "")) {
+                showError = "El campo Contraseña esta nulo";}
+            else {
+                showError = "La contraseña que ingreso no es correcta";
+            }
         } catch (LockedAccountException ex) {
             showError = "El usuario esta deshabilitado para el ingreso";
+        } catch (IOException ex) {
+            showError = "A ocurrido un error desconocido";
+            error("Unknown error: " + ex.getMessage());
+            log.error(ex.getMessage(), ex);
         }
     }
 
@@ -95,6 +110,12 @@ public class LoginBean implements Serializable{
             error("Unknown error: " + ex.getMessage());
             log.error(ex.getMessage(), ex);
         }
+    }
+
+    public void reset() {
+        setUser("");
+        setPasswd("");
+        showError="";
     }
 
     public void redirect() {

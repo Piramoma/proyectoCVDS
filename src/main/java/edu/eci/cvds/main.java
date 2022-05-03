@@ -16,7 +16,8 @@ public class main {
     public static void main(String[] args) throws PersistenceException {
         ServiciosBiblioteca instance = ServiciosBibliotecaFactory.getInstance().getServiciosBiblioteca();
 
-        instance.nuevoRecurso(1001, "disponible", "Awa", "Bloque G", "libro", 5, "Daniel Ramos");
+        //Reservas Recurso
+        //instance.nuevoRecurso(1002, "disponible", "Awa", "Bloque G", "libro", 5, "Daniel Ramos");
 
         System.out.println("Recursos Libros");
         List<Recurso> Recursolibros = instance.consultarLibros();
@@ -38,10 +39,27 @@ public class main {
         for(Usuario u: usuariosConReservas){
             System.out.println(u.toString());
         }
+        System.out.println("Reservas De Usuario");
+        List<Reserva> reservasuser = instance.consultarPorUsuarioPocaInfo("yesid.mora");
+        for(Reserva r: reservasuser){
+            System.out.println(r.toString());
+        }
         System.out.println("Horarios");
         List<Horario> horarios = instance.consultarHorarios();
         for(Horario h: horarios){
             System.out.println(h.toString());
+        }
+
+        System.out.println("Consultar reservas Pasadas");
+        List<Reserva> reservasPasadas = instance.consultarReservasPasadas("yesid.mora");
+        for(Reserva r: reservasPasadas){
+            System.out.println(r.toString());
+        }
+
+        System.out.println("Consultar reservas Canceladas");
+        List<Reserva> reservasCanceladas = instance.consultarReservasCanceladas("yesid.mora");
+        for(Reserva r: reservasCanceladas){
+            System.out.println(r.toString());
         }
 
     }

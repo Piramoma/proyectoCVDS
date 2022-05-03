@@ -15,9 +15,8 @@
         <result property='recurrente' column='recurrente' />
         <result property='proximaocurrencia' column='proximaocurrencia' />
         <result property='estado' column='estado' />
-        <result property='diaactual' column='diaActual' />
+        <result property='diaactual' column='diaactual' />
         <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" />
-        <association property="usuario" javaType="Usuario" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.UsuarioMapper.UsuarioResult" />
     </resultMap>
 
     <select id="consultarPorUsuarioPocaInfo" resultMap="ReservaResult" parameterType="map">
@@ -26,6 +25,25 @@
         INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
         INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
         where public.reservas.estado = 'activa' and idUsuario = #{idUsuario}
+        order by fechainicioreserva
+    </select>
+
+    <select id="consultarReservasPasadas" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'terminada' and idUsuario = #{idUsuario}
+        order by fechainicioreserva
+    </select>
+
+    <select id="consultarReservasCanceladas" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'cancelado' and idUsuario = #{idUsuario}
+        order by fechainicioreserva
     </select>
 
 </mapper>

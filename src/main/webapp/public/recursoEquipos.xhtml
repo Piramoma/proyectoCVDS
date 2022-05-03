@@ -38,7 +38,7 @@
 
                 <c:if  test="#{loginBean.isVisitante()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesion</a>
+                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/recursoEquipos.xhtml')}">Iniciar Sesion</a>
                     </li>
                 </c:if>
 
@@ -89,6 +89,7 @@
                         <p:column headerText="Id" style="text-align: center" >
                             <h:outputText value="#{element.id}"/>
                         </p:column>
+
                         <p:column headerText="Nombre" style="text-align: center" filterBy="#{element.nombre}" filterStyle="width: 100px;" filterMatchMode="contains">
                             <h:outputText value="#{element.nombre}"/>
                         </p:column>
@@ -101,16 +102,17 @@
                             <h:outputText value="#{element.capacidad}"/>
                         </p:column>
 
-                        <p:column headerText="Estado" style="text-align: center" >
-                            <h:outputText value="#{element.estado}"/>
+                        <p:column headerText="Caracteristicas" style="text-align: center" >
+                            <h:outputText value="#{element.descripcion}"/>
                         </p:column>
 
                         <c:if  test="#{!loginBean.isVisitante()}">
                             <p:column headerText="Haga su reserva" style="text-align: center">
-                                <p:button outcome="verHorarios" value="Ver horarios disponibles">
+                                <p:button outcome="verHorarios" value="Ver horarios">
                                 </p:button>
                             </p:column>
                         </c:if>
+
                     </p:dataTable>
                 </h:form>
             </div>

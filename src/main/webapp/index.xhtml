@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:my="http://Java.Sun.com/jsf/composite/my">
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <meta charset="UTF-8" />
     <title>BibliotecaECI</title>
@@ -26,23 +25,17 @@
                 <h1 class="tittleLogo" >Biblioteca ECI</h1>
             </div>
 
-
-
             <ul class="nav-menu">
 
                 <c:if  test="#{loginBean.isVisitante()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Iniciar Sesion</a>
+                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Iniciar Sesion</a>
                     </li>
                 </c:if>
 
                 <c:if  test="#{loginBean.isEstudiante()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Mis Reservas</a>
-                    </li>
-
-                    <li class="nav-menu-item">
-                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}"/>
+                        <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link" action="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Mis Reservas</a>
                     </li>
                 </c:if>
 
@@ -50,13 +43,8 @@
                     <li class="nav-menu-item">
                         <a href="/faces/admin/userReservas.xhtml" class="nav-menu-link nav-link" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Consultar Reservas</a>
                     </li>
-
                     <li class="nav-menu-item">
                         <a href="#" class="nav-menu-link nav-link">Reporte</a>
-                    </li>
-
-                    <li class="nav-menu-item">
-                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoLibros.xhtml')}"/>
                     </li>
                 </c:if>
             </ul>
@@ -69,6 +57,7 @@
             <h4>La Biblioteca Jorge Álvarez Lleras es un sistema de información que cuenta con una amplia colección de recursos físicos y electrónicos que apoyan la labor académica e investigativa de la Institución en áreas relacionadas con Ingeniería, Administración, Economía, Matemáticas, Ciencias Puras y Ciencias Humanas, entre otras.</h4>
         </div>
         <div class="container-card">
+
             <div class="card">
                 <figure>
                     <img src="https://cdn.discordapp.com/attachments/690979978824777744/969000213241024532/Libros.jpg" />

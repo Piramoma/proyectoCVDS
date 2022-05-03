@@ -18,6 +18,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 import java.io.IOException;
+import java.util.Objects;
 
 
 @SuppressWarnings("deprecation")
@@ -27,6 +28,8 @@ public class ReservasBean extends BasePageBean {
 
     private Reserva reservaActual;
 
+    private String tipoHistorial;
+
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
 
@@ -34,13 +37,21 @@ public class ReservasBean extends BasePageBean {
         return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
     }
 
+    public List<Reserva> consultarReservasPasadas(String idUsuario){
+        return serviciosBiblioteca.consultarReservasPasadas(idUsuario);
+    }
+
+    public List<Reserva> consultarReservasCanceladas(String idUsuario){
+        return serviciosBiblioteca.consultarReservasCanceladas(idUsuario);
+    }
+
     public int getReservaActual() {
-        System.out.println("Si llego aqui");
         return reservaActual.getId();
     }
 
     public void setReservaActual(Reserva reservaActual) {
         this.reservaActual = reservaActual;
-        System.out.println(this.reservaActual.getId() + " BEBE");
     }
+
+
 }

@@ -26,5 +26,8 @@ public interface ServiciosBiblioteca {
 
     public abstract List<Horario> consultarHorarios() ;
 
+    public List<Reserva> consultarReservasPasadas(String idUsuario);
+
+    public List<Reserva> consultarReservasCanceladas(String idUsuario);
 
 }

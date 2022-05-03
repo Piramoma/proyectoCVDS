@@ -39,7 +39,7 @@
 
                 <c:if  test="#{loginBean.isVisitante()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesion</a>
+                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/recursoLibros.xhtml')}" >Iniciar Sesion</a>
                     </li>
                 </c:if>
 
@@ -95,6 +95,10 @@
                             <h:outputText value="#{element.nombre}"/>
                         </p:column>
 
+                        <p:column headerText="Autor" style="text-align: center" filterBy="#{element.descripcion}" filterStyle="width: 100px;" filterMatchMode="contains">
+                            <h:outputText value="#{element.descripcion}"/>
+                        </p:column>
+
                         <p:column headerText="Ubicacion" style="text-align: center" filterBy="#{element.ubicacion}" filterStyle="width: 100px;" filterMatchMode="contains">
                             <h:outputText value="#{element.ubicacion}"/>
                         </p:column>
@@ -103,12 +107,9 @@
                             <h:outputText value="#{element.capacidad}"/>
                         </p:column>
 
-                        <p:column headerText="Estado" style="text-align: center" >
-                            <h:outputText value="#{element.estado}"/>
-                        </p:column>
                         <c:if  test="#{!loginBean.isVisitante()}">
                             <p:column headerText="Haga su reserva" style="text-align: center">
-                                <p:button outcome="/faces/calendario/shedule.xhtml" value="Ver horarios disponibles">
+                                <p:button outcome="/faces/calendario/shedule.xhtml" value="Ver horarios">
                                 </p:button>
                             </p:column>
                         </c:if>

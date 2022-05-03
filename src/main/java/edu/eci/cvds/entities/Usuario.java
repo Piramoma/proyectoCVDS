@@ -24,6 +24,10 @@ public class Usuario implements Serializable{
     private String tipo;
     private long numReservas;
 
+    public Usuario(){
+        super();
+    }
+
     public Usuario(String email,String nombre, String apellido, String programa, String contraseña, String tipo){
         this.email = email;
         this.nombre = nombre;
@@ -31,14 +35,6 @@ public class Usuario implements Serializable{
         this.programa = programa;
         this.contraseña = contraseña;
         this.tipo = tipo;
-    }
-
-    public Usuario(String email,String nombre, String apellido, String programa, long numReservas){
-        this.email = email;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.programa = programa;
-        this.numReservas = numReservas;
     }
 
     public String getEmail() {

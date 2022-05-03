@@ -10,4 +10,8 @@ public interface ReservaDAO {
 
     public List<Reserva> consultarPorUsuarioMuchaInfo(String idUsuario, int id);
 
+    public List<Reserva> consultarReservasPasadas(String idUsuario);
+
+    public List<Reserva> consultarReservasCanceladas(String idUsuario);
+
 }

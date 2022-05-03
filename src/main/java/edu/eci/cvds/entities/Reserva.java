@@ -15,14 +15,26 @@ public class Reserva {
     private Timestamp fechaInicioReserva;
     private Timestamp fechaFinReserva;
     private boolean recurrente;
-    private Timestamp proximaocurrencia;
     private String estado;
-    private Timestamp diaActual;
+    private Timestamp diaactual;
+    private Timestamp proximaocurrencia;
 
     private Recurso recurso;
 
     private Usuario usuario;
 
+    public Reserva(int id, String idUsuario, int idRecurso, Date fechaSolicitud, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, boolean recurrente, Timestamp proximaocurrencia, String estado, Timestamp diaactual) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.idRecurso = idRecurso;
+        this.fechaSolicitud = fechaSolicitud;
+        this.fechaInicioReserva = fechaInicioReserva;
+        this.fechaFinReserva = fechaFinReserva;
+        this.recurrente = recurrente;
+        this.proximaocurrencia = proximaocurrencia;
+        this.estado = estado;
+        this.diaactual = diaactual;
+    }
 
     public Reserva(){
         super();
@@ -101,11 +113,11 @@ public class Reserva {
     }
 
     public Timestamp getDiaActual() {
-        return diaActual;
+        return diaactual;
     }
 
     public void setDiaActual(Timestamp diaActual) {
-        this.diaActual = diaActual;
+        this.diaactual = diaActual;
     }
 
     public Recurso getRecurso() {
@@ -136,7 +148,7 @@ public class Reserva {
                 ", recurrente=" + recurrente +
                 ", proximarecurrencia=" + proximaocurrencia +
                 ", estado='" + estado + '\'' +
-                ", diaActual=" + diaActual +
+                ", diaActual=" + diaactual +
                 '}';
     }
 }

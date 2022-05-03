@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
     <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
-    <link rel="stylesheet" href="style/login.css" />
+    <link rel="stylesheet" href="style/loginF.css" />
 </h:head>
 <h:body>
     <h:form class="formulario">
@@ -29,11 +29,13 @@
             </div>
             <div class="login">
                 <p:commandButton id="mybutton" class="button1"  value="Ingresar" alig="center" actionListener="#{loginBean.login}"/>
-                <p:commandButton id="myButton" class="button2" value="Cancelar" actionListener="#{loginBean.logOut}" />
+
+                <p:commandButton id="myButton" class="button2" value="Cancelar" onclick="history.back()" actionListener="#{loginBean.reset}"/>
+
                 <p>Recuerda Devolver los Recursos en el plazo establecido.</p>
-                <h:outputText id = "message" value="#{loginBean.showError()}">
-                    <p:autoUpdate/>
-                </h:outputText>
+
+                <h:outputText class="errores" id = "message" value="#{loginBean.showError()}"><p:autoUpdate/></h:outputText>
+
             </div>
         </div>
     </h:form>

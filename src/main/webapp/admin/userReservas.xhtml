@@ -50,7 +50,7 @@
 
                 <div class="p-0 btn-group justify-content-lg-center">
                     <div class="tittle" >
-                        <h1 class="text align-self-center p-2">USUARIOS CON RESERVAS ACTIVAS</h1>
+                        <h1 class="text align-self-center p-2">USUARIOS CON RESERVAS</h1>
                     </div>
                 </div>
 
@@ -76,11 +76,11 @@
                         </p:column>
 
                         <p:column headerText="Num. Reservas" style="text-align: center" >
-                            <h:outputText value="#{element.numReservas}"/>
+                            <h:outputText value="#{element.getNumReservas()}"/>
                         </p:column>
 
-                        <p:column headerText="Informacion" style="text-align: center">
-                            <p:commandButton icon="pi pi-search" value="Ver Mas" title="View" action="#{usuariosBean.masInfoReserva(element.email)}">
+                        <p:column headerText="Listar" style="text-align: center">
+                            <p:commandButton value="Ver Reservas" title="View" action="#{usuariosBean.masInfoReserva(element.email)}">
                             </p:commandButton>
                         </p:column>
 

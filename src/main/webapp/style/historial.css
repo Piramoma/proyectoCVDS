@@ -58,6 +58,7 @@ body {
   line-height: 80px;
   color: white;
   text-decoration: none;
+  margin-left: -72px;
 }
 
 .login {
