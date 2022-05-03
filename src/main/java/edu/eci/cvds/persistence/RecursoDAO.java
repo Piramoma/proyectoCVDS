@@ -2,6 +2,7 @@ package edu.eci.cvds.persistence;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface RecursoDAO {
     public List<Recurso> consultarEquipos();
 
     public List<Recurso> consultarSalasEstudio();
+
+    public List<Recurso> consultarRecurso(int idrecurso);
 
     public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion);
 }

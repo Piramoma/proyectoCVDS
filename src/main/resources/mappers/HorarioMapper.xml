@@ -9,14 +9,21 @@
         <id property='id' column='id' />
         <result property="idrecurso" column="idrecurso"/>
         <result property='fechainicio' column='fechainicio'/>
-        <result property='horainicio' column='horainicio'/>
         <result property='fechafin' column='fechafin' />
-        <result property='horafin' column='horafin' />
+        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" />
+
     </resultMap>
 
     <select id="consultarHorarios" resultMap="HorarioResult" parameterType="map">
         select *
         from public.horarios
+    </select>
+
+    <select id="consultaHorariosRecurso" resultMap="HorarioResult" >
+        select *
+        FROM public.horarios
+        INNER JOIN public.recursos ON public.horarios.idrecurso = public.recursos.id
+        where public.recursos.id = #{idrecurso}
     </select>
 
 </mapper>

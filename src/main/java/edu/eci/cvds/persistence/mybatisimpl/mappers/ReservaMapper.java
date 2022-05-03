@@ -15,4 +15,6 @@ public interface ReservaMapper {
 
     public List<Reserva> consultarReservasCanceladas(@Param("idUsuario") String idUsuario);
 
+    public List<Reserva> listarReservasRecurso(@Param ("idrecurso") int idrecurso);
+
 }

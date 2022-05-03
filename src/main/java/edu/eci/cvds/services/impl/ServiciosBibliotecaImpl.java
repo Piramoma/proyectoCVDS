@@ -72,4 +72,19 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         return reservaDAO.consultarReservasCanceladas(idUsuario);
     }
 
+    @Override
+    public List<Reserva> listarReservasRecurso(int idrecurso) {
+        return reservaDAO.listarReservasRecurso(idrecurso);
+    }
+
+    @Override
+    public List<Recurso> consultarRecurso(int idrecurso) {
+        return recursoDAO.consultarRecurso(idrecurso);
+    }
+
+    @Override
+    public List<Horario> consultaHorariosRecurso(int idrecurso) {
+        return horarioDAO.consultaHorariosRecurso(idrecurso);
+    }
+
 }

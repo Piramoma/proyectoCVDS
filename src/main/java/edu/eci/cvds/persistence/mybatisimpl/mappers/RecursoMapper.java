@@ -4,6 +4,7 @@ import edu.eci.cvds.entities.Recurso;
 
 import java.util.List;
 
+import edu.eci.cvds.entities.Reserva;
 import org.apache.ibatis.annotations.Param;
 
 public interface RecursoMapper {
@@ -42,4 +43,6 @@ public interface RecursoMapper {
                              @Param("tipo") String tipo,
                              @Param("capacidad")int capacidad,
                              @Param("descripcion")String descripcion);
+
+    public List<Recurso> consultarRecurso(@Param("idrecurso") int idrecurso);
 }

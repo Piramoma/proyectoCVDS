@@ -23,6 +23,8 @@ public class Recurso implements Serializable{
     private int capacidad;
     private String descripcion;
 
+    private Horario horario;
+
     public Recurso() {
         super();
     }
@@ -102,6 +104,14 @@ public class Recurso implements Serializable{
         this.descripcion = descripcion;
     }
 
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+
     @Override
     public String toString() {
         return "Recurso{" +
@@ -113,6 +123,7 @@ public class Recurso implements Serializable{
                 ", tipo='" + tipo + '\'' +
                 ", capacidad=" + capacidad +
                 ", descripcion='" + descripcion + '\'' +
+                ", horarioId ='" + horario.getId() + '\'' +
                 '}';
     }
 }

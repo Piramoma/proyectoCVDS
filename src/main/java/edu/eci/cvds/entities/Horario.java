@@ -7,22 +7,28 @@ import java.sql.Timestamp;
 public class Horario {
     private int id;
     private int idrecurso;
-    private Date fechainicio;
-    private String horainicio;
-    private Date fechafin;
-    private String horafin;
+    private Timestamp fechainicio;
+    private Timestamp fechafin;
+
+    private Recurso recurso;
 
     /**
      * El constructor de Horario toma la franja (con hora inicial y final) en forma de String y la
      * convierte a hora tipo Date.
      */
-    public Horario(int id, int idRecurso, Date fechainicio, String horainicio, Date fechafin, String horafin) {
+    public Horario(int id, int idRecurso, Timestamp fechainicio, Timestamp fechafin) {
         this.id = id;
         this.idrecurso = idRecurso;
         this.fechainicio = fechainicio;
-        this.horainicio = horainicio;
         this.fechafin = fechafin;
-        this.horafin = horafin;
+    }
+
+    public Recurso getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
     }
 
     public Horario() {
@@ -45,37 +51,22 @@ public class Horario {
         this.idrecurso = idrecurso;
     }
 
-    public Date getFechainicio() {
+    public Timestamp getFechainicio() {
         return fechainicio;
     }
 
-    public void setFechainicio(Date fechainicio) {
+    public void setFechainicio(Timestamp fechainicio) {
         this.fechainicio = fechainicio;
     }
 
-    public String getHorainicio() {
-        return horainicio;
-    }
-
-    public void setHorainicio(String horainicio) {
-        this.horainicio = horainicio;
-    }
-
-    public Date getFechafin() {
+    public Timestamp getFechafin() {
         return fechafin;
     }
 
-    public void setFechafin(Date fechafin) {
+    public void setFechafin(Timestamp fechafin) {
         this.fechafin = fechafin;
     }
 
-    public String getHorafin() {
-        return horafin;
-    }
-
-    public void setHorafin(String horafin) {
-        this.horafin = horafin;
-    }
 
     @Override
     public String toString() {
@@ -83,9 +74,7 @@ public class Horario {
                 "id=" + id +
                 ", idrecurso=" + idrecurso +
                 ", fechainicio=" + fechainicio +
-                ", horainicio='" + horainicio + '\'' +
                 ", fechafin=" + fechafin +
-                ", horafin='" + horafin + '\'' +
                 '}';
     }
 }

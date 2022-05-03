@@ -30,4 +30,10 @@ public interface ServiciosBiblioteca {
 
     public List<Reserva> consultarReservasCanceladas(String idUsuario);
 
+    public List<Reserva> listarReservasRecurso(int idrecurso);
+
+    public List<Recurso> consultarRecurso(int idrecurso);
+
+    public List<Horario> consultaHorariosRecurso(int idrecurso);
+
 }

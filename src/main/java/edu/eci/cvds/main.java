@@ -62,5 +62,17 @@ public class main {
             System.out.println(r.toString());
         }
 
+        System.out.println("Reservas de un recurso");
+        List<Reserva> reservasRecurso = instance.listarReservasRecurso(17);
+        for(Reserva r: reservasRecurso){
+            System.out.println(r.toString());
+        }
+
+        System.out.println("Consultar Recurso Horarios");
+        List<Horario> horariosRecurso = instance.consultaHorariosRecurso(1);
+        for(Horario r: horariosRecurso){
+            System.out.println(r.toString());
+        }
+
     }
 }

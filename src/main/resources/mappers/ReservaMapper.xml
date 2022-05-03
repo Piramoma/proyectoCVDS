@@ -46,4 +46,12 @@
         order by fechainicioreserva
     </select>
 
+    <select id="listarReservasRecurso" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'activa' and idrecurso = #{idrecurso}
+    </select>
+
 </mapper>

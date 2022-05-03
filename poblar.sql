@@ -46,3 +46,12 @@ insert into Horarios (idrecurso, fechainicio, horainicio, fechafin, horafin) val
 insert into Horarios (idrecurso, fechainicio, horainicio, fechafin, horafin) values ('13', '2022-04-16', '09:20', '2022-04-17', '09:20');
 insert into Horarios (idrecurso, fechainicio, horainicio, fechafin, horafin) values ('22', '2022-04-17', '09:20', '2022-04-18', '09:20');
 insert into Horarios (idrecurso, fechainicio, horainicio, fechafin, horafin) values ('23', '2022-04-18', '09:20', '2022-04-19', '09:20');
+
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('1', '2022-05-03 09:08:39', '2022-05-04 09:08:39');
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('2', '2022-05-03 09:08:39', '2022-05-04 09:08:39');
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('3', '2022-05-03 09:08:39', '2022-05-04 09:08:39');
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('11','2022-05-03 09:08:39', '2022-05-04 09:08:39');
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('12','2022-05-03 09:08:39', '2022-05-04 09:08:39');
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('13','2022-05-03 09:08:39', '2022-05-04 09:08:39');
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('22','2022-05-03 09:08:39', '2022-05-04 09:08:39');
+insert into Horarios (idrecurso, fechainicio, fechafin) values ('23','2022-05-03 09:08:39', '2022-05-04 09:08:39');

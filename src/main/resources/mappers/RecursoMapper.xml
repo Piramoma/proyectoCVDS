@@ -14,6 +14,8 @@
         <result property='tipo' column='tipo' />
         <result property='capacidad' column='capacidad' />
         <result property='descripcion' column='descripcion' />
+        <association property="horario" javaType="Horario" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.HorarioMapper.HorarioResult" />
+
     </resultMap>
 
     <select id="consultarLibros" resultMap="RecursoResult" >
@@ -37,5 +39,12 @@
     <insert parameterType="map" id="nuevoRecurso">
         insert into Recursos(idInterno, estado, nombre, ubicacion, tipo, capacidad, descripcion) values (#{idInterno}, #{estado}, #{nombre}, #{ubicacion}, #{tipo}, #{capacidad}, #{descripcion})
     </insert>
+
+    <select id="consultarRecurso" resultMap="RecursoResult" >
+        select *
+        FROM public.recursos
+        INNER JOIN public.horarios ON public.horarios.idrecurso = public.recursos.id
+        where public.recursos.id = #{idrecurso}
+    </select>
 
 </mapper>

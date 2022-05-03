@@ -32,4 +32,10 @@ public class MyBATISReservaDAO implements ReservaDAO {
     public List<Reserva> consultarReservasCanceladas(String idUsuario) {
         return reservaMapper.consultarReservasCanceladas(idUsuario);
     }
+
+    @Override
+    public List<Reserva> listarReservasRecurso(int idrecurso) {
+        return reservaMapper.listarReservasRecurso(idrecurso);
+    }
+
 }
