@@ -38,4 +38,9 @@ public class MyBATISReservaDAO implements ReservaDAO {
         return reservaMapper.listarReservasRecurso(idrecurso);
     }
 
+    @Override
+    public Reserva consultarReserva(int idrecurso, int idreserva) {
+        return reservaMapper.consultarReserva(idrecurso,idreserva);
+    }
+
 }

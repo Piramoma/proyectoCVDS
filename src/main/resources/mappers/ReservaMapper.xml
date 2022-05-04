@@ -54,4 +54,12 @@
         where public.reservas.estado = 'activa' and idrecurso = #{idrecurso}
     </select>
 
+    <select id="consultarReserva" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'activa' and idrecurso = #{idrecurso} and reservas.id = #{idreserva}
+    </select>
+
 </mapper>

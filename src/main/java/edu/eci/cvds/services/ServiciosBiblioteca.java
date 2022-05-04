@@ -38,4 +38,6 @@ public interface ServiciosBiblioteca {
 
     public Horario consultarHorario(int idrecurso, int idhorario);
 
+    public Reserva consultarReserva(int idrecurso, int idreserva);
+
 }

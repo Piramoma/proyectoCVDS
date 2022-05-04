@@ -55,6 +55,8 @@ public class ReservasBean extends BasePageBean {
 
     private Horario horarioactual;
 
+    private Reserva reservaactual;
+
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario){
         return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
     }
@@ -71,7 +73,13 @@ public class ReservasBean extends BasePageBean {
         return serviciosBiblioteca.consultarHorario(idrecurso,idhorario);
     }
 
+    public Reserva getReservaactual() {
+        return reservaactual;
+    }
 
+    public void setReservaactual(Reserva reservaactual) {
+        this.reservaactual = reservaactual;
+    }
 
     public int getReservaActual() {
         return reservaActual.getId();
@@ -140,11 +148,14 @@ public class ReservasBean extends BasePageBean {
 
     public void loadEvents() {
         eventModel = new DefaultScheduleModel();
-        List<Horario> horarios = serviciosBiblioteca.consultaHorariosRecurso(this.idRecurso);
-        System.out.println(" ID " + this.idRecurso);
-        System.out.println(" LEN " + horarios.size());
-        for (Horario r : horarios){
-            event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechainicio(), r.getFechafin());
+        List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
+        for (Reserva r : horarios){
+            if (r.isRecurrente()) {
+                event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre() + " - Recurrente", r.getFechaInicioReserva(), r.getFechaFinReserva());
+            }
+            else {
+                event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre() + " - NoRecurrente", r.getFechaInicioReserva(), r.getFechaFinReserva());
+            }
             eventModel.addEvent(event);
             event.setId(String.valueOf(r.getId()));
         }
@@ -153,9 +164,9 @@ public class ReservasBean extends BasePageBean {
     public void onEventSelect(SelectEvent selectEvent) {
         this.event = (ScheduleEvent) selectEvent.getObject();
         this.eventId = Integer.parseInt(event.getId());
-        this.horarioactual = consultarHorario(this.idRecurso,this.eventId);
-        this.fechainicio = horarioactual.getFechainicio();
-        this.fechafin = horarioactual.getFechafin();
+        this.reservaactual = serviciosBiblioteca.consultarReserva(this.idRecurso,this.eventId);
+        this.fechainicio = reservaactual.getFechaInicioReserva();
+        this.fechafin = reservaactual.getFechaFinReserva();
     }
 
     public void onEventMove(ScheduleEntryMoveEvent event) {

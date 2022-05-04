@@ -15,4 +15,6 @@ public interface ReservaDAO {
     public List<Reserva> consultarReservasCanceladas(String idUsuario);
 
     public List<Reserva> listarReservasRecurso(int idrecurso);
+
+    public Reserva consultarReserva(int idrecurso, int idreserva);
 }

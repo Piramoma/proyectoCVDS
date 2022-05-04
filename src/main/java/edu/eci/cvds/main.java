@@ -78,5 +78,9 @@ public class main {
         Horario horarioespecifico = instance.consultarHorario(1, 1);
         System.out.println(horarioespecifico.toString());
 
+        System.out.println("Consultar Reserva Especifico");
+        Reserva reservaespecifica = instance.consultarReserva(1, 27);
+        System.out.println(reservaespecifica.toString());
+
     }
 }

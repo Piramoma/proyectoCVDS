@@ -29,9 +29,6 @@
                 <h1 class="tittleLogo" >Biblioteca ECI</h1>
             </div>
 
-            <button class="nav-toggle" aria-label="Abrir menú">
-                <i class="fas fa-bars"></i>
-            </button>
             <ul class="nav-menu">
                 <li class="nav-menu-item">
                     <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
@@ -107,11 +104,9 @@
                             <h:outputText value="#{element.capacidad}"/>
                         </p:column>
 
-                        <c:if  test="#{!loginBean.isVisitante()}">
-                            <p:column headerText="Haga su reserva" style="text-align: center">
-                                <p:commandButton value="Ver horarios" title="View" actionListener="#{reservasBean.saveIdRecurso(element.id)}"></p:commandButton>
-                            </p:column>
-                        </c:if>
+                        <p:column headerText="Haga su reserva" style="text-align: center">
+                            <p:commandButton value="Ver horarios" title="View" actionListener="#{reservasBean.saveIdRecurso(element.id)}"></p:commandButton>
+                        </p:column>
 
                     </p:dataTable>
                 </h:form>

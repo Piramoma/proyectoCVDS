@@ -92,4 +92,9 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         return horarioDAO.consultarHorario(idrecurso, idhorario);
     }
 
+    @Override
+    public Reserva consultarReserva(int idrecurso, int idreserva) {
+        return reservaDAO.consultarReserva(idrecurso, idreserva);
+    }
+
 }
