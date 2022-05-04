@@ -2,16 +2,13 @@ package edu.eci.cvds.managedBeans;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Horario;
-import edu.eci.cvds.entities.Recurso;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.ServiciosBiblioteca;
-import edu.eci.cvds.services.exception.ServicesException;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
