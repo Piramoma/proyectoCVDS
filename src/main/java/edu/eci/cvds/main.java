@@ -74,5 +74,9 @@ public class main {
             System.out.println(r.toString());
         }
 
+        System.out.println("Consultar Horario Especifico");
+        Horario horarioespecifico = instance.consultarHorario(1, 1);
+        System.out.println(horarioespecifico.toString());
+
     }
 }

@@ -11,5 +11,6 @@ public interface HorarioDAO {
 
     public List<Horario> consultaHorariosRecurso(int idrecurso);
 
+    public Horario consultarHorario(int idrecurso, int idhorario);
 
 }

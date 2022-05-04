@@ -7,12 +7,9 @@ import edu.eci.cvds.entities.Recurso;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import edu.eci.cvds.entities.Reserva;
-import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import edu.eci.cvds.services.exception.ServicesException;
 import org.primefaces.PrimeFaces;
@@ -24,14 +21,10 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.List;
 import java.io.IOException;
-import java.util.Objects;
+import java.sql.Timestamp;
+import java.util.List;
+
 
 
 @SuppressWarnings("deprecation")
@@ -39,12 +32,28 @@ import java.util.Objects;
 @ApplicationScoped
 public class ReservasBean extends BasePageBean {
 
-    private Reserva reservaActual;
-
-    private String tipoHistorial;
-
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
+
+    private Reserva reservaActual;
+
+    //HORARIO
+
+    private ScheduleModel eventModel = new DefaultScheduleModel();
+
+    private ScheduleEvent event = new DefaultScheduleEvent();
+
+    private ScheduleEvent eventAux = new DefaultScheduleEvent();
+
+    private int eventId = 0;
+
+    private int idRecurso;
+
+    private Timestamp fechainicio;
+
+    private Timestamp fechafin;
+
+    private Horario horarioactual;
 
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario){
         return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
@@ -58,6 +67,12 @@ public class ReservasBean extends BasePageBean {
         return serviciosBiblioteca.consultarReservasCanceladas(idUsuario);
     }
 
+    public Horario consultarHorario(int idrecurso, int idhorario) {
+        return serviciosBiblioteca.consultarHorario(idrecurso,idhorario);
+    }
+
+
+
     public int getReservaActual() {
         return reservaActual.getId();
     }
@@ -66,25 +81,44 @@ public class ReservasBean extends BasePageBean {
         this.reservaActual = reservaActual;
     }
 
+    public Timestamp getFechainicio() {
+        return fechainicio;
+    }
 
-    //HORARIOS
+    public void setFechainicio(Timestamp fechainicio) {
+        this.fechainicio = fechainicio;
+    }
 
-    private ScheduleModel eventModel = new DefaultScheduleModel();
+    public Timestamp getFechafin() {
+        return fechafin;
+    }
 
-    private ScheduleEvent event = new DefaultScheduleEvent();
+    public void setFechafin(Timestamp fechafin) {
+        this.fechafin = fechafin;
+    }
 
-    private ScheduleEvent eventAux = new DefaultScheduleEvent();
+    public int getEventId() {
+        return eventId;
+    }
 
-    private int eventId = 0;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
 
-    public void loadEvents() throws ServicesException {
-        eventModel = new DefaultScheduleModel();
-        List<Horario> horarios = serviciosBiblioteca.consultaHorariosRecurso(1);
-        for (Horario r : horarios){
-            event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechainicio(), r.getFechafin());
-            eventModel.addEvent(event);
-            event.setId(String.valueOf(r.getId()));
-        }
+    public int getIdRecurso() {
+        return idRecurso;
+    }
+
+    public void setIdRecurso(int idRecurso) {
+        this.idRecurso = idRecurso;
+    }
+
+    public Horario getHorarioactual() {
+        return horarioactual;
+    }
+
+    public void setHorarioactual(Horario horarioactual) {
+        this.horarioactual = horarioactual;
     }
 
     public ScheduleModel getEventModel() {
@@ -95,9 +129,33 @@ public class ReservasBean extends BasePageBean {
         this.eventModel = eventModel;
     }
 
+    public void saveIdRecurso(int idRecurso) {
+        this.idRecurso = idRecurso;
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/verHorarios.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadEvents() {
+        eventModel = new DefaultScheduleModel();
+        List<Horario> horarios = serviciosBiblioteca.consultaHorariosRecurso(this.idRecurso);
+        System.out.println(" ID " + this.idRecurso);
+        System.out.println(" LEN " + horarios.size());
+        for (Horario r : horarios){
+            event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechainicio(), r.getFechafin());
+            eventModel.addEvent(event);
+            event.setId(String.valueOf(r.getId()));
+        }
+    }
+
     public void onEventSelect(SelectEvent selectEvent) {
         this.event = (ScheduleEvent) selectEvent.getObject();
         this.eventId = Integer.parseInt(event.getId());
+        this.horarioactual = consultarHorario(this.idRecurso,this.eventId);
+        this.fechainicio = horarioactual.getFechainicio();
+        this.fechafin = horarioactual.getFechafin();
     }
 
     public void onEventMove(ScheduleEntryMoveEvent event) {
@@ -115,11 +173,4 @@ public class ReservasBean extends BasePageBean {
         PrimeFaces.current().dialog().showMessageDynamic(message);
     }
 
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
 }

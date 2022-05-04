@@ -15,4 +15,6 @@ public interface HorarioMapper {
     public List<Horario> consultarHorarios();
 
     public List<Horario> consultaHorariosRecurso(@Param("idrecurso") int idrecurso);
+
+    public Horario consultarHorario(@Param("idrecurso") int idrecurso, @Param("idhorario") int idhorario);
 }

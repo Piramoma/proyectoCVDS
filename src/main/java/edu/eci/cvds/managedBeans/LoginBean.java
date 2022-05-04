@@ -26,7 +26,6 @@ public class LoginBean implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(LoginBean.class);
     private String user;
     private String passwd;
-    public boolean logeado = false;
     public String showError = "";
     public String ultimaPagina = "";
 
@@ -40,7 +39,6 @@ public class LoginBean implements Serializable{
             userActual.getSession().setAttribute("correo", user);
             showError="";
             FacesContext.getCurrentInstance().getExternalContext().redirect(this.ultimaPagina);
-            setLogeado(true);
         } catch (UnknownAccountException ex) {
             if (Objects.equals(this.user, "") || Objects.equals(this.passwd, "")) {
                 showError = "El campo Correo esta nulo";}
@@ -78,14 +76,6 @@ public class LoginBean implements Serializable{
         this.passwd = passwd;
     }
 
-    public boolean isLogeado() {
-        return logeado;
-    }
-
-    public void setLogeado(boolean logeado) {
-        this.logeado = logeado;
-    }
-
     public void setUltimaPagina(String ultimaPagina) {
         this.ultimaPagina = ultimaPagina;
     }
@@ -102,7 +92,6 @@ public class LoginBean implements Serializable{
         setUser("");
         setPasswd("");
         showError="";
-        setLogeado(false);
         SecurityUtils.getSubject().logout();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(redirect);

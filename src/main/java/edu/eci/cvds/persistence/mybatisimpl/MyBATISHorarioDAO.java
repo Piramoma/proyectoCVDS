@@ -23,5 +23,10 @@ public class MyBATISHorarioDAO implements HorarioDAO {
         return horarioMapper.consultaHorariosRecurso(idrecurso);
     }
 
+    @Override
+    public Horario consultarHorario(int idrecurso, int idhorario) {
+        return horarioMapper.consultarHorario(idrecurso, idhorario);
+    }
+
 }
 

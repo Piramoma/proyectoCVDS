@@ -26,4 +26,11 @@
         where public.recursos.id = #{idrecurso}
     </select>
 
+    <select id="consultarHorario" resultMap="HorarioResult" >
+        select *
+        FROM public.horarios
+        INNER JOIN public.recursos ON public.horarios.idrecurso = public.recursos.id
+        where public.recursos.id = #{idrecurso} and public.horarios.id = #{idhorario}
+    </select>
+
 </mapper>

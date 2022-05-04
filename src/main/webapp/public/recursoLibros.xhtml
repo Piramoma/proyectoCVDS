@@ -109,10 +109,10 @@
 
                         <c:if  test="#{!loginBean.isVisitante()}">
                             <p:column headerText="Haga su reserva" style="text-align: center">
-                                <p:button outcome="/faces/calendario/shedule.xhtml" value="Ver horarios">
-                                </p:button>
+                                <p:commandButton value="Ver horarios" title="View" actionListener="#{reservasBean.saveIdRecurso(element.id)}"></p:commandButton>
                             </p:column>
                         </c:if>
+
                     </p:dataTable>
                 </h:form>
             </div>
