@@ -1,15 +1,24 @@
 # Detalles
-Logearse
 aparecer quien está logueado
-Terminar registro
-Control de errores de login, de registrar recursos (Validaciones de formulario) y de consultar recursos
 Pruebas unitarias de login y registro
-Cuando uno quiere hacer reserva tener que llevarlo a logearse si no lo est
-Tener diferentes cuetnas, admin y estudiante, con diferentes vistas cada uno
-Modificar las vista de registrar recurso, solo el admin puede ver los registrar (añadir, eliminar y modificar)
-Capacidad a la hora de agregar datos
 Por nada del mundo mostrar un error feo al usuario
-Solo agregar recursos disponibles en el listar!
+
+05/05/2022
+Al momento de agendar una reserva la fecha de reserva tiene que agregarse la fecha de hoy (Esta agregandose la fecha de cuando inicia la reserva)
+Cuando se reserva un recurso disminuir su capacidad en 1 (Excepto salas)
+Cuando se cancela una reserva la capacidad del recurso vuelve a sumar 1
+Si la capacidad de un recurso es 0 su estado cambia a agotado
+Al agregar un recurso re dirigirlo a la pagina en la que estaba
+Revisar los detalles minuciosos de hacer una reserva
+    * No se debe poder hacer una reserva de un dia pasado
+    * Depronto cambiar la forma de hacer una reserva
+    * Filtros en una tabla
+    * Reserva recurrentes
+    * Las fechas estan raras. . .
+    * Hacer pruebas :D
+    * Mostrar un mensaje bonito, no "false" no "true
+ Ya no me acuerdo de los demas errores :D
+    
 
 # Errores que pueden suceder:
 poner numeros grandes
