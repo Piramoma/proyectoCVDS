@@ -43,7 +43,6 @@
     <select id="consultarRecurso" resultMap="RecursoResult" >
         select *
         FROM public.recursos
-        INNER JOIN public.horarios ON public.horarios.idrecurso = public.recursos.id
         where public.recursos.id = #{idrecurso}
     </select>
 

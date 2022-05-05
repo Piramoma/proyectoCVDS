@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
@@ -66,7 +65,7 @@
                         oncomplete="PF('eventDetails1').show();" />
 
                 <c:if  test="#{!loginBean.isVisitante()}">
-                    <p:ajax event="dateSelect" listener="#{reservaBean.onDateSelect}" update="eventDetails"
+                    <p:ajax event="dateSelect" listener="#{reservasBean.onDateSelect}" update="eventDetails"
                             oncomplete="PF('eventDialog').show();"/>
                 </c:if>
 
@@ -114,43 +113,36 @@
 
             <h:panelGrid id="eventDetails" columns="2">
 
-                <p:outputLabel for="title" value="Nombre: "/>
+                <p:outputLabel value="Id: "/>
+                <p:outputLabel value="#{reservasBean.getRecursoactual().id}" required="true"/>
 
-                <p:inputText id="title" value="#{reservaBean.event.title}" required="true"/>
+                <p:outputLabel value="Recurso: "/>
+                <p:outputLabel value="#{reservasBean.getRecursoactual().tipo}" required="true"/>
+
+                <p:outputLabel value="Nombre: "/>
+                <p:outputLabel value="#{reservasBean.getRecursoactual().nombre}" required="true"/>
+
+                <c:if  test="#{reservasBean.getRecursoactual().tipo == 'libro'}">
+                    <p:outputLabel value="Unidades: "/>
+                    <p:outputLabel value="#{reservasBean.getRecursoactual().capacidad}" required="true"/>
+                </c:if>
+
+                <c:if  test="#{reservasBean.getRecursoactual().tipo == 'sala'}">
+                    <p:outputLabel value="Capacidad: "/>
+                    <p:outputLabel value="#{reservasBean.getRecursoactual().capacidad}" required="true"/>
+                </c:if>
+
+                <p:outputLabel value="Descripcion: "/>
+                <p:outputLabel value="#{reservasBean.getRecursoactual().descripcion}" required="true"/>
 
                 <p:outputLabel for="inicio" value="Fecha Inicio:"/>
-                <p:calendar id="inicio" value="#{reservaBean.event.startDate}" pattern="dd/MM/yyyy HH:mm"/><br/>
+                <p:calendar id="inicio" value="#{reservasBean.getEvent().startDate}" pattern="dd/MM/yyyy HH:mm"/>
 
                 <p:outputLabel for="fin" value="Fecha Fin:"/>
-                <p:calendar id="fin" value="#{reservaBean.event.startDate}" pattern="dd/MM/yyyy HH:mm"/><br/>
+                <p:calendar id="fin" value="#{reservasBean.getEvent().endDate}" pattern="dd/MM/yyyy HH:mm"/>
 
-
-                <label class="bmd-label-floating">Recurrencia</label>
-
-                <div>
-                    <div class="col-xs-6">
-                        <h:selectOneMenu value="#{reservaBean.frecuencia}" class="form-control">
-                            <f:selectItems value="#{reservaBean.getTipos()}"/>
-                        </h:selectOneMenu>
-                    </div>
-                    <div class="col-xs-6">
-                        <h:selectOneMenu id="console" value="#{reservaBean.fretiempo}" style="width:125px">
-                            <f:selectItem itemLabel="Select One" itemValue=""/>
-                            <f:selectItem itemLabel="1" itemValue="1"/>
-                            <f:selectItem itemLabel="2" itemValue="2"/>
-                            <f:selectItem itemLabel="3" itemValue="3"/>
-                            <f:selectItem itemLabel="4" itemValue="4"/>
-                            <f:selectItem itemLabel="5" itemValue="5"/>
-                            <f:selectItem itemLabel="6" itemValue="6"/>
-                            <f:facet name="footer">
-                                <p:separator/>
-                                <h:outputText value="3 consoles" style="font-weight:bold;"/>
-                            </f:facet>
-                        </h:selectOneMenu>
-                    </div>
-                </div>
-                <p:commandButton id="addButton" value="Reservar" action="#{reservaBean.addEvent(shiroBean.username)}"
-                                 oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+                <p:commandButton id="addButton" value="Reservar" action="#{reservasBean.addEvent(loginBean.user)}"
+                                 oncomplete="PF('myschedule').update();PF('eventDialog').hide);"/>
 
             </h:panelGrid>
 

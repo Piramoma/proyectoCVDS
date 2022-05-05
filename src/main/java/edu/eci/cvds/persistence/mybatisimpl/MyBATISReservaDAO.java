@@ -6,6 +6,8 @@ import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.ReservaDAO;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class MyBATISReservaDAO implements ReservaDAO {
@@ -41,6 +43,11 @@ public class MyBATISReservaDAO implements ReservaDAO {
     @Override
     public Reserva consultarReserva(int idrecurso, int idreserva) {
         return reservaMapper.consultarReserva(idrecurso,idreserva);
+    }
+
+    @Override
+    public void nuevaReserva(String idusuario, int idrecurso, Date fechasolicitud, Timestamp fechainicioreserva, Timestamp fechafinreserva, boolean recurrente, String estado, Timestamp diaactual) {
+        reservaMapper.nuevaReserva(idusuario,idrecurso,fechasolicitud,fechainicioreserva,fechafinreserva,recurrente,estado,diaactual);
     }
 
 }

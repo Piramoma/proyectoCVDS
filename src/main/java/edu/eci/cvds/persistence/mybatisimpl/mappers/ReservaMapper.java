@@ -3,6 +3,8 @@ package edu.eci.cvds.persistence.mybatisimpl.mappers;
 import edu.eci.cvds.entities.Reserva;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ReservaMapper {
@@ -19,4 +21,12 @@ public interface ReservaMapper {
 
     public Reserva consultarReserva(@Param ("idrecurso") int idrecurso, @Param ("idreserva") int idreserva);
 
+    public void nuevaReserva(@Param ("idusuario") String idusuario,
+                             @Param ("idrecurso") int idrecurso,
+                             @Param ("fechasolicitud") Date fechasolicitud,
+                             @Param ("fechainicioreserva") Timestamp fechainicioreserva,
+                             @Param ("fechafinreserva") Timestamp fechafinreserva,
+                             @Param ("recurrente") boolean recurrente,
+                             @Param ("estado") String estado,
+                             @Param ("diaactual") Timestamp diaactual);
 }

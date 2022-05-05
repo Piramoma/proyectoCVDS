@@ -44,5 +44,5 @@ public interface RecursoMapper {
                              @Param("capacidad")int capacidad,
                              @Param("descripcion")String descripcion);
 
-    public List<Recurso> consultarRecurso(@Param("idrecurso") int idrecurso);
+    public Recurso consultarRecurso(@Param("idrecurso") int idrecurso);
 }

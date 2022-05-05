@@ -18,7 +18,7 @@ public interface RecursoDAO {
 
     public List<Recurso> consultarSalasEstudio();
 
-    public List<Recurso> consultarRecurso(int idrecurso);
+    public Recurso consultarRecurso(int idrecurso);
 
     public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion);
 }

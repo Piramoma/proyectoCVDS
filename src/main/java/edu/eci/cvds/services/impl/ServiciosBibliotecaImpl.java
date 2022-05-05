@@ -8,6 +8,8 @@ import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.*;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import javax.ejb.Singleton;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Singleton
@@ -78,7 +80,7 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     }
 
     @Override
-    public List<Recurso> consultarRecurso(int idrecurso) {
+    public Recurso consultarRecurso(int idrecurso) {
         return recursoDAO.consultarRecurso(idrecurso);
     }
 
@@ -95,6 +97,11 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     @Override
     public Reserva consultarReserva(int idrecurso, int idreserva) {
         return reservaDAO.consultarReserva(idrecurso, idreserva);
+    }
+
+    @Override
+    public void nuevaReserva(String idusuario, int idrecurso, Date fechasolicitud, Timestamp fechainicioreserva, Timestamp fechafinreserva, boolean recurrente, String estado, Timestamp diaactual) {
+        reservaDAO.nuevaReserva(idusuario,idrecurso,fechasolicitud,fechainicioreserva,fechafinreserva,recurrente,estado,diaactual);
     }
 
 }

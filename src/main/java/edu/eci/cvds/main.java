@@ -9,6 +9,8 @@ import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import edu.eci.cvds.services.ServiciosBibliotecaFactory;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 //https://proyecto-cvds-piramoma.herokuapp.com
@@ -82,5 +84,11 @@ public class main {
         Reserva reservaespecifica = instance.consultarReserva(1, 27);
         System.out.println(reservaespecifica.toString());
 
+        System.out.println("Consultar Recurso");
+        Recurso recurso = instance.consultarRecurso(1);
+        System.out.println(recurso.toString());
+
+        //Reserva Nueva
+        //instance.nuevaReserva("yesid.mora", 13, new Date(2022,05,04), new Timestamp(2022,05,04,8,0,0,0), new Timestamp(2022,05,04,10,0,0,0),  false, "activa",new Timestamp(2022,05,04,10,0,0,0));
     }
 }

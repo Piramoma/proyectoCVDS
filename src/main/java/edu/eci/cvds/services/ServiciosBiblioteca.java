@@ -6,6 +6,8 @@ import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ServiciosBiblioteca {
@@ -32,12 +34,15 @@ public interface ServiciosBiblioteca {
 
     public List<Reserva> listarReservasRecurso(int idrecurso);
 
-    public List<Recurso> consultarRecurso(int idrecurso);
+    public Recurso consultarRecurso(int idrecurso);
 
     public List<Horario> consultaHorariosRecurso(int idrecurso);
 
     public Horario consultarHorario(int idrecurso, int idhorario);
 
     public Reserva consultarReserva(int idrecurso, int idreserva);
+
+    public void nuevaReserva(String idusuario, int idrecurso, Date fechasolicitud, Timestamp fechainicioreserva, Timestamp fechafinreserva, boolean recurrente, String estado, Timestamp diaactual);
+
 
 }

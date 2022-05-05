@@ -62,4 +62,8 @@
         where public.reservas.estado = 'activa' and idrecurso = #{idrecurso} and reservas.id = #{idreserva}
     </select>
 
+    <insert parameterType="map" id="nuevaReserva">
+        insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values (#{idusuario},#{idrecurso}, #{fechasolicitud}, #{fechainicioreserva}, #{fechafinreserva},  #{recurrente}, #{estado}, #{diaactual});
+    </insert>
+
 </mapper>
