@@ -5,9 +5,13 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
+import org.postgresql.util.PSQLException;
+
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.sql.SQLException;
+
 import java.util.List;
 
 public interface ServiciosBiblioteca {
@@ -18,7 +22,7 @@ public interface ServiciosBiblioteca {
 
     public abstract List<Recurso> consultarSalasEstudio() ;
 
-    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion);
+    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) throws PSQLException;
 
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario);
 

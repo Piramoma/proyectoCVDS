@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.swing.plaf.TreeUI;
 
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
@@ -79,20 +80,20 @@ public class ReservasBean extends BasePageBean {
         this.newFechaFin = newFechaFin;
     }
 
-    public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario){
+    public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario) {
         return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
     }
 
-    public List<Reserva> consultarReservasPasadas(String idUsuario){
+    public List<Reserva> consultarReservasPasadas(String idUsuario) {
         return serviciosBiblioteca.consultarReservasPasadas(idUsuario);
     }
 
-    public List<Reserva> consultarReservasCanceladas(String idUsuario){
+    public List<Reserva> consultarReservasCanceladas(String idUsuario) {
         return serviciosBiblioteca.consultarReservasCanceladas(idUsuario);
     }
 
     public Horario consultarHorario(int idrecurso, int idhorario) {
-        return serviciosBiblioteca.consultarHorario(idrecurso,idhorario);
+        return serviciosBiblioteca.consultarHorario(idrecurso, idhorario);
     }
 
     public Recurso getRecursoactual() {
@@ -179,11 +180,10 @@ public class ReservasBean extends BasePageBean {
     public void loadEvents() {
         eventModel = new DefaultScheduleModel();
         List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
-        for (Reserva r : horarios){
+        for (Reserva r : horarios) {
             if (Objects.equals(r.getEstado(), "activa")) {
                 event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechaInicioReserva(), r.getFechaFinReserva());
-            }
-            else {
+            } else {
                 event = new DefaultScheduleEvent("Restringido", r.getFechaInicioReserva(), r.getFechaFinReserva());
             }
             eventModel.addEvent(event);
@@ -194,7 +194,7 @@ public class ReservasBean extends BasePageBean {
     public void onEventSelect(SelectEvent selectEvent) {
         this.event = (ScheduleEvent) selectEvent.getObject();
         this.eventId = Integer.parseInt(event.getId());
-        this.reservaactual = serviciosBiblioteca.consultarReserva(this.idRecurso,this.eventId);
+        this.reservaactual = serviciosBiblioteca.consultarReserva(this.idRecurso, this.eventId);
         this.fechainicio = reservaactual.getFechaInicioReserva();
         this.fechafin = reservaactual.getFechaFinReserva();
     }
@@ -202,8 +202,7 @@ public class ReservasBean extends BasePageBean {
     public boolean isEventRestringido() {
         if (Objects.equals(this.event.getTitle(), "Restringido")) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -237,31 +236,50 @@ public class ReservasBean extends BasePageBean {
     }
 
     public void addEvent(String usuario) {
-        ScheduleEvent newEvent = new DefaultScheduleEvent();
-        newEvent = new DefaultScheduleEvent(this.recursoactual.getTipo() + " - " + this.recursoactual.getNombre(), event.getStartDate(), event.getEndDate());
-        this.eventModel.updateEvent(event);
-        Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
-        Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
+        boolean noError = true;
+        if (event.getStartDate() == null) { showErrors("El campo de Fecha Inicial es Nulo"); noError=false;}
+        if (event.getEndDate() == null) { showErrors("El campo de Fecha Final es Nulo"); noError=false;}
+        if (event.getStartDate().getTime() > event.getEndDate().getTime()) { showErrors("La Fecha Final Debe ser mayor a la Fecha Inicial"); noError=false;}
+        if ((event.getEndDate().getHours() - event.getStartDate().getHours()) > 2) { showErrors("EL Tiempo maximo de la reserva es 2 Horas."); noError=false;}
 
-        java.util.Date date = event.getStartDate();
-        long timeInMilliSeconds = date.getTime();
-        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+        if (noError){
+            ScheduleEvent newEvent = new DefaultScheduleEvent();
+            newEvent = new DefaultScheduleEvent(this.recursoactual.getTipo() + " - " + this.recursoactual.getNombre(), event.getStartDate(), event.getEndDate());
+            this.eventModel.updateEvent(event);
+            Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
+            Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
 
-        serviciosBiblioteca.nuevaReserva(usuario,this.recursoactual.getId(),date1,timeStampInicio,timeStampFin,false,"activa",timeStampInicio);
+            java.util.Date date = event.getStartDate();
+            long timeInMilliSeconds = date.getTime();
+            java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+            serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), date1, timeStampInicio, timeStampFin, false, "activa", timeStampInicio);
+        }
     }
 
     public void addEventAdmin(String usuario) {
-        ScheduleEvent newEvent = new DefaultScheduleEvent();
-        newEvent = new DefaultScheduleEvent("Restringido", event.getStartDate(), event.getEndDate());
-        this.eventModel.updateEvent(event);
+        boolean noError = true;
+        if (event.getStartDate() == null) { showErrors("El campo de Fecha Inicial es Nulo"); noError=false;}
+        if (event.getEndDate() == null) { showErrors("El campo de Fecha Final es Nulo"); noError=false;}
 
-        Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
-        Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
-        java.util.Date date = event.getStartDate();
-        long timeInMilliSeconds = date.getTime();
-        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+        if (noError){
+            ScheduleEvent newEvent = new DefaultScheduleEvent();
+            newEvent = new DefaultScheduleEvent("Restringido", event.getStartDate(), event.getEndDate());
+            this.eventModel.updateEvent(event);
 
-        serviciosBiblioteca.nuevaReserva(usuario,this.recursoactual.getId(),date1,timeStampInicio,timeStampFin,false,"restringido",timeStampInicio);
+            Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
+            Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
+            java.util.Date date = event.getStartDate();
+            long timeInMilliSeconds = date.getTime();
+            java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+
+            serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), date1, timeStampInicio, timeStampFin, false, "restringido", timeStampInicio);
+
+        }
+    }
+
+    public void showErrors(String error) {
+        FacesContext.getCurrentInstance().addMessage("Shiro",
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));
     }
 
 

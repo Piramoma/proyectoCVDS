@@ -21,35 +21,42 @@
 </h:head>
 <h:body >
     <header class="header">
-        <nav class="nav">
-            <div class="logos">
-                <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
-                <h1 class="tittleLogo" >Bibliotec ECI</h1>
-            </div>
+        <h:form>
+            <nav class="nav">
+                <div class="logos">
+                    <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                    <h1 class="tittleLogo" >Bibliotec ECI</h1>
+                </div>
 
-            <ul class="nav-menu">
-                <li class="nav-menu-item">
-                    <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
-                </li>
-
-                <li class="nav-menu-item">
-                    <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
-                </li>
-
-                <c:if  test="#{!loginBean.isVisitante()}">
+                <ul class="nav-menu">
                     <li class="nav-menu-item">
-                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}"/>
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
                     </li>
-                </c:if>
 
-                <c:if  test="#{loginBean.isVisitante()}">
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/verHorarios.xhtml')}" >Iniciar Sesion</a>
+                        <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
                     </li>
-                </c:if>
 
-            </ul>
-        </nav>
+                    <c:if  test="#{!loginBean.isVisitante()}">
+                        <li class="nav-menu-item">
+                            <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/verHorarios.xhtml')}"/>
+                        </li>
+                    </c:if>
+
+                    <c:if  test="#{loginBean.isVisitante()}">
+                        <li class="nav-menu-item">
+                            <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/verHorarios.xhtml')}" >Iniciar Sesion</a>
+                        </li>
+                    </c:if>
+
+                </ul>
+            </nav>
+
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+        </h:form>
     </header>
 
     <h:form class="formulario">

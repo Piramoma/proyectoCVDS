@@ -38,44 +38,67 @@
                 </li>
 
                 <li class="nav-menu-item">
-                    <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoSalas.xhtml')}"/>
+                    <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
                 </li>
             </ul>
         </nav>
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
     </header>
+
     <h:form class="formulario">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
         <h1>Agregar Recurso</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <i class="fas fa fa-user icon"></i>
-                <p:inputText type="String" placeholder="idInterno" required="true" />
+                <i class="fas fa fa-user icon"/>
+                <p:inputText type="String" placeholder="idInterno" value="#{recursosBean.idInterno}"/>
             </div>
             <div class="input-contenedor">
-                <i class="fas fa fa-user icon"></i>
-                <p:inputText type="String" placeholder="Nombre" required="true" />
+                <i class="fas fa fa-user icon"/>
+                <p:inputText type="String" placeholder="Nombre" value="#{recursosBean.nombre}"/>
             </div>
             <div class="input-contenedor">
-                <i class="fas fa fa-user-secret icon"></i>
-                <p:inputText type="String" placeholder="Ubicacion" required="true" />
+                <i class="fas fa fa-check-square icon"/>
+                <p:selectOneMenu id="Ubicacion" value="#{recursosBean.ubicacion}">
+                    <p:ajax update="@this" process="@this"/>
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Bloque A" itemValue="Bloque A"/>
+                    <f:selectItem itemLabel="Bloque G" itemValue="Bloque G"/>
+                </p:selectOneMenu>
             </div>
             <div class="input-contenedor">
-                <i class="fas fa fa-check-square icon"></i>
-                <p:inputText type="String" placeholder="Estado" required="true" />
+                <i class="fas fa fa-check-square icon"/>
+                <p:selectOneMenu id="Estado" value="#{recursosBean.estado}">
+                    <p:ajax update="@this" process="@this"/>
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="disponible" itemValue="disponible"/>
+                    <f:selectItem itemLabel="agotado" itemValue="agotado"/>
+                </p:selectOneMenu>
             </div>
             <div class="input-contenedor">
-                <i class="fas fa fa-check-square icon"></i>
-                <p:inputText type="String" placeholder="Unidades" required="true" />
+                <i class="fas fa fa-check-square icon"/>
+                <p:inputText type="String" placeholder="Capacidad" value="#{recursosBean.capacidad}"/>
             </div>
-            <p:selectOneMenu id="Tipo" >
-                <p:ajax update="@this" process="@this"/>
-                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                <f:selectItem itemLabel="libro" itemValue="libro"/>
-                <f:selectItem itemLabel="Equipo" itemValue="Equipo"/>
-                <f:selectItem itemLabel="Sala" itemValue="Sala"/>
-            </p:selectOneMenu>
+            <div class="input-contenedor">
+                <i class="fas fa fa-check-square-o icon"/>
+                <p:inputTextarea type="String" placeholder="Descripcion" value="#{recursosBean.description}"/>
+            </div>
+            <div  class="input-contenedor">
+                <i class="fas fa fa-check-square icon"/>
+                <p:selectOneMenu id="Tipo" value="#{recursosBean.tipo}">
+                    <p:ajax update="@this" process="@this"/>
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="libro" itemValue="libro"/>
+                    <f:selectItem itemLabel="equipo" itemValue="equipo"/>
+                    <f:selectItem itemLabel="sala" itemValue="sala"/>
+                </p:selectOneMenu>
+            </div>
 
-            <p:commandButton class="button" value="Registrar" action="recursoLibrosAdmin?servlet-redirect = true" />
+
+            <p:commandButton class="button" value="Registrar" actionListener="#{recursosBean.nuevoRecurso}"/>
+
             <p:commandButton  class="buttonCancel" value="Cancelar" onclick="history.back()" />
             <p>Todos los campos tienen que estar completados.</p>
         </div>
