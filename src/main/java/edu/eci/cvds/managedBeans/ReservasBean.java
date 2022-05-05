@@ -237,10 +237,10 @@ public class ReservasBean extends BasePageBean {
 
     public void addEvent(String usuario) {
         boolean noError = true;
-        if (event.getStartDate() == null) { showErrors("El campo de Fecha Inicial es Nulo"); noError=false;}
-        if (event.getEndDate() == null) { showErrors("El campo de Fecha Final es Nulo"); noError=false;}
-        if (event.getStartDate().getTime() > event.getEndDate().getTime()) { showErrors("La Fecha Final Debe ser mayor a la Fecha Inicial"); noError=false;}
-        if ((event.getEndDate().getHours() - event.getStartDate().getHours()) > 2) { showErrors("EL Tiempo maximo de la reserva es 2 Horas."); noError=false;}
+        if (Objects.equals(event.getStartDate(),null)) { showErrors("El campo de Fecha Inicial es Nulo"); noError=false;}
+        else if (Objects.equals(event.getEndDate(),null))  { showErrors("El campo de Fecha Final es Nulo"); noError=false;}
+        else if (event.getStartDate().getTime() > event.getEndDate().getTime()) { showErrors("La Fecha Final Debe ser mayor a la Fecha Inicial"); noError=false;}
+        else if ((event.getEndDate().getHours() - event.getStartDate().getHours()) > 2) { showErrors("EL Tiempo maximo de la reserva es 2 Horas."); noError=false;}
 
         if (noError){
             ScheduleEvent newEvent = new DefaultScheduleEvent();
@@ -248,7 +248,6 @@ public class ReservasBean extends BasePageBean {
             this.eventModel.updateEvent(event);
             Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
             Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
-
             java.util.Date date = event.getStartDate();
             long timeInMilliSeconds = date.getTime();
             java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
@@ -258,8 +257,10 @@ public class ReservasBean extends BasePageBean {
 
     public void addEventAdmin(String usuario) {
         boolean noError = true;
-        if (event.getStartDate() == null) { showErrors("El campo de Fecha Inicial es Nulo"); noError=false;}
-        if (event.getEndDate() == null) { showErrors("El campo de Fecha Final es Nulo"); noError=false;}
+        if (Objects.equals(event.getStartDate(),null)) { showErrors("El campo de Fecha Inicial es Nulo"); noError=false;}
+        else if (Objects.equals(event.getEndDate(),null))  { showErrors("El campo de Fecha Final es Nulo"); noError=false;}
+        else if (event.getStartDate().getTime() > event.getEndDate().getTime()) { showErrors("La Fecha Final Debe ser mayor a la Fecha Inicial"); noError=false;}
+        else if ((event.getEndDate().getHours() - event.getStartDate().getHours()) > 2) { showErrors("EL Tiempo maximo de la reserva es 2 Horas."); noError=false;}
 
         if (noError){
             ScheduleEvent newEvent = new DefaultScheduleEvent();
