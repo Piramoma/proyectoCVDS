@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-
+import java.util.Objects;
 
 
 @SuppressWarnings("deprecation")
@@ -180,7 +180,12 @@ public class ReservasBean extends BasePageBean {
         eventModel = new DefaultScheduleModel();
         List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
         for (Reserva r : horarios){
-            event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechaInicioReserva(), r.getFechaFinReserva());
+            if (Objects.equals(r.getEstado(), "activa")) {
+                event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechaInicioReserva(), r.getFechaFinReserva());
+            }
+            else {
+                event = new DefaultScheduleEvent("Restringido", r.getFechaInicioReserva(), r.getFechaFinReserva());
+            }
             eventModel.addEvent(event);
             event.setId(String.valueOf(r.getId()));
         }
@@ -192,6 +197,15 @@ public class ReservasBean extends BasePageBean {
         this.reservaactual = serviciosBiblioteca.consultarReserva(this.idRecurso,this.eventId);
         this.fechainicio = reservaactual.getFechaInicioReserva();
         this.fechafin = reservaactual.getFechaFinReserva();
+    }
+
+    public boolean isEventRestringido() {
+        if (Objects.equals(this.event.getTitle(), "Restringido")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public ScheduleEvent getEvent() {
@@ -234,6 +248,20 @@ public class ReservasBean extends BasePageBean {
         java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
 
         serviciosBiblioteca.nuevaReserva(usuario,this.recursoactual.getId(),date1,timeStampInicio,timeStampFin,false,"activa",timeStampInicio);
+    }
+
+    public void addEventAdmin(String usuario) {
+        ScheduleEvent newEvent = new DefaultScheduleEvent();
+        newEvent = new DefaultScheduleEvent("Restringido", event.getStartDate(), event.getEndDate());
+        this.eventModel.updateEvent(event);
+
+        Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
+        Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
+        java.util.Date date = event.getStartDate();
+        long timeInMilliSeconds = date.getTime();
+        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+
+        serviciosBiblioteca.nuevaReserva(usuario,this.recursoactual.getId(),date1,timeStampInicio,timeStampFin,false,"restringido",timeStampInicio);
     }
 
 
