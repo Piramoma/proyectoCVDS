@@ -36,7 +36,14 @@ insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva,
 insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, proximaocurrencia, estado, diaactual)  values ('daniel.ramos', 15, '2022-04-27', '2022-06-02 09:18:34', '2022-08-29 02:05:22', true, '2022-12-11 09:08:39', 'cancelado','2022-05-02 06:00:00');
 insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, proximaocurrencia, estado, diaactual)  values ('daniel.ramos', 16, '2022-04-27', '2022-07-14 20:32:40', '2022-08-28 20:00:31',  true, '2022-12-11 09:08:39', 'cancelado','2022-05-02 06:00:00');
 insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('daniel.ramos', 17, '2022-04-27', '2022-07-05 16:01:02', '2022-08-27 06:59:15', false, 'activa','2022-05-02 06:00:00');
-insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('daniel.ramos', 17, '2022-04-27', '2022-09-01 12:28:57', '2022-10-25 08:28:52', false, 'terminada','2022-05-02 06:00:00');
+
+insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('daniel.ramos', 2, '2021-04-27', '2022-05-03 07:00:00', '2022-05-03 08:28:52', false, 'terminada','2022-05-02 06:00:00');
+insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('yesid.mora', 21, '2022-04-27', '2022-05-05 07:00:00', '2022-05-05 08:28:52', false, 'cancelado','2022-05-02 06:00:00');
+insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('daniel.ramos', 19, '2021-04-27', '2022-05-03 07:00:00', '2022-05-03 08:28:52', false, 'terminada','2022-05-02 06:00:00');
+insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('yesid.mora', 15, '2022-04-27', '2022-06-04 07:00:00', '2022-06-04 08:28:52', false, 'cancelado','2022-05-02 06:00:00');
+insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('daniel.ramos', 22, '2022-04-27', '2022-08-03 07:00:00', '2022-08-03 08:28:52', false, 'cancelado','2022-05-02 06:00:00');
+insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values ('yesid.mora', 2, '2021-04-27', '2022-05-03 07:00:00', '2022-05-03 08:28:52', false, 'terminada','2022-05-02 06:00:00');
+
 
 insert into Horarios (idrecurso, fechainicio, horainicio, fechafin, horafin) values ('1', '2022-04-11', '09:20', '2022-04-12', '09:20');
 insert into Horarios (idrecurso, fechainicio, horainicio, fechafin, horafin) values ('2', '2022-04-12', '09:20', '2022-04-13', '09:20');

@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cancelar</title>
+    <title>Horarios</title>
     <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script
@@ -15,9 +17,43 @@
             crossorigin="anonymous"
     ></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../style/horario.css" />
 
 </h:head>
 <h:body>
-    <h1 style="background: red">Funcionalidad en construcción</h1>
+    <header class="header">
+        <h:form>
+            <nav class="nav">
+                <div class="logos">
+                    <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                    <h1 class="tittleLogo" >Bibliotec ECI</h1>
+                </div>
+
+                <ul class="nav-menu">
+                    <li class="nav-menu-item">
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
+                    </li>
+
+                    <li class="nav-menu-item">
+                        <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
+                    </li>
+                </ul>
+            </nav>
+        </h:form>
+    </header>
+
+    <div align="center">
+        <h1>
+            Funcionalidad en Construcción
+        </h1>
+    </div>
+
+    <div align="center">
+        <h2>
+            Estamos trabajando para mejorar para ti
+        </h2>
+    </div>
+
+
 </h:body>
 </html>

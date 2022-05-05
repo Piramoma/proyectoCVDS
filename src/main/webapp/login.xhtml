@@ -15,26 +15,27 @@
     <link rel="stylesheet" href="style/loginF.css" />
 </h:head>
 <h:body>
+    <p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate/>
+    </p:messages>
     <h:form class="formulario">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
         <h1>Iniciar Sesion</h1>
         <div class="contenedor">
             <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
+                <i class="fas fa-envelope icon"/>
                 <p:inputText id="user_name" type="text" placeholder="nombre.apellido" value="#{loginBean.user}"/>
             </div>
             <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
+                <i class="fas fa-key icon"/>
                 <p:inputText type="password" placeholder="Contraseña" value="#{loginBean.passwd}" />
             </div>
             <div class="login">
                 <p:commandButton id="mybutton" class="button1"  value="Ingresar" alig="center" actionListener="#{loginBean.login}"/>
 
-                <p:commandButton id="myButton" class="button2" value="Cancelar" onclick="history.back()" actionListener="#{loginBean.reset}"/>
+                <p:commandButton id="myButton" class="button2" value="Cancelar" onclick="history.back()" actionListener="#{loginBean.reset}" immediate="true"/>
 
                 <p>Recuerda Devolver los Recursos en el plazo establecido.</p>
-
-                <h:outputText class="errores" id = "message" value="#{loginBean.showError()}"><p:autoUpdate/></h:outputText>
 
             </div>
         </div>

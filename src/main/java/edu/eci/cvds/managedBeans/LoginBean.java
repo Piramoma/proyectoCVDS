@@ -26,37 +26,29 @@ public class LoginBean implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(LoginBean.class);
     private String user;
     private String passwd;
-    public String showError = "";
     public String ultimaPagina = "";
 
     public void login() {
         Subject userActual = SecurityUtils.getSubject();
         UsernamePasswordToken uPToken = new UsernamePasswordToken(getUser(), getPasswd());
-        if (Objects.equals(this.user, "") || Objects.equals(this.passwd, "")) {
-            showError = "Algunos de los campos es nulo";}
+        if (this.user == null || Objects.equals(this.user.trim(), "")) {
+            error("El campo de correo esta vacio");
+            }
+        if (this.passwd == null || this.passwd.trim().equals("")){
+            error("El campo de contraseña esta vacio");
+        }
         try{
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
-            showError="";
             FacesContext.getCurrentInstance().getExternalContext().redirect(this.ultimaPagina);
         } catch (UnknownAccountException ex) {
-            if (Objects.equals(this.user, "") || Objects.equals(this.passwd, "")) {
-                showError = "El campo Correo esta nulo";}
-            else {
-                showError = "El usuario no se encuentra registrado";
-            }
+            error("El usuario no se encuentra registrado");
         } catch (IncorrectCredentialsException ex) {
-            if (Objects.equals(this.user, "") || Objects.equals(this.passwd, "")) {
-                showError = "El campo Contraseña esta nulo";}
-            else {
-                showError = "La contraseña que ingreso no es correcta";
-            }
+            error("La contraseña ingresada no es correcta");
         } catch (LockedAccountException ex) {
-            showError = "El usuario esta deshabilitado para el ingreso";
+            error("El usuario esta deshabilitado para el ingreso");
         } catch (IOException ex) {
-            showError = "A ocurrido un error desconocido";
-            error("Unknown error: " + ex.getMessage());
-            log.error(ex.getMessage(), ex);
+            error("A ocurrido un error desconocido" + ex.getMessage());
         }
     }
 
@@ -89,9 +81,7 @@ public class LoginBean implements Serializable{
     }
 
     public void logOut(String redirect) {
-        setUser("");
-        setPasswd("");
-        showError="";
+        reset();
         SecurityUtils.getSubject().logout();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(redirect);
@@ -104,7 +94,6 @@ public class LoginBean implements Serializable{
     public void reset() {
         setUser("");
         setPasswd("");
-        showError="";
     }
 
     public void redirect() {
@@ -121,9 +110,6 @@ public class LoginBean implements Serializable{
         }
     }
 
-    public String showError(){
-        return showError;
-    }
 
     public boolean isAdmin() {
         Subject user = SecurityUtils.getSubject();

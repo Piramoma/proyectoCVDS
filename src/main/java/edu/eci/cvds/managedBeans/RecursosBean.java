@@ -149,13 +149,12 @@ public class RecursosBean extends BasePageBean {
             }catch (Exception ex) {
                 showErrors("Ha ocurrido un error inesperado, estamos trabajando para mejorar para usted");
             }
-
         }
         idInterno = 0;
-        estado = "";
+        estado = null;
         nombre = "";
         ubicacion = "";
-        tipo = "";
+        tipo = null;
         capacidad = 0;
         description = "";
     }

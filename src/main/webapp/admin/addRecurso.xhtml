@@ -60,8 +60,13 @@
                 <p:inputText type="String" placeholder="Nombre" value="#{recursosBean.nombre}"/>
             </div>
             <div class="input-contenedor">
-                <i class="fas fa fa-user-secret icon"/>
-                <p:inputText type="String" placeholder="Ubicacion" value="#{recursosBean.ubicacion}"/>
+                <i class="fas fa fa-check-square icon"/>
+                <p:selectOneMenu id="Ubicacion" value="#{recursosBean.ubicacion}">
+                    <p:ajax update="@this" process="@this"/>
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Bloque A" itemValue="Bloque A"/>
+                    <f:selectItem itemLabel="Bloque G" itemValue="Bloque G"/>
+                </p:selectOneMenu>
             </div>
             <div class="input-contenedor">
                 <i class="fas fa fa-check-square icon"/>
@@ -80,13 +85,17 @@
                 <i class="fas fa fa-check-square-o icon"/>
                 <p:inputTextarea type="String" placeholder="Descripcion" value="#{recursosBean.description}"/>
             </div>
-            <p:selectOneMenu id="Tipo" value="#{recursosBean.tipo}">
-                <p:ajax update="@this" process="@this"/>
-                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                <f:selectItem itemLabel="libro" itemValue="libro"/>
-                <f:selectItem itemLabel="equipo" itemValue="equipo"/>
-                <f:selectItem itemLabel="sala" itemValue="sala"/>
-            </p:selectOneMenu>
+            <div  class="input-contenedor">
+                <i class="fas fa fa-check-square icon"/>
+                <p:selectOneMenu id="Tipo" value="#{recursosBean.tipo}">
+                    <p:ajax update="@this" process="@this"/>
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="libro" itemValue="libro"/>
+                    <f:selectItem itemLabel="equipo" itemValue="equipo"/>
+                    <f:selectItem itemLabel="sala" itemValue="sala"/>
+                </p:selectOneMenu>
+            </div>
+
 
             <p:commandButton class="button" value="Registrar" actionListener="#{recursosBean.nuevoRecurso}"/>
 
