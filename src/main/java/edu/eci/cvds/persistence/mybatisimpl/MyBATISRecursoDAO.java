@@ -5,6 +5,7 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper;
+import org.postgresql.util.PSQLException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
     private RecursoMapper recursoMapper;
 
     @Override
-    public void save(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) {
+    public void save(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) throws PSQLException {
         recursoMapper.nuevoRecurso(idInterno,estado,nombre,ubicacion,tipo,capacidad,descripcion);
     }
 
@@ -39,7 +40,7 @@ public class MyBATISRecursoDAO implements RecursoDAO {
     }
 
     @Override
-    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) {
+    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) throws PSQLException {
         recursoMapper.nuevoRecurso(idInterno,estado,nombre,ubicacion,tipo,capacidad, descripcion);
     }
 

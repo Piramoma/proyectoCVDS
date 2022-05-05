@@ -7,7 +7,10 @@ import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.*;
 import edu.eci.cvds.services.ServiciosBiblioteca;
+import org.postgresql.util.PSQLException;
+
 import javax.ejb.Singleton;
+import java.sql.SQLException;
 import java.util.List;
 
 @Singleton
@@ -38,7 +41,7 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     }
 
     @Override
-    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) {
+    public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) throws PSQLException {
         recursoDAO.nuevoRecurso(idInterno,estado,nombre,ubicacion,tipo,capacidad,descripcion);
     }
 

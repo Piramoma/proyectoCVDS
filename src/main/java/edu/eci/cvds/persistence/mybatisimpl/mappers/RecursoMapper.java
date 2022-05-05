@@ -6,6 +6,7 @@ import java.util.List;
 
 import edu.eci.cvds.entities.Reserva;
 import org.apache.ibatis.annotations.Param;
+import org.postgresql.util.PSQLException;
 
 public interface RecursoMapper {
 
@@ -42,7 +43,7 @@ public interface RecursoMapper {
                              @Param("ubicacion") String ubicacion,
                              @Param("tipo") String tipo,
                              @Param("capacidad")int capacidad,
-                             @Param("descripcion")String descripcion);
+                             @Param("descripcion")String descripcion) throws PSQLException;
 
     public List<Recurso> consultarRecurso(@Param("idrecurso") int idrecurso);
 }
