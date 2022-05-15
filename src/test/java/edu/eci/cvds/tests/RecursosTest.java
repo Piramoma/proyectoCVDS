@@ -1,13 +1,11 @@
 package edu.eci.cvds.tests;
 
-import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.services.ServiciosBibliotecaFactory;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

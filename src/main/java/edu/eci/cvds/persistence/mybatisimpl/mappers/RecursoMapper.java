@@ -2,9 +2,11 @@ package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
 import edu.eci.cvds.entities.Recurso;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.persistence.exception.PersistenceException;
 import org.apache.ibatis.annotations.Param;
 import org.postgresql.util.PSQLException;
 
@@ -43,7 +45,7 @@ public interface RecursoMapper {
                              @Param("ubicacion") String ubicacion,
                              @Param("tipo") String tipo,
                              @Param("capacidad")int capacidad,
-                             @Param("descripcion")String descripcion) throws PSQLException;
+                             @Param("descripcion")String descripcion) throws PersistenceException;
 
-    public Recurso consultarRecurso(@Param("idrecurso") int idrecurso);
+    public Recurso consultarRecurso(@Param("idrecurso") int idrecurso) throws PersistenceException;
 }

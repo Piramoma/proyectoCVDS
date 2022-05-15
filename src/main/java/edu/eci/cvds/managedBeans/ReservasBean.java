@@ -11,6 +11,7 @@ import javax.swing.plaf.TreeUI;
 
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.ScheduleEntryMoveEvent;
@@ -81,19 +82,39 @@ public class ReservasBean extends BasePageBean {
     }
 
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario) {
-        return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
+        try {
+            return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
     }
 
     public List<Reserva> consultarReservasPasadas(String idUsuario) {
-        return serviciosBiblioteca.consultarReservasPasadas(idUsuario);
+        try {
+            return serviciosBiblioteca.consultarReservasPasadas(idUsuario);
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
     }
 
     public List<Reserva> consultarReservasCanceladas(String idUsuario) {
-        return serviciosBiblioteca.consultarReservasCanceladas(idUsuario);
+        try {
+            return serviciosBiblioteca.consultarReservasCanceladas(idUsuario);
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
     }
 
     public Horario consultarHorario(int idrecurso, int idhorario) {
-        return serviciosBiblioteca.consultarHorario(idrecurso, idhorario);
+        try {
+            return serviciosBiblioteca.consultarHorario(idrecurso, idhorario);
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
     }
 
     public Recurso getRecursoactual() {
@@ -178,25 +199,33 @@ public class ReservasBean extends BasePageBean {
     }
 
     public void loadEvents() {
-        eventModel = new DefaultScheduleModel();
-        List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
-        for (Reserva r : horarios) {
-            if (Objects.equals(r.getEstado(), "activa")) {
-                event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechaInicioReserva(), r.getFechaFinReserva());
-            } else {
-                event = new DefaultScheduleEvent("Restringido", r.getFechaInicioReserva(), r.getFechaFinReserva());
+        try {
+            eventModel = new DefaultScheduleModel();
+            List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
+            for (Reserva r : horarios) {
+                if (Objects.equals(r.getEstado(), "activa")) {
+                    event = new DefaultScheduleEvent(r.getRecurso().getTipo() + " - " + r.getRecurso().getNombre(), r.getFechaInicioReserva(), r.getFechaFinReserva());
+                } else {
+                    event = new DefaultScheduleEvent("Restringido", r.getFechaInicioReserva(), r.getFechaFinReserva());
+                }
+                eventModel.addEvent(event);
+                event.setId(String.valueOf(r.getId()));
             }
-            eventModel.addEvent(event);
-            event.setId(String.valueOf(r.getId()));
+        }catch (Exception e){
+            showErrors(e.getMessage());
         }
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
-        this.event = (ScheduleEvent) selectEvent.getObject();
-        this.eventId = Integer.parseInt(event.getId());
-        this.reservaactual = serviciosBiblioteca.consultarReserva(this.idRecurso, this.eventId);
-        this.fechainicio = reservaactual.getFechaInicioReserva();
-        this.fechafin = reservaactual.getFechaFinReserva();
+        try {
+            this.event = (ScheduleEvent) selectEvent.getObject();
+            this.eventId = Integer.parseInt(event.getId());
+            this.reservaactual = serviciosBiblioteca.consultarReserva(this.idRecurso, this.eventId);
+            this.fechainicio = reservaactual.getFechaInicioReserva();
+            this.fechafin = reservaactual.getFechaFinReserva();
+        }catch (Exception e){
+            showErrors(e.getMessage());
+        }
     }
 
     public boolean isEventRestringido() {
@@ -216,8 +245,13 @@ public class ReservasBean extends BasePageBean {
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
-        this.recursoactual = serviciosBiblioteca.consultarRecurso(this.idRecurso);
-        this.event = new DefaultScheduleEvent();
+        try {
+            this.recursoactual = serviciosBiblioteca.consultarRecurso(this.idRecurso);
+            this.event = new DefaultScheduleEvent();
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+
     }
 
     public void onEventMove(ScheduleEntryMoveEvent event) {
@@ -251,7 +285,11 @@ public class ReservasBean extends BasePageBean {
             java.util.Date date = event.getStartDate();
             long timeInMilliSeconds = date.getTime();
             java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
-            serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), date1, timeStampInicio, timeStampFin, false, "activa", timeStampInicio);
+            try {
+                serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), date1, timeStampInicio, timeStampFin, false, "activa", timeStampInicio);
+            } catch (PersistenceException e) {
+                showErrors(e.getMessage());
+            }
         }
     }
 
@@ -273,7 +311,11 @@ public class ReservasBean extends BasePageBean {
             long timeInMilliSeconds = date.getTime();
             java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
 
-            serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), date1, timeStampInicio, timeStampFin, false, "restringido", timeStampInicio);
+            try {
+                serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), date1, timeStampInicio, timeStampFin, false, "restringido", timeStampInicio);
+            } catch (PersistenceException e) {
+                showErrors(e.getMessage());
+            }
 
         }
     }

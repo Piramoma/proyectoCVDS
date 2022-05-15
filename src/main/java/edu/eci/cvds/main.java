@@ -4,13 +4,10 @@ import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
-import edu.eci.cvds.persistence.PersistenceException;
-import edu.eci.cvds.persistence.UsuarioDAO;
+import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import edu.eci.cvds.services.ServiciosBibliotecaFactory;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 //https://proyecto-cvds-piramoma.herokuapp.com

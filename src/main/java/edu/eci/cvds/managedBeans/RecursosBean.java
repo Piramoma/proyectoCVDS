@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
+import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import org.postgresql.util.PSQLException;
 import org.primefaces.component.ajaxexceptionhandler.AjaxExceptionHandler;
@@ -146,8 +147,10 @@ public class RecursosBean extends BasePageBean {
             try {
                 serviciosBiblioteca.nuevoRecurso(idInterno,estado,nombre,ubicacion,tipo,capacidad,description);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
-            }catch (Exception ex) {
-                showErrors("Ha ocurrido un error inesperado, estamos trabajando para mejorar para usted");
+            }catch (PersistenceException e) {
+                showErrors(e.getMessage());
+            } catch (Exception e) {
+                showErrors("Un error inesperado ha ocurrido, estamos trabajando para mejorar");
             }
         }
         idInterno = 0;
