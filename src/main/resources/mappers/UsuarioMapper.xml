@@ -16,12 +16,18 @@
         <result property='numReservas' column='numReservas' />
     </resultMap>
 
-    <select id="consultarUsuariosConReservas" resultMap="UsuarioResult" parameterType="map">
+    <select id="consultarUsuariosConReservas" resultMap="UsuarioResult" >
         SELECT email, nombre, apellido, programa, count(*) AS numReservas
         FROM public.usuarios INNER JOIN public.reservas ON public.usuarios.email = public.reservas.idusuario
         where public.reservas.estado = 'activa'
         GROUP BY email
         ORDER BY numReservas desc
+    </select>
+
+    <select id="consultarNombreUsuario" resultMap="UsuarioResult" parameterType="map">
+        SELECT *
+        FROM public.usuarios
+        WHERE email = #{idUsuario}
     </select>
 
 </mapper>

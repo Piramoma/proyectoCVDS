@@ -47,5 +47,5 @@ public interface ServiciosBiblioteca {
 
     public void nuevaReserva(String idusuario, int idrecurso, Date fechasolicitud, Timestamp fechainicioreserva, Timestamp fechafinreserva, boolean recurrente, String estado, Timestamp diaactual) throws PersistenceException;
 
-
+    public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException;
 }

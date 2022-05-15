@@ -18,7 +18,19 @@ public class MyBATISUsuarioDAO implements UsuarioDAO {
         try{
             return usuarioMapper.consultarUsuariosConReservas();
         }catch (Exception e){
+            e.printStackTrace();
             throw new PersistenceException(PersistenceException.noSePuedeConsultarUsuariosConReservas);
+        }
+
+    }
+
+    @Override
+    public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException {
+        try{
+            return usuarioMapper.consultarNombreUsuario(idUsuario);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSeEncuentraAlUsuario);
         }
 
     }

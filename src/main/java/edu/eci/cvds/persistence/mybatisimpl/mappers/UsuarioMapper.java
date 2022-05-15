@@ -17,4 +17,6 @@ public interface UsuarioMapper {
      */
     public List<Usuario> consultarUsuariosConReservas() throws PersistenceException;
 
+    public Usuario consultarNombreUsuario(@Param("idUsuario") String idUsuario) throws PersistenceException;
+
 }

@@ -108,4 +108,9 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         reservaDAO.nuevaReserva(idusuario,idrecurso,fechasolicitud,fechainicioreserva,fechafinreserva,recurrente,estado,diaactual);
     }
 
+    @Override
+    public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException {
+        return usuarioDAO.consultarNombreUsuario(idUsuario);
+    }
+
 }

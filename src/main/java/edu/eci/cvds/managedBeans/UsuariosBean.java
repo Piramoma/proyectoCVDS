@@ -49,6 +49,15 @@ public class UsuariosBean extends BasePageBean {
         return usuarioReservas;
     }
 
+    public Usuario getUsuario(String idUsuario){
+        try {
+            return serviciosBiblioteca.consultarNombreUsuario(idUsuario);
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
     public void showErrors(String error){
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));

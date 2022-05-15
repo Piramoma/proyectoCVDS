@@ -28,6 +28,7 @@ public class PersistenceException extends Exception {
 
 	public static final String noSePuedeConsultarUsuariosConReservas = "No se puede consultar los usuarios que tienen reservas activas";
 	public static final String errorAlRegistrarNuevoRecurso = "No se puedo registrar el recurso";
+	public static final String noSeEncuentraAlUsuario = "No se ha podido encontrar al usuario solicitado";
 	public static final String idInternoRepetido = "El id interno puesto ya se encuentra registrado en la base de datos";
 	public static final String noSePuedeConsultarRecursosPorId = "No se ha podido consultar el recurso solicitado";
 	public static final String noSePuedeConsultarPocaInfoPorUsuario = "No se puedo hacer la consulta de poca información por usuario";
