@@ -13,29 +13,37 @@
         <result property='ubicacion' column='ubicacion' />
         <result property='tipo' column='tipo' />
         <result property='capacidad' column='capacidad' />
+        <result property='descripcion' column='descripcion' />
+        <association property="horario" javaType="Horario" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.HorarioMapper.HorarioResult" />
+
     </resultMap>
 
     <select id="consultarLibros" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
-        WHERE tipo = 'libro'
+        WHERE tipo = 'libro' and estado = 'disponible'
     </select>
 
     <select id="consultarEquipos" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
-        WHERE tipo = 'equipo'
+        WHERE tipo = 'equipo' and estado = 'disponible'
     </select>
 
     <select id="consultarSalasEstudio" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
-        WHERE tipo = 'sala'
+        WHERE tipo = 'sala' and estado = 'disponible'
     </select>
 
-<!--    <insert id="insertarRecurso" parameterType="map">-->
-<!--        insert into recursos (estado, nombre, ubicacion, tipo, capacidad, horainicio, horafin) values-->
-<!--        (#{r.estado}, #{r.nombre}, #{r.ubicacion}, #{r.tipo}, #{r.capacidad}, #{r.horainicio}, #{r.horafin})-->
-<!--    </insert>-->
+    <insert parameterType="map" id="nuevoRecurso">
+        insert into Recursos(idInterno, estado, nombre, ubicacion, tipo, capacidad, descripcion) values (#{idInterno}, #{estado}, #{nombre}, #{ubicacion}, #{tipo}, #{capacidad}, #{descripcion})
+    </insert>
+
+    <select id="consultarRecurso" resultMap="RecursoResult" >
+        select *
+        FROM public.recursos
+        where public.recursos.id = #{idrecurso}
+    </select>
 
 </mapper>

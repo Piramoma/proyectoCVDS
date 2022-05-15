@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper">
+
+    <resultMap type='Reserva' id='ReservaResult'>
+        <id property='id' column='id' />
+        <result property="idUsuario" column="idUsuario"/>
+        <result property='idRecurso' column='idRecurso'/>
+        <result property='fechaSolicitud' column='fechaSolicitud' />
+        <result property='fechaInicioReserva' column='fechaInicioReserva' />
+        <result property='fechaFinReserva' column='fechaFinReserva' />
+        <result property='recurrente' column='recurrente' />
+        <result property='proximaocurrencia' column='proximaocurrencia' />
+        <result property='estado' column='estado' />
+        <result property='diaactual' column='diaactual' />
+        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" />
+    </resultMap>
+
+    <select id="consultarPorUsuarioPocaInfo" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'activa' and idUsuario = #{idUsuario}
+        order by fechainicioreserva
+    </select>
+
+    <select id="consultarReservasPasadas" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'terminada' and idUsuario = #{idUsuario}
+        order by fechainicioreserva
+    </select>
+
+    <select id="consultarReservasCanceladas" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'cancelado' and idUsuario = #{idUsuario}
+        order by fechainicioreserva
+    </select>
+
+    <select id="listarReservasRecurso" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where (public.reservas.estado = 'activa' or public.reservas.estado = 'restringido') and idrecurso = #{idrecurso}
+    </select>
+
+    <select id="consultarReserva" resultMap="ReservaResult" parameterType="map">
+        SELECT *
+        FROM public.reservas
+        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
+        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
+        where (public.reservas.estado = 'activa' or public.reservas.estado = 'restringido') and idrecurso = #{idrecurso} and reservas.id = #{idreserva}
+    </select>
+
+    <insert parameterType="map" id="nuevaReserva">
+        insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values (#{idusuario},#{idrecurso}, #{fechasolicitud}, #{fechainicioreserva}, #{fechafinreserva},  #{recurrente}, #{estado}, #{diaactual});
+    </insert>
+
+</mapper>

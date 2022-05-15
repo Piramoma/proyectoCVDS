@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.UsuarioMapper">
+
+    <resultMap type='Usuario' id='UsuarioResult'>
+        <id property='email' column='email' />
+        <result property="nombre" column="nombre"/>
+        <result property='apellido' column='apellido'/>
+        <result property='programa' column='programa' />
+        <result property='contraseña' column='contraseña' />
+        <result property='tipo' column='tipo' />
+        <result property='tipo' column='tipo' />
+        <result property='numReservas' column='numReservas' />
+    </resultMap>
+
+    <select id="consultarUsuariosConReservas" resultMap="UsuarioResult" parameterType="map">
+        SELECT email, nombre, apellido, programa, count(*) AS numReservas
+        FROM public.usuarios INNER JOIN public.reservas ON public.usuarios.email = public.reservas.idusuario
+        where public.reservas.estado = 'activa'
+        GROUP BY email
+        ORDER BY numReservas desc
+    </select>
+
+</mapper>

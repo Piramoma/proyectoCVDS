@@ -2,11 +2,16 @@ package edu.eci.cvds.managedBeans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.Security;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -16,37 +21,34 @@ import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="loginBean")
-@SessionScoped
+@ApplicationScoped
 public class LoginBean implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(LoginBean.class);
     private String user;
     private String passwd;
-    public boolean logeado = false;
+    public String ultimaPagina = "";
 
     public void login() {
         Subject userActual = SecurityUtils.getSubject();
         UsernamePasswordToken uPToken = new UsernamePasswordToken(getUser(), getPasswd());
+        if (this.user == null || Objects.equals(this.user.trim(), "")) {
+            error("El campo de correo esta vacio");
+            }
+        if (this.passwd == null || this.passwd.trim().equals("")){
+            error("El campo de contraseña esta vacio");
+        }
         try{
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
-            redirect();
-            setLogeado(true);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(this.ultimaPagina);
         } catch (UnknownAccountException ex) {
-            String errorMessage = "El usuario no se encuentra registrado";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
+            error("El usuario no se encuentra registrado");
         } catch (IncorrectCredentialsException ex) {
-            String errorMessage = "La contraseña que ingreso no es correcta";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
+            error("La contraseña ingresada no es correcta");
         } catch (LockedAccountException ex) {
-            String errorMessage = "El usuario esta deshabilitado para el ingreso";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
-        } catch (AuthenticationException ex) {
-            String errorMessage = "Error inesperado";
-            error(errorMessage);
-            log.error(ex.getMessage(), ex);
+            error("El usuario esta deshabilitado para el ingreso");
+        } catch (IOException ex) {
+            error("A ocurrido un error desconocido" + ex.getMessage());
         }
     }
 
@@ -66,26 +68,32 @@ public class LoginBean implements Serializable{
         this.passwd = passwd;
     }
 
-    public boolean isLogeado() {
-        return logeado;
+    public void setUltimaPagina(String ultimaPagina) {
+        this.ultimaPagina = ultimaPagina;
     }
 
-    public void setLogeado(boolean logeado) {
-        this.logeado = logeado;
+    public String getUltimaPagina() {
+        return ultimaPagina;
     }
 
     private void error(String message) {
-        FacesContext.getCurrentInstance().addMessage("Shiro", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", message));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", message));
     }
 
-    public void logOut() {
-        setLogeado(false);
+    public void logOut(String redirect) {
+        reset();
         SecurityUtils.getSubject().logout();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(redirect);
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+            error("Unknown error: " + ex.getMessage());
+            log.error(ex.getMessage(), ex);
         }
+    }
+
+    public void reset() {
+        setUser("");
+        setPasswd("");
     }
 
     public void redirect() {
@@ -94,11 +102,28 @@ public class LoginBean implements Serializable{
             if (user.hasRole("estudiante")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
             } else if (user.hasRole("admin")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/indexAdmin.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/index.xhtml");
             }
         } catch (IOException ex) {
             error("Unknown error: " + ex.getMessage());
             log.error(ex.getMessage(), ex);
         }
     }
+
+
+    public boolean isAdmin() {
+        Subject user = SecurityUtils.getSubject();
+        return user.hasRole("admin");
+    }
+
+    public boolean isEstudiante() {
+        Subject user = SecurityUtils.getSubject();
+        return user.hasRole("estudiante");
+    }
+
+    public boolean isVisitante() {
+        Subject user = SecurityUtils.getSubject();
+        return !(user.hasRole("estudiante") || user.hasRole("admin"));
+    }
+
 }

@@ -22,6 +22,11 @@ public class Usuario implements Serializable{
     private String programa;
     private String contraseña;
     private String tipo;
+    private long numReservas;
+
+    public Usuario(){
+        super();
+    }
 
     public Usuario(String email,String nombre, String apellido, String programa, String contraseña, String tipo){
         this.email = email;
@@ -80,6 +85,14 @@ public class Usuario implements Serializable{
         this.tipo = tipo;
     }
 
+    public long getNumReservas() {
+        return numReservas;
+    }
+
+    public void setNumReservas(long numReservas) {
+        this.numReservas = numReservas;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -89,6 +102,7 @@ public class Usuario implements Serializable{
                 ", programa='" + programa + '\'' +
                 ", contraseña='" + contraseña + '\'' +
                 ", tipo='" + tipo + '\'' +
+                ", NumeroReservasActivas='" + numReservas + '\'' +
                 '}';
     }
 }

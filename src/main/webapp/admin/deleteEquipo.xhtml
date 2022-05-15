@@ -24,7 +24,7 @@
                 <p:inputText type="String" placeholder="ID Equipo" required="true" />
             </div>
             <p:commandButton class="button" value="Eliminar" action="recursoEquiposAdmin?servlet-redirect = true" />
-            <p:button class="buttonCancel" value="Cancelar" outcome="recursoEquiposAdmin" />
+            <p:commandButton  class="buttonCancel" value="Cancelar" onclick="history.back()" />
             <p>Verifique que el Equipo Exista en la opción Listar Equipos.</p>
         </div>
     </h:form>

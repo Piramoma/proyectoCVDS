@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.HorarioMapper">
+
+    <resultMap type='Horario' id='HorarioResult'>
+        <id property='id' column='id' />
+        <result property="idrecurso" column="idrecurso"/>
+        <result property='fechainicio' column='fechainicio'/>
+        <result property='fechafin' column='fechafin' />
+        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" />
+
+    </resultMap>
+
+    <select id="consultarHorarios" resultMap="HorarioResult" parameterType="map">
+        select *
+        from public.horarios
+    </select>
+
+    <select id="consultaHorariosRecurso" resultMap="HorarioResult" >
+        select *
+        FROM public.horarios
+        INNER JOIN public.recursos ON public.horarios.idrecurso = public.recursos.id
+        where public.recursos.id = #{idrecurso}
+    </select>
+
+    <select id="consultarHorario" resultMap="HorarioResult" >
+        select *
+        FROM public.horarios
+        INNER JOIN public.recursos ON public.horarios.idrecurso = public.recursos.id
+        where public.recursos.id = #{idrecurso} and public.horarios.id = #{idhorario}
+    </select>
+
+</mapper>

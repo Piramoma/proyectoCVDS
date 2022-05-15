@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horarios</title>
+    <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script
+            src="https://kit.fontawesome.com/7e5b2d153f.js"
+            crossorigin="anonymous"
+    ></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../style/horario.css" />
+
+</h:head>
+<h:body >
+    <header class="header">
+        <h:form>
+            <nav class="nav">
+                <div class="logos">
+                    <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                    <h1 class="tittleLogo" >Bibliotec ECI</h1>
+                </div>
+
+                <ul class="nav-menu">
+                    <li class="nav-menu-item">
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
+                    </li>
+
+                    <li class="nav-menu-item">
+                        <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
+                    </li>
+
+                    <c:if  test="#{!loginBean.isVisitante()}">
+                        <li class="nav-menu-item">
+                            <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/verHorarios.xhtml')}"/>
+                        </li>
+                    </c:if>
+
+                    <c:if  test="#{loginBean.isVisitante()}">
+                        <li class="nav-menu-item">
+                            <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/verHorarios.xhtml')}" >Iniciar Sesion</a>
+                        </li>
+                    </c:if>
+
+                </ul>
+            </nav>
+
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+        </h:form>
+    </header>
+
+    <h:form class="formulario">
+        <p:growl id="messages" showDetail="true"/>
+        #{reservasBean.loadEvents()}
+
+        <h:panelGrid columnClasses="value">
+            <p:schedule id="schedule" value="#{reservasBean.eventModel}" widgetVar="myschedule"
+                        rightHeaderTemplate="agendaDay,agendaWeek,month,listYear"
+                        timeZone="ZoneId.systemDefault()" clientTimeZone="local" draggable="false" style="background:#ffffff;">
+
+
+                <p:ajax event="eventSelect" listener="#{reservasBean.onEventSelect}" update="eventDetails1"
+                        oncomplete="PF('eventDetails1').show();" />
+
+                <c:if  test="#{loginBean.isEstudiante()}">
+                    <p:ajax event="dateSelect" listener="#{reservasBean.onDateSelect}" update="eventDetails"
+                            oncomplete="PF('eventDialog').show();"/>
+                </c:if>
+
+                <c:if  test="#{loginBean.isAdmin()}">
+                    <p:ajax event="dateSelect" listener="#{reservasBean.onDateSelect}" update="eventDetails"
+                            oncomplete="PF('eventDialog').show();"/>
+                </c:if>
+
+                <p:ajax event="eventMove" listener="#{reservasBean.onEventMove}" update="messages"/>
+
+                <p:ajax event="eventResize" listener="#{reservasBean.onEventResize}" update="messages"/>
+
+            </p:schedule>
+        </h:panelGrid>
+
+        <c:if  test="#{!reservasBean.isEventRestringido()}">
+            <p:dialog widgetVar="eventDetails1" header="Informacion de la Reserva" showEffect="clip" hideEffect="clip" modal="true">
+                <h:panelGrid id="eventDetails1" border="1" columns="2" styleClass="table-style" >
+
+                    <h:outputLabel for="id" value="Id Evento: " />
+                    <h:outputLabel id="id" value="#{reservasBean.eventId}"/>
+
+                    <h:outputLabel for="Usuario" value="Usuario: " />
+                    <h:outputLabel id="Usuario" value="#{reservasBean.getReservaactual().idUsuario}"/>
+
+                    <h:outputLabel for="fechaInicio" value="Fecha Inicio: " />
+                    <h:outputLabel id="fechaInicio" value="#{reservasBean.getFechainicio()}"/>
+
+                    <h:outputLabel for="fechaFin" value="Fecha Fin: " />
+                    <h:outputLabel id="fechaFin" value="#{reservasBean.getFechafin()}"/>
+
+                    <h:outputLabel for="ubicacion" value="Ubicacion: " />
+                    <h:outputLabel id="ubicacion" value="#{reservasBean.getReservaactual().getRecurso().ubicacion}"/>
+
+                    <h:outputLabel for="capacidad" value="Capacidad: " />
+                    <h:outputLabel id="capacidad" value="#{reservasBean.getReservaactual().getRecurso().capacidad}"/>
+
+                    <h:outputLabel for="descripcion" value="Descripcion: " />
+                    <h:outputLabel id="descripcion" value="#{reservasBean.getReservaactual().getRecurso().descripcion}"/>
+
+                    <h:outputLabel for="Recurrente" value="Recurrente: " />
+                    <h:outputLabel id="Recurrente" value="#{reservasBean.getReservaactual().recurrente}"/>
+
+                </h:panelGrid>
+            </p:dialog>
+        </c:if>
+
+        <c:if  test="#{reservasBean.isEventRestringido()}">
+            <p:dialog widgetVar="eventDetails1" header="Informacion de la Reserva" showEffect="clip" hideEffect="clip" modal="true">
+                <h:panelGrid id="eventDetails1" border="1" columns="2" styleClass="table-style" >
+                    <h:outputLabel for="id" value="Id Evento: " />
+                    <h:outputLabel id="id" value="#{reservasBean.eventId}"/>
+                </h:panelGrid>
+            </p:dialog>
+        </c:if>
+
+        <c:if  test="#{loginBean.isEstudiante()}">
+            <p:dialog widgetVar="eventDialog" header="Reservar Recurso" showEffect="clip" hideEffect="clip" modal="true">
+
+                <h:panelGrid id="eventDetails" columns="2">
+
+                    <p:outputLabel value="Id: "/>
+                    <p:outputLabel value="#{reservasBean.getRecursoactual().id}" required="true"/>
+
+                    <p:outputLabel value="Recurso: "/>
+                    <p:outputLabel value="#{reservasBean.getRecursoactual().tipo}" required="true"/>
+
+                    <p:outputLabel value="Nombre: "/>
+                    <p:outputLabel value="#{reservasBean.getRecursoactual().nombre}" required="true"/>
+
+                    <c:if  test="#{reservasBean.getRecursoactual().tipo == 'libro'}">
+                        <p:outputLabel value="Unidades: "/>
+                        <p:outputLabel value="#{reservasBean.getRecursoactual().capacidad}" required="true"/>
+                    </c:if>
+
+                    <c:if  test="#{reservasBean.getRecursoactual().tipo == 'sala'}">
+                        <p:outputLabel value="Capacidad: "/>
+                        <p:outputLabel value="#{reservasBean.getRecursoactual().capacidad}" required="true"/>
+                    </c:if>
+
+                    <p:outputLabel value="Descripcion: "/>
+                    <p:outputLabel value="#{reservasBean.getRecursoactual().descripcion}" required="true"/>
+
+                    <p:outputLabel for="inicio" value="Fecha Inicio:"/>
+                    <p:calendar id="inicio" value="#{reservasBean.getEvent().startDate}" pattern="dd/MM/yyyy HH:mm"/>
+
+                    <p:outputLabel for="fin" value="Fecha Fin:"/>
+                    <p:calendar id="fin" value="#{reservasBean.getEvent().endDate}" pattern="dd/MM/yyyy HH:mm"/>
+
+                    <p:commandButton id="addButton" value="Reservar" action="#{reservasBean.addEvent(loginBean.user)}"
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide);"/>
+
+                </h:panelGrid>
+            </p:dialog>
+        </c:if>
+
+        <c:if  test="#{loginBean.isAdmin()}">
+            <p:dialog widgetVar="eventDialog" header="Restringir Horario" showEffect="clip" hideEffect="clip" modal="true">
+
+                <h:panelGrid id="eventDetails" columns="2">
+
+                    <p:outputLabel for="inicio" value="Fecha Inicio:"/>
+                    <p:calendar id="inicio" value="#{reservasBean.getEvent().startDate}" pattern="dd/MM/yyyy HH:mm"/>
+
+                    <p:outputLabel for="fin" value="Fecha Fin:"/>
+                    <p:calendar id="fin" value="#{reservasBean.getEvent().endDate}" pattern="dd/MM/yyyy HH:mm"/>
+
+                    <p:commandButton id="addButton" value="Reservar" action="#{reservasBean.addEventAdmin(loginBean.user)}"
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide);"/>
+
+                </h:panelGrid>
+
+            </p:dialog>
+        </c:if>
+
+    </h:form>
+</h:body>
+</html>

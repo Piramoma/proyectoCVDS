@@ -25,7 +25,7 @@
                 <p:inputText type="String" placeholder="ID Sala" required="true" />
             </div>
             <p:commandButton class="button" value="Eliminar" action="recursoSalasAdmin?servlet-redirect = true" />
-            <p:button class="buttonCancel" value="Cancelar" outcome="recursoSalasAdmin" />
+            <p:commandButton  class="buttonCancel" value="Cancelar" onclick="history.back()" />
             <p>Verifique que la Sala Exista en la opción Listar Salas de Estudio.</p>
         </div>
     </h:form>

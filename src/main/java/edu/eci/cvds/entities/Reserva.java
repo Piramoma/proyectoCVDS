@@ -2,33 +2,42 @@ package edu.eci.cvds.entities;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Objeto de una reserva de un recurso especifico hecha por un usuario registrado
- * @param idUsuario String con el e-mail de un usuario registrado, este e-mail identifica al usuario
- * @param id Numero de identificacion del recurso que el usuario esta reservando
- * @param fechaReserva Fecha actual en la que la reserva esta tomando lugar
- * @param fechaInicioReserva Fecha en la que la reserva comenzara a ser vigente
- * @param fechaFinReserva Fecha en la que la reserva dejara de ser vigente
- * @param activo Booleano que indica si una reserva sigue activa. True si sigue activa False de lo contrario
- * @author LEVIATAN
  */
 public class Reserva {
     private int id;
     private String idUsuario;
     private int idRecurso;
-    Timestamp fechaInicioReserva,fechaFinReserva;
-    Date fechaReserva;
-    boolean activo;
+    private Date fechaSolicitud;
+    private Timestamp fechaInicioReserva;
+    private Timestamp fechaFinReserva;
+    private boolean recurrente;
+    private String estado;
+    private Timestamp diaactual;
+    private Timestamp proximaocurrencia;
 
-    public Reserva(int id,String idUsuario, int idRecurso, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, Date fechaReserva, boolean activo) {
-        this.id=id;
+    private Recurso recurso;
+
+    private Usuario usuario;
+
+    public Reserva(int id, String idUsuario, int idRecurso, Date fechaSolicitud, Timestamp fechaInicioReserva, Timestamp fechaFinReserva, boolean recurrente, Timestamp proximaocurrencia, String estado, Timestamp diaactual) {
+        this.id = id;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
+        this.fechaSolicitud = fechaSolicitud;
         this.fechaInicioReserva = fechaInicioReserva;
         this.fechaFinReserva = fechaFinReserva;
-        this.fechaReserva=fechaReserva;
-        this.activo=activo;
+        this.recurrente = recurrente;
+        this.proximaocurrencia = proximaocurrencia;
+        this.estado = estado;
+        this.diaactual = diaactual;
+    }
+
+    public Reserva(){
+        super();
     }
 
     public int getId() {
@@ -55,6 +64,14 @@ public class Reserva {
         this.idRecurso = idRecurso;
     }
 
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
+    }
+
+    public void setFechaSolicitud(Date fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
+    }
+
     public Timestamp getFechaInicioReserva() {
         return fechaInicioReserva;
     }
@@ -71,20 +88,52 @@ public class Reserva {
         this.fechaFinReserva = fechaFinReserva;
     }
 
-    public Date getFechaReserva() {
-        return fechaReserva;
+    public boolean isRecurrente() {
+        return recurrente;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
-        this.fechaReserva = fechaReserva;
+    public void setRecurrente(boolean recurrente) {
+        this.recurrente = recurrente;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public Timestamp getProximarecurrencia() {
+        return proximaocurrencia;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setProximarecurrencia(Timestamp proximarecurrencia) {
+        this.proximaocurrencia = proximarecurrencia;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Timestamp getDiaActual() {
+        return diaactual;
+    }
+
+    public void setDiaActual(Timestamp diaActual) {
+        this.diaactual = diaActual;
+    }
+
+    public Recurso getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -93,10 +142,13 @@ public class Reserva {
                 "id=" + id +
                 ", idUsuario='" + idUsuario + '\'' +
                 ", idRecurso=" + idRecurso +
+                ", fechaSolicitud=" + fechaSolicitud +
                 ", fechaInicioReserva=" + fechaInicioReserva +
                 ", fechaFinReserva=" + fechaFinReserva +
-                ", fechaReserva=" + fechaReserva +
-                ", activo=" + activo +
+                ", recurrente=" + recurrente +
+                ", proximarecurrencia=" + proximaocurrencia +
+                ", estado='" + estado + '\'' +
+                ", diaActual=" + diaactual +
                 '}';
     }
 }

@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Reservas</title>
+    <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script
+            src="https://kit.fontawesome.com/7e5b2d153f.js"
+            crossorigin="anonymous"
+    ></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../style/historial.css" />
+
+</h:head>
+<h:body >
+    <header class="header">
+        <nav class="nav">
+            <div class="logos">
+                <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                <h1 class="tittleLogo" >Biblioteca</h1>
+                <h1 class="tittleLogo2" >ECI</h1>
+            </div>
+
+            <button class="nav-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu">
+
+                <c:if  test="#{loginBean.isAdmin()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/admin/userReservas.xhtml" class="nav-menu-link nav-link">Atras</a>
+                    </li>
+                </c:if>
+
+                <c:if  test="#{loginBean.isEstudiante()}">
+                    <li class="nav-menu-item">
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
+                    </li>
+                </c:if>
+
+
+                <li class="nav-menu-item">
+                    <a href="/faces/public/historialcanceladas.xhtml" class="nav-menu-link nav-link" >Canceladas</a>
+                </li>
+
+                <li class="nav-menu-item">
+                    <a href="/faces/public/historialterminadas.xhtml" class="nav-menu-link nav-link">Terminadas</a>
+                </li>
+
+                <li class="nav-menu-item">
+                    <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" />
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container h-100">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex flex-column">
+
+                <c:if  test="#{loginBean.isAdmin()}">
+                    <div class="p-0 btn-group justify-content-lg-center">
+                        <div class="tittle" >
+                            <h1 class="text align-self-center p-2">RESERVAS USUARIO</h1>
+                        </div>
+                    </div>
+                </c:if>
+
+                <c:if  test="#{loginBean.isEstudiante()}">
+                    <div class="p-0 btn-group justify-content-lg-center">
+                        <div class="tittle" >
+                            <h1 class="text align-self-center p-2">MIS RESERVAS</h1>
+                        </div>
+                    </div>
+                </c:if>
+
+                <h:form class="data">
+
+                    <c:if  test="#{loginBean.isAdmin()}">
+
+                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(usuariosBean.getUsuarioReservas())}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15"
+                                     styleClass="table-dark table-striped table-bordered justify-content-center"
+                                     class="valor">
+                            <p:column headerText="Id" style="text-align: center" >
+                                <h:outputText value="#{element.id}"/>
+                            </p:column>
+                            <p:column headerText="Recurso" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().tipo}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().nombre}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha Inicio" style="text-align: center" >
+                                <h:outputText value="#{element.fechaInicioReserva}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha Fin" style="text-align: center" >
+                                <h:outputText value="#{element.fechaFinReserva}"/>
+                            </p:column>
+
+                            <p:column headerText="Detalles" style="text-align: center; width:7rem;" >
+                                <p:rowToggler/>
+                            </p:column>
+
+                            <p:column headerText="Cancelar" style="text-align: center; width:12rem;" >
+                                <p:button outcome="/faces/public/cancelarReserva.xhtml" value="Cancelar" style="background: red;"/>
+                            </p:column>
+
+                            <p:rowExpansion>
+                                <center>
+                                    <h:panelGrid columns="2" cellpadding="7" style="background: #3FFE0E">
+                                        <h:outputLabel for="IdRecurso" value="Id Recurso:" />
+                                        <h:outputText id="IdRecurso" value="#{element.recurso.id}"/>
+
+                                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
+                                        <h:outputText id="ubicacion" value="#{element.recurso.ubicacion}"/>
+
+                                        <h:outputLabel for="capacidad" value="Capacidad:" />
+                                        <h:outputText id="capacidad" value="#{element.recurso.capacidad}"/>
+
+                                        <h:outputLabel for="Descripcion" value="Descripcion:" />
+                                        <h:outputText id="Descripcion" value="#{element.recurso.descripcion}"/>
+
+                                        <h:outputLabel for="fechaSolicitud" value="Fecha Solicitud:" />
+                                        <h:outputText id="fechaSolicitud" value="#{element.fechaSolicitud}"/>
+
+                                        <h:outputLabel for="recurente" value="Recurrente:" />
+                                        <h:outputText id="recurente" value="#{element.recurrente}"/>
+
+                                        <h:outputLabel for="fechare" value="Proxima Ocurrencia:" />
+                                        <h:outputText id="fechare" value="#{element.getProximarecurrencia()}"/>
+
+                                    </h:panelGrid>
+                                </center>
+                            </p:rowExpansion>
+
+                        </p:dataTable>
+                    </c:if>
+
+                    <c:if  test="#{loginBean.isEstudiante()}">
+
+                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarPorUsuarioPocaInfo(loginBean.user)}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15"
+                                     styleClass="table-dark table-striped table-bordered justify-content-center"
+                                     class="valor">
+
+                            <p:column headerText="Id" style="text-align: center" >
+                                <h:outputText value="#{element.id}"/>
+                            </p:column>
+                            <p:column headerText="Recurso" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().tipo}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" style="text-align: center" >
+                                <h:outputText value="#{element.getRecurso().nombre}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha Inicio" style="text-align: center" >
+                                <h:outputText value="#{element.fechaInicioReserva}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha Fin" style="text-align: center" >
+                                <h:outputText value="#{element.fechaFinReserva}"/>
+                            </p:column>
+
+                            <p:column headerText="Detalles" style="text-align: center; width:7rem;" >
+                                <p:rowToggler/>
+                            </p:column>
+
+                            <p:column headerText="Cancelar" style="text-align: center; width:12rem;" >
+                                <p:button outcome="/faces/public/cancelarReserva.xhtml" value="Cancelar" style="background: red;"/>
+                            </p:column>
+
+                            <p:rowExpansion>
+                                <center>
+                                    <h:panelGrid columns="2" cellpadding="7" style="background: #3FFE0E">
+                                        <h:outputLabel for="IdRecurso" value="Id Recurso:" />
+                                        <h:outputText id="IdRecurso" value="#{element.recurso.id}"/>
+
+                                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
+                                        <h:outputText id="ubicacion" value="#{element.recurso.ubicacion}"/>
+
+                                        <h:outputLabel for="capacidad" value="Capacidad:" />
+                                        <h:outputText id="capacidad" value="#{element.recurso.capacidad}"/>
+
+                                        <h:outputLabel for="Descripcion" value="Descripcion:" />
+                                        <h:outputText id="Descripcion" value="#{element.recurso.descripcion}"/>
+
+                                        <h:outputLabel for="fechaSolicitud" value="Fecha Solicitud:" />
+                                        <h:outputText id="fechaSolicitud" value="#{element.fechaSolicitud}"/>
+
+                                        <h:outputLabel for="recurente" value="Recurrente:" />
+                                        <h:outputText id="recurente" value="#{element.recurrente}"/>
+
+                                        <h:outputLabel for="fechare" value="Proxima Ocurrencia:" />
+                                        <h:outputText id="fechare" value="#{element.getProximarecurrencia()}"/>
+
+                                    </h:panelGrid>
+                                </center>
+                            </p:rowExpansion>
+
+                        </p:dataTable>
+
+                    </c:if>
+
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>
