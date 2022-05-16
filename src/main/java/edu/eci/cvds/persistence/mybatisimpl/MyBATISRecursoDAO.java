@@ -53,6 +53,16 @@ public class MyBATISRecursoDAO implements RecursoDAO {
     }
 
     @Override
+    public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException {
+        try{
+            recursoMapper.cambiarEstadoRecurso(newEstado,idRecurso);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoActualizarEstadoRecurso);
+        }
+    }
+
+    @Override
     public Recurso consultarRecurso(int idrecurso) throws PersistenceException{
         try {
             return recursoMapper.consultarRecurso(idrecurso);

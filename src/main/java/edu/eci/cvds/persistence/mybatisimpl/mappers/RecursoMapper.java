@@ -48,4 +48,6 @@ public interface RecursoMapper {
                              @Param("descripcion")String descripcion) throws PersistenceException;
 
     public Recurso consultarRecurso(@Param("idrecurso") int idrecurso) throws PersistenceException;
+
+    public void cambiarEstadoRecurso(@Param("newEstado") String newEstado, @Param("idRecurso") int idRecurso) throws PersistenceException;
 }

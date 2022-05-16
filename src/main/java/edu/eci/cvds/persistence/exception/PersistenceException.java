@@ -40,6 +40,7 @@ public class PersistenceException extends Exception {
     public static final String errorAlRegistrarNuevaReserva = "No se ha podido registrar la reserva deseada";
     public static final String noSePuedeConsultarLosHorarios = "Ha ocurrido un error al consultar los horarios";
     public static final String errorAlconsultarHorariosDeUnRecurso = "No se ha podido consultar los horarios del recurso especificado";
+    public static final String noSePudoActualizarEstadoRecurso = "Ha ocurrido un error al actualizar el estado de un recurso";
 
 
     public PersistenceException(String message) {

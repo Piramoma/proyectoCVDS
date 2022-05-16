@@ -46,4 +46,8 @@
         where public.recursos.id = #{idrecurso}
     </select>
 
+    <update id="cambiarEstadoRecurso" parameterType="map">
+        UPDATE public.recursos SET estado = #{newEstado} WHERE id = #{idRecurso}
+    </update>
+
 </mapper>
