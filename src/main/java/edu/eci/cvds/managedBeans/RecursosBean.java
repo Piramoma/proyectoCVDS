@@ -210,7 +210,6 @@ public class RecursosBean extends BasePageBean {
         try {
             return serviciosBiblioteca.consultarTodoLibros();
         }catch (PersistenceException e){
-            System.out.println("Maldita vida de verga");
             showErrors(e.getMessage());
         }
         return null;

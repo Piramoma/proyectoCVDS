@@ -5,6 +5,7 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.exception.PersistenceException;
+import org.apache.ibatis.annotations.Param;
 import org.postgresql.util.PSQLException;
 
 
@@ -56,4 +57,6 @@ public interface ServiciosBiblioteca {
     public List<Recurso> consultarTodoEquipos() throws PersistenceException;
 
     public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException;
+
+    public void cancelarReserva(int idReserva) throws PersistenceException;
 }

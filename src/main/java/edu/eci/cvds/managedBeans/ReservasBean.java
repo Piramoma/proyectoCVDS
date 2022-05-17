@@ -320,6 +320,15 @@ public class ReservasBean extends BasePageBean {
         }
     }
 
+    public void cancelarReserva(int idRecurso){
+        try {
+            System.out.println("F mega F, no quiero sbaer nada de nadie");
+            serviciosBiblioteca.cancelarReserva(idRecurso);
+        }catch (PersistenceException e){
+            showErrors(e.getMessage());
+        }
+    }
+
     public void showErrors(String error) {
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));

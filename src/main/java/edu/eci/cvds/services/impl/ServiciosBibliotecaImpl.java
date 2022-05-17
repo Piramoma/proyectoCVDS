@@ -133,4 +133,9 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         return recursoDAO.consultarTodoSalasEstudio();
     }
 
+    @Override
+    public void cancelarReserva(int idReserva) throws PersistenceException {
+        reservaDAO.cancelarReserva(idReserva);
+    }
+
 }

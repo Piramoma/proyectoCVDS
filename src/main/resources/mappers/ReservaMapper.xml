@@ -16,7 +16,7 @@
         <result property='proximaocurrencia' column='proximaocurrencia' />
         <result property='estado' column='estado' />
         <result property='diaactual' column='diaactual' />
-        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" />
+        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult"/>
     </resultMap>
 
     <select id="consultarPorUsuarioPocaInfo" resultMap="ReservaResult" parameterType="map">
@@ -65,5 +65,9 @@
     <insert parameterType="map" id="nuevaReserva">
         insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values (#{idusuario},#{idrecurso}, #{fechasolicitud}, #{fechainicioreserva}, #{fechafinreserva},  #{recurrente}, #{estado}, #{diaactual});
     </insert>
+
+    <update id="cancelarReserva" parameterType="map">
+        UPDATE public.Reservas SET estado = 'cancelado' WHERE id = #{idReserva}
+    </update>
 
 </mapper>
