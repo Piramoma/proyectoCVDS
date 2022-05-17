@@ -196,4 +196,32 @@ public class RecursosBean extends BasePageBean {
     public void setIdRecursoSeleccionado(int idRecursoSeleccionado) {
         this.idRecursoSeleccionado = idRecursoSeleccionado;
     }
+
+    public List<Recurso> getTodosLosEquipos(){
+        try {
+            return serviciosBiblioteca.consultarTodoEquipos();
+        }catch (PersistenceException e){
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Recurso> getTodosLosLibros(){
+        try {
+            return serviciosBiblioteca.consultarTodoLibros();
+        }catch (PersistenceException e){
+            System.out.println("Maldita vida de verga");
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Recurso> getTodasSalasEstudio(){
+        try {
+            return serviciosBiblioteca.consultarTodoSalasEstudio();
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
 }

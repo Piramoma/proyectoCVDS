@@ -88,6 +88,8 @@ public class main {
         //Reserva Nueva
         //instance.nuevaReserva("yesid.mora", 13, new Date(2022,05,04), new Timestamp(2022,05,04,8,0,0,0), new Timestamp(2022,05,04,10,0,0,0),  false, "activa",new Timestamp(2022,05,04,10,0,0,0));
 
-        instance.cambiarEstadoRecurso("disponible", 1);
+        for (Recurso recurso: instance.consultarTodoLibros()){
+            System.out.println(recurso.toString());
+        }
     }
 }

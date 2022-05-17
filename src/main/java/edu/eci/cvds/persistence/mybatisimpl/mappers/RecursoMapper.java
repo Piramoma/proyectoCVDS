@@ -50,4 +50,10 @@ public interface RecursoMapper {
     public Recurso consultarRecurso(@Param("idrecurso") int idrecurso) throws PersistenceException;
 
     public void cambiarEstadoRecurso(@Param("newEstado") String newEstado, @Param("idRecurso") int idRecurso) throws PersistenceException;
+
+    public List<Recurso> consultarTodoLibros() throws PersistenceException;
+
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException;
+
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException;
 }

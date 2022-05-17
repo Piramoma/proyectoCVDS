@@ -41,6 +41,7 @@ public class PersistenceException extends Exception {
     public static final String noSePuedeConsultarLosHorarios = "Ha ocurrido un error al consultar los horarios";
     public static final String errorAlconsultarHorariosDeUnRecurso = "No se ha podido consultar los horarios del recurso especificado";
     public static final String noSePudoActualizarEstadoRecurso = "Ha ocurrido un error al actualizar el estado de un recurso";
+    public static final String noSePudoConsultarRecursos = "No se ha podido consultar los recursos";
 
 
     public PersistenceException(String message) {

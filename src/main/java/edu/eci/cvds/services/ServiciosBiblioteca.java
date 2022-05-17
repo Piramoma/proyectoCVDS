@@ -50,4 +50,10 @@ public interface ServiciosBiblioteca {
     public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException;
 
     public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException;
+
+    public List<Recurso> consultarTodoLibros() throws PersistenceException;
+
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException;
+
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException;
 }

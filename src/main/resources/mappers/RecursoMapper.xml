@@ -24,16 +24,34 @@
         WHERE tipo = 'libro' and estado = 'disponible'
     </select>
 
+    <select id="consultarTodoLibros" resultMap="RecursoResult">
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'libro'
+    </select>
+
     <select id="consultarEquipos" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
         WHERE tipo = 'equipo' and estado = 'disponible'
     </select>
 
+    <select id="consultarTodoEquipos" resultMap="RecursoResult">
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'equipo'
+    </select>
+
     <select id="consultarSalasEstudio" resultMap="RecursoResult" >
         SELECT *
         FROM public.recursos
         WHERE tipo = 'sala' and estado = 'disponible'
+    </select>
+
+    <select id="consultarTodoSalasEstudio" resultMap="RecursoResult">
+        SELECT *
+        FROM public.recursos
+        WHERE tipo = 'sala'
     </select>
 
     <insert parameterType="map" id="nuevoRecurso">
