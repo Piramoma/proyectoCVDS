@@ -121,31 +121,34 @@
                             </p:column>
 
                             <p:column headerText="Cancelar" style="text-align: center; width:12rem;" >
-                                <p:button outcome="/faces/public/cancelarReserva.xhtml" value="Cancelar" style="background: red;"/>
+                                <h:commandButton value="Cancelar" style="background: red;" actionListener="#{reservasBean.cancelarReserva(element.id)}"/>
                             </p:column>
 
                             <p:rowExpansion>
                                 <center>
                                     <h:panelGrid columns="2" cellpadding="7" style="background: #3FFE0E">
-                                        <h:outputLabel for="IdRecurso" value="Id Recurso:" />
+                                        <h:outputLabel for="IdRecursoA" value="Id Recurso:" />
                                         <h:outputText id="IdRecursoA" value="#{element.recurso.id}"/>
 
-                                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
+                                        <h:outputLabel for="estadoA" value="Estado: "/>
+                                        <h:outputLabel id="estadoA" value="#{element.recurso.estado}"/>
+
+                                        <h:outputLabel for="ubicacionA" value="Ubicacion:" />
                                         <h:outputText id="ubicacionA" value="#{element.recurso.ubicacion}"/>
 
-                                        <h:outputLabel for="capacidad" value="Capacidad:" />
+                                        <h:outputLabel for="capacidadA" value="Capacidad:" />
                                         <h:outputText id="capacidadA" value="#{element.recurso.capacidad}"/>
 
-                                        <h:outputLabel for="Descripcion" value="Descripcion:" />
+                                        <h:outputLabel for="DescripcionA" value="Descripcion:" />
                                         <h:outputText id="DescripcionA" value="#{element.recurso.descripcion}"/>
 
-                                        <h:outputLabel for="fechaSolicitud" value="Fecha Solicitud:" />
+                                        <h:outputLabel for="fechaSolicitudA" value="Fecha Solicitud:" />
                                         <h:outputText id="fechaSolicitudA" value="#{element.fechaSolicitud}"/>
 
-                                        <h:outputLabel for="recurente" value="Recurrente:" />
+                                        <h:outputLabel for="recurenteA" value="Recurrente:" />
                                         <h:outputText id="recurenteA" value="#{element.recurrente}"/>
 
-                                        <h:outputLabel for="fechare" value="Proxima Ocurrencia:" />
+                                        <h:outputLabel for="fechareA" value="Proxima Ocurrencia:" />
                                         <h:outputText id="fechareA" value="#{element.getProximarecurrencia()}"/>
 
                                     </h:panelGrid>
@@ -169,10 +172,10 @@
                                 <h:outputText value="#{element.id}"/>
                             </p:column>
                             <p:column headerText="Recurso" style="text-align: center" >
-                                <h:outputText value="#{element.getRecurso().tipo}"/>
+                                <h:outputText value="#{element.recurso.tipo}"/>
                             </p:column>
                             <p:column headerText="Nombre" style="text-align: center" >
-                                <h:outputText value="#{element.getRecurso().nombre}"/>
+                                <h:outputText value="#{element.recurso.nombre}"/>
                             </p:column>
 
                             <p:column headerText="Fecha Inicio" style="text-align: center" >
@@ -198,7 +201,7 @@
                                         <h:outputText id="IdRecurso" value="#{element.recurso.id}"/>
 
                                         <h:outputLabel for="estado" value="Estado: "/>
-                                        <h:outputLabel id="estado" value="#{element.recurso}"/>
+                                        <h:outputLabel id="estado" value="#{element.recurso.estado}"/>
 
                                         <h:outputLabel for="ubicacion" value="Ubicacion:" />
                                         <h:outputText id="ubicacion" value="#{element.recurso.ubicacion}"/>
