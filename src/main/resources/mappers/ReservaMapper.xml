@@ -118,11 +118,31 @@
     </select>
 
     <select id="consultarReserva" resultMap="ReservaResult" parameterType="map">
-        SELECT *
-        FROM public.reservas
-        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
-        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
-        where (public.reservas.estado = 'activa' or public.reservas.estado = 'restringido') and idrecurso = #{idrecurso} and reservas.id = #{idreserva}
+        SELECT
+        rv.id,
+        rv.estado,
+        rv.idUsuario,
+        rv.idRecurso,
+        rv.fechaSolicitud,
+        rv.fechaInicioReserva,
+        rv.fechaFinReserva,
+        rv.recurrente,
+        rv.proximaocurrencia,
+        rv.diaactual,
+
+        rc.id as rc_id,
+        rc.idInterno as rc_idInterno,
+        rc.estado as rc_estado,
+        rc.nombre as rc_nombre,
+        rc.ubicacion as rc_ubicacion,
+        rc.tipo as rc_tipo,
+        rc.capacidad as rc_capacidad,
+        rc.descripcion as rc_descripcion
+
+        FROM reservas as rv
+        JOIN recursos rc ON rc.id = rv.idRecurso
+        JOIN usuarios u ON u.email = rv.idUsuario
+        where (rv.estado = 'activa' or rv.estado = 'restringido') and rv.id = #{idreserva} and rv.idrecurso = #{idrecurso}
     </select>
 
     <insert parameterType="map" id="nuevaReserva">

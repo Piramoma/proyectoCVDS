@@ -11,6 +11,8 @@ import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.ScheduleEntryMoveEvent;
+import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
@@ -19,6 +21,9 @@ import org.primefaces.model.ScheduleModel;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -58,13 +63,10 @@ public class CalendarioBean extends BasePageBean {
 
     private java.util.Date fechaDiaSeleccionado;
 
-    private List<String> hours;
-
     private String selectedHourStart;
 
     private String selectedHourEnd;
 
-    private String tipoReserva;
 
     /**
      * Metodo para inicializar el horario de los recursos
@@ -72,8 +74,6 @@ public class CalendarioBean extends BasePageBean {
      */
     public void inicializarHorario(int idRecurso) {
         this.idRecurso = idRecurso;
-        eventModel = new DefaultScheduleModel();
-        loadEvents();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/verHorarios.xhtml");
         } catch (IOException e) {
@@ -86,6 +86,7 @@ public class CalendarioBean extends BasePageBean {
      */
     public void loadEvents() {
         try {
+            eventModel = new DefaultScheduleModel();
             List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
             for (Reserva r : horarios) {
                 if (Objects.equals(r.getEstado(), "activa")) {
@@ -103,6 +104,7 @@ public class CalendarioBean extends BasePageBean {
             showErrors(e.getMessage());
         }
     }
+
 
     /**
      * Metodo que muestra la informacion del evento clickleado
@@ -151,30 +153,86 @@ public class CalendarioBean extends BasePageBean {
      * Metodo para que la comunidad añada un evento nuevo
      * @param usuario Usuario que quiere hacer el evento
      */
-    public void addEvent(String usuario) {
-        if (errors()){
-            ScheduleEvent newEvent = new DefaultScheduleEvent();
-            newEvent = new DefaultScheduleEvent("Reserva Activa", event.getStartDate(), event.getEndDate());
-            this.eventModel.updateEvent(event);
-            Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
-            Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
-            LocalDate localDateHoy = LocalDate.now();
-            java.sql.Date dateHoy = Date.valueOf(localDateHoy);
-            Timestamp timestampHoy = new Timestamp(dateHoy.getTime());
-            try {
-                serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), dateHoy, timeStampInicio, timeStampFin, false, "activa", timestampHoy);
-            } catch (PersistenceException e) {
-                showErrors(e.getMessage());
-            }
+    public void addEvent(String usuario) throws ParseException, PersistenceException {
+        //Horas Seleecionadas
+        String[] hourStart = selectedHourStart.split(":");
+        String[] hourEnd = selectedHourEnd.split(":");
+        //Fecha Actual
+        LocalDate localDateHoy = LocalDate.now();
+        java.sql.Date dateHoy = Date.valueOf(localDateHoy);
+        Timestamp timestampHoy = new Timestamp(dateHoy.getTime());
+        //Timestamp Evento
+        Timestamp timestampStart = new Timestamp(fechaDiaSeleccionado.getYear(),fechaDiaSeleccionado.getMonth(),fechaDiaSeleccionado.getDate(),Integer.parseInt(hourStart[0]),0,0,0);
+        Timestamp timestampEnd = new Timestamp(fechaDiaSeleccionado.getYear(),fechaDiaSeleccionado.getMonth(),fechaDiaSeleccionado.getDate(),Integer.parseInt(hourEnd[0]),0,0,0);
+        Date dateStart = new Date(timestampStart.getTime());
+        Date dateEnd = new Date(timestampEnd.getTime());
+       if (errors(hourStart,hourEnd,dateStart,dateEnd,dateHoy)){
+           ScheduleEvent newEvent = new DefaultScheduleEvent("Reserva Activa", dateStart, dateEnd);
+           this.eventModel.updateEvent(newEvent);
+           try {
+               serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), dateHoy, timestampStart, timestampEnd, false, "activa", timestampHoy);
+           } catch (PersistenceException e) {
+               showErrors(e.getMessage());
+           }
         }
     }
+
+    /**
+     * Metodo para verificar errores cuando se va añadir un evento
+     * @return
+     */
+    private boolean errors(String[] hourStart, String[] hourEnd,Date dateStart,Date dateEnd, Date dateHoy) throws PersistenceException {
+        boolean isError = true;
+        if (Integer.parseInt(hourStart[0]) > Integer.parseInt(hourEnd[0]))
+        { showErrors("La Hora Final Debe ser mayor a la Hora Inicial");
+            isError=false;
+        }
+        else if (Integer.parseInt(hourStart[0]) == Integer.parseInt(hourEnd[0]))
+        { showErrors("La Hora Final Debe ser diferente la Hora Inicial");
+            isError=false;
+        }
+        else if ((Integer.parseInt(hourEnd[0]) - Integer.parseInt(hourStart[0])) > 2)
+        { showErrors("La Reservas tienen un maximo de dos Horas");
+            isError=false;
+        }
+        else if ((dateStart).getTime() < (dateHoy).getTime()) {
+            showErrors("La Fecha de la Reserva debe ser mayor o igual a la Fecha actual");
+            isError=false;
+        }
+
+        return isError;
+    }
+
+    public boolean verificarHorariosIncorrectos(Date dateStartSolicitud, int hourInicio, int hourFin) throws PersistenceException {
+        boolean isCorrect = false;
+        List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
+        System.out.println("LEN HORARIOS " + horarios.size());
+        for (Reserva h : horarios) {
+            Date dateHorario = new Date(h.getFechaInicioReserva().getYear(), h.getFechaInicioReserva().getMonth(), h.getFechaInicioReserva().getDate());
+            System.out.println("DATE HORARIO " + dateHorario);
+            System.out.println("DATE RESERVA " + dateStartSolicitud);
+            if (dateHorario == dateStartSolicitud) {
+                System.out.println("SI HAY RESERVA EN EL MISMO DIA");
+                int inicio_Hora = h.getFechaInicioReserva().getHours();
+                int fin_Hora = h.getFechaFinReserva().getHours();
+                if ((inicio_Hora <= hourInicio || hourInicio <= fin_Hora) && (hourFin >= inicio_Hora)){
+                    isCorrect = true;
+                    break;
+                }
+            }
+        }
+        return isCorrect;
+    }
+
 
     /**
      * Metodo para que al admin añada un evento
      * @param usuario Admin
      */
     public void addEventAdmin(String usuario) {
-        if (errors()){
+        boolean perro = true;
+
+        if (perro){
             ScheduleEvent newEvent = new DefaultScheduleEvent();
             newEvent = new DefaultScheduleEvent("Restringido", event.getStartDate(), event.getEndDate());
             this.eventModel.updateEvent(event);
@@ -191,30 +249,7 @@ public class CalendarioBean extends BasePageBean {
         }
     }
 
-    /**
-     * Metodo para verificar errores cuando se va añadir un evento
-     * @return
-     */
-    private boolean errors() {
-        boolean isError = true;
-        if (Objects.equals(event.getStartDate(),null)) {
-            showErrors("El campo de Fecha Inicial es Nulo");
-            isError=false;
-        }
-        else if (Objects.equals(event.getEndDate(),null))  {
-            showErrors("El campo de Fecha Final es Nulo");
-            isError=false;
-        }
-        else if (event.getStartDate().getTime() > event.getEndDate().getTime())
-        { showErrors("La Fecha Final Debe ser mayor a la Fecha Inicial");
-            isError=false;
-        }
-        else if ((event.getEndDate().getHours() - event.getStartDate().getHours()) > 2) {
-            showErrors("EL Tiempo maximo de la reserva es 2 Horas.");
-            isError=false;
-        }
-        return isError;
-    }
+
 
     /**
      * Metodo para mostrar errores en pantalla
@@ -231,6 +266,17 @@ public class CalendarioBean extends BasePageBean {
     public void showErrors(String error) {
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));
+    }
+
+    public void onEventMove(ScheduleEntryMoveEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+        PrimeFaces.current().dialog().showMessageDynamic(message);
+        addMessage(message);
+    }
+
+    public void onEventResize(ScheduleEntryResizeEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+        PrimeFaces.current().dialog().showMessageDynamic(message);
     }
 
     public int getIdRecurso() {
@@ -285,10 +331,6 @@ public class CalendarioBean extends BasePageBean {
         return fechaDiaSeleccionado;
     }
 
-    public List<String> getHours() {
-        return hours;
-    }
-
     public String getSelectedHourStart() {
         return selectedHourStart;
     }
@@ -305,7 +347,57 @@ public class CalendarioBean extends BasePageBean {
         this.selectedHourEnd = selectedHourEnd;
     }
 
-    public String getTipoReserva() {
-        return tipoReserva;
+
+    public void setIdRecurso(int idRecurso) {
+        this.idRecurso = idRecurso;
     }
+
+    public void setEventModel(ScheduleModel eventModel) {
+        this.eventModel = eventModel;
+    }
+
+    public void setEvent(ScheduleEvent event) {
+        this.event = event;
+    }
+
+    public void setEventAux(ScheduleEvent eventAux) {
+        this.eventAux = eventAux;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public void setNewFechaInicio(Timestamp newFechaInicio) {
+        this.newFechaInicio = newFechaInicio;
+    }
+
+    public void setNewFechaFin(Timestamp newFechaFin) {
+        this.newFechaFin = newFechaFin;
+    }
+
+    public void setFechainicio(Timestamp fechainicio) {
+        this.fechainicio = fechainicio;
+    }
+
+    public void setFechafin(Timestamp fechafin) {
+        this.fechafin = fechafin;
+    }
+
+    public void setHorarioactual(Horario horarioactual) {
+        this.horarioactual = horarioactual;
+    }
+
+    public void setReservaactual(Reserva reservaactual) {
+        this.reservaactual = reservaactual;
+    }
+
+    public void setRecursoactual(Recurso recursoactual) {
+        this.recursoactual = recursoactual;
+    }
+
+    public void setFechaDiaSeleccionado(java.util.Date fechaDiaSeleccionado) {
+        this.fechaDiaSeleccionado = fechaDiaSeleccionado;
+    }
+
 }

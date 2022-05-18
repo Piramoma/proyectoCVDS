@@ -78,7 +78,8 @@ public class main {
 //        System.out.println(horarioespecifico.toString());
 //
 //        System.out.println("Consultar Reserva Especifico");
-//        Reserva reservaespecifica = instance.consultarReserva(1, 27);
+//        Reserva reservaespecifica = instance.consultarReserva(3, 68);
+//        System.out.println(reservaespecifica.getRecurso().getCapacidad());
 //        System.out.println(reservaespecifica.toString());
 //
 //        System.out.println("Consultar Recurso");
@@ -88,8 +89,8 @@ public class main {
         //Reserva Nueva
         //instance.nuevaReserva("yesid.mora", 13, new Date(2022,05,04), new Timestamp(2022,05,04,8,0,0,0), new Timestamp(2022,05,04,10,0,0,0),  false, "activa",new Timestamp(2022,05,04,10,0,0,0));
 
-        for (Reserva reserva: instance.consultarPorUsuarioPocaInfo("daniel.ramos")){
-            System.out.println(reserva.toString());
-        }
+//        for (Reserva reserva: instance.consultarPorUsuarioPocaInfo("daniel.ramos")){
+//            System.out.println(reserva.toString());
+//        }
     }
 }
