@@ -151,11 +151,53 @@
                     <p:outputLabel value="Descripcion: "/>
                     <p:outputLabel value="#{calendarioBean.getRecursoactual().descripcion}" required="true"/>
 
-                    <p:outputLabel for="inicio" value="Fecha Inicio:"/>
-                    <p:calendar id="inicio" value="#{calendarioBean.getEvent().startDate}" pattern="dd/MM/yyyy HH:mm"/>
+                    <p:outputLabel value="Fecha Reserva:"/>
+                    <p:outputLabel value="#{calendarioBean.getFechaDiaSeleccionado()}"  required="true"/>
 
-                    <p:outputLabel for="fin" value="Fecha Fin:"/>
-                    <p:calendar id="fin" value="#{calendarioBean.getEvent().endDate}" pattern="dd/MM/yyyy HH:mm"/>
+                    <p:outputLabel for="inicio_fecha" value="Hora Inicio: "/>
+                    <p:selectOneMenu id="inicio_fecha" value="#{calendarioBean.selectedHourStart}" style="width: 150px">
+                        <f:selectItem itemLabel="Hora Inicio" itemValue=""/>
+                        <f:selectItem itemLabel="7:00" itemValue="7:00"/>
+                        <f:selectItem itemLabel="8:00" itemValue="8:00"/>
+                        <f:selectItem itemLabel="9:00" itemValue="9:00"/>
+                        <f:selectItem itemLabel="10:00" itemValue="10:00"/>
+                        <f:selectItem itemLabel="11:00" itemValue="11:00"/>
+                        <f:selectItem itemLabel="12:00" itemValue="12:00"/>
+                        <f:selectItem itemLabel="13:00" itemValue="13:00"/>
+                        <f:selectItem itemLabel="14:00" itemValue="14:00"/>
+                        <f:selectItem itemLabel="15:00" itemValue="15:00"/>
+                        <f:selectItem itemLabel="16:00" itemValue="16:00"/>
+                        <f:selectItem itemLabel="17:00" itemValue="17:00"/>
+                        <f:selectItem itemLabel="18:00" itemValue="18:00"/>
+                        <f:selectItem itemLabel="19:00" itemValue="19:00"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="fin_fecha" value="Hora Fin: "/>
+                    <p:selectOneMenu id="fin_fecha" value="#{calendarioBean.selectedHourEnd}" style="width: 150px">
+                        <f:selectItem itemLabel="Hora Fin" itemValue=""/>
+                        <f:selectItem itemLabel="7:00" itemValue="7:00"/>
+                        <f:selectItem itemLabel="8:00" itemValue="8:00"/>
+                        <f:selectItem itemLabel="9:00" itemValue="9:00"/>
+                        <f:selectItem itemLabel="10:00" itemValue="10:00"/>
+                        <f:selectItem itemLabel="11:00" itemValue="11:00"/>
+                        <f:selectItem itemLabel="12:00" itemValue="12:00"/>
+                        <f:selectItem itemLabel="13:00" itemValue="13:00"/>
+                        <f:selectItem itemLabel="14:00" itemValue="14:00"/>
+                        <f:selectItem itemLabel="15:00" itemValue="15:00"/>
+                        <f:selectItem itemLabel="16:00" itemValue="16:00"/>
+                        <f:selectItem itemLabel="17:00" itemValue="17:00"/>
+                        <f:selectItem itemLabel="18:00" itemValue="18:00"/>
+                        <f:selectItem itemLabel="19:00" itemValue="19:00"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="tipo" value="Recurrencia: "/>
+                    <p:selectOneMenu id="tipo" value="#{calendarioBean.tipoReserva}" style="width: 150px">
+                        <f:selectItem itemLabel="Recurrencia" itemValue=""/>
+                        <f:selectItem itemLabel="Mensual" itemValue="Mensual"/>
+                        <f:selectItem itemLabel="Semanal" itemValue="Semanal"/>
+                        <f:selectItem itemLabel="Diario" itemValue="Diario"/>
+                        <f:selectItem itemLabel="Una vez" itemValue="Una vez"/>
+                    </p:selectOneMenu>
 
                     <p:commandButton id="addButton" value="Reservar" action="#{calendarioBean.addEvent(loginBean.user)}"
                                      oncomplete="PF('myschedule').update();PF('eventDialog').hide);"/>

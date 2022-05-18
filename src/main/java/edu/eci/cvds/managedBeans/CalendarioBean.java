@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -59,6 +60,15 @@ public class CalendarioBean extends BasePageBean {
 
     private Recurso recursoactual;
 
+    private java.util.Date fechaDiaSeleccionado;
+
+    private List<String> hours;
+
+    private String selectedHourStart;
+
+    private String selectedHourEnd;
+
+    private String tipoReserva;
 
     /**
      * Metodo para inicializar el horario de los recursos
@@ -134,10 +144,11 @@ public class CalendarioBean extends BasePageBean {
         try {
             this.recursoactual = serviciosBiblioteca.consultarRecurso(this.idRecurso);
             this.event = new DefaultScheduleEvent();
+            java.util.Date date = (java.util.Date) selectEvent.getObject();
+            fechaDiaSeleccionado = new Date(date.getTime() + (1000 * 60 * 60 * 24));
         } catch (PersistenceException e) {
             showErrors(e.getMessage());
         }
-
     }
 
     /**
@@ -272,5 +283,33 @@ public class CalendarioBean extends BasePageBean {
 
     public Recurso getRecursoactual() {
         return recursoactual;
+    }
+
+    public java.util.Date getFechaDiaSeleccionado() {
+        return fechaDiaSeleccionado;
+    }
+
+    public List<String> getHours() {
+        return hours;
+    }
+
+    public String getSelectedHourStart() {
+        return selectedHourStart;
+    }
+
+    public String getSelectedHourEnd() {
+        return selectedHourEnd;
+    }
+
+    public void setSelectedHourStart(String selectedHourStart) {
+        this.selectedHourStart = selectedHourStart;
+    }
+
+    public void setSelectedHourEnd(String selectedHourEnd) {
+        this.selectedHourEnd = selectedHourEnd;
+    }
+
+    public String getTipoReserva() {
+        return tipoReserva;
     }
 }
