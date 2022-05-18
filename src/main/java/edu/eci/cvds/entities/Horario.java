@@ -3,11 +3,11 @@ package edu.eci.cvds.entities;
 import java.sql.Timestamp;
 
 public class Horario {
+
     private int id;
     private int idrecurso;
     private Timestamp fechainicio;
     private Timestamp fechafin;
-
     private Recurso recurso;
 
     /**
@@ -21,22 +21,41 @@ public class Horario {
         this.fechafin = fechafin;
     }
 
+    /**
+     * Metodo que retorna el Recurso
+     * @return Recurso
+     */
     public Recurso getRecurso() {
         return recurso;
     }
 
+    /**
+     * Metodo que cambia el Recurso
+     * @param recurso Recurso nuevo
+     */
     public void setRecurso(Recurso recurso) {
         this.recurso = recurso;
     }
 
+    /**
+     * Constructor de la clase
+     */
     public Horario() {
         super();
     }
 
+    /**
+     * Metodo que retorna el Id del Horario
+     * @return Id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Metodo que cambia dl Id del Horario
+     * @param id Id nuevo
+     */
     public void setId(int id) {
         this.id = id;
     }

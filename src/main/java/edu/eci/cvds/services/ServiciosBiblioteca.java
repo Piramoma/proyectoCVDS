@@ -50,6 +50,14 @@ public interface ServiciosBiblioteca {
 
     public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException;
 
+    //public List<Reserva> reservasMasUsadas() throws PersistenceException;
+
+    //public List<Reserva> reservasMenosUsadas() throws PersistenceException;
+
+    //public List<Reserva> horariosMayorOcupacion() throws PersistenceException;
+
+    //public List<Reserva> horariosMenorOcupacion() throws PersistenceException;
+
     public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException;
 
     public List<Recurso> consultarTodoLibros() throws PersistenceException;
@@ -59,4 +67,5 @@ public interface ServiciosBiblioteca {
     public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException;
 
     public void cancelarReserva(int idReserva) throws PersistenceException;
+
 }
