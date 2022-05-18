@@ -21,4 +21,12 @@ public interface RecursoDAO {
     public Recurso consultarRecurso(int idrecurso) throws PersistenceException;
 
     public void nuevoRecurso(int idInterno, String estado, String nombre, String ubicacion, String tipo, int capacidad, String descripcion) throws PersistenceException;
+
+    public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException;
+
+    public List<Recurso> consultarTodoLibros() throws PersistenceException;
+
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException;
+
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException;
 }

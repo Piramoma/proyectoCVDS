@@ -53,6 +53,46 @@ public class MyBATISRecursoDAO implements RecursoDAO {
     }
 
     @Override
+    public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException {
+        try{
+            recursoMapper.cambiarEstadoRecurso(newEstado,idRecurso);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoActualizarEstadoRecurso);
+        }
+    }
+
+    @Override
+    public List<Recurso> consultarTodoLibros() throws PersistenceException {
+        try {
+            return recursoMapper.consultarTodoLibros();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoConsultarRecursos);
+        }
+    }
+
+    @Override
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException {
+        try {
+            return recursoMapper.consultarTodoEquipos();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoConsultarRecursos);
+        }
+    }
+
+    @Override
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException {
+        try {
+            return recursoMapper.consultarTodoSalasEstudio();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoConsultarRecursos);
+        }
+    }
+
+    @Override
     public Recurso consultarRecurso(int idrecurso) throws PersistenceException{
         try {
             return recursoMapper.consultarRecurso(idrecurso);

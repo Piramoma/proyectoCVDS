@@ -113,4 +113,24 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         return usuarioDAO.consultarNombreUsuario(idUsuario);
     }
 
+    @Override
+    public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException {
+        recursoDAO.cambiarEstadoRecurso(newEstado,idRecurso);
+    }
+
+    @Override
+    public List<Recurso> consultarTodoLibros() throws PersistenceException {
+        return recursoDAO.consultarTodoLibros();
+    }
+
+    @Override
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException {
+        return recursoDAO.consultarTodoEquipos();
+    }
+
+    @Override
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException {
+        return recursoDAO.consultarTodoSalasEstudio();
+    }
+
 }

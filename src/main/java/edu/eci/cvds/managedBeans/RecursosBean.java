@@ -38,6 +38,8 @@ public class RecursosBean extends BasePageBean {
     private int idInterno;
     private String description;
 
+    private int idRecursoSeleccionado;
+
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
 
@@ -162,8 +164,64 @@ public class RecursosBean extends BasePageBean {
         description = "";
     }
 
+    public void cambiarEstadoRecurso(String redirect){
+        try {
+            serviciosBiblioteca.cambiarEstadoRecurso(estado,idRecursoSeleccionado);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(redirect);
+        }catch (PersistenceException e){
+            showErrors(e.getMessage());
+        } catch (IOException e) {
+            showErrors("No hemos podido encontrar la pagina");
+        }
+    }
+
+    public void seleccionarRecurso(int idRecursoSeleccionadod){
+        setIdRecursoSeleccionado(idRecursoSeleccionadod);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin/cambiarEstadoRecurso.xhtml");
+        } catch (IOException e) {
+            showErrors("No hemos podido encontrar la pagina");
+        }
+    }
+
     public void showErrors(String error){
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));
+    }
+
+    public int getIdRecursoSeleccionado() {
+        return idRecursoSeleccionado;
+    }
+
+    public void setIdRecursoSeleccionado(int idRecursoSeleccionado) {
+        this.idRecursoSeleccionado = idRecursoSeleccionado;
+    }
+
+    public List<Recurso> getTodosLosEquipos(){
+        try {
+            return serviciosBiblioteca.consultarTodoEquipos();
+        }catch (PersistenceException e){
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Recurso> getTodosLosLibros(){
+        try {
+            return serviciosBiblioteca.consultarTodoLibros();
+        }catch (PersistenceException e){
+            System.out.println("Maldita vida de verga");
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Recurso> getTodasSalasEstudio(){
+        try {
+            return serviciosBiblioteca.consultarTodoSalasEstudio();
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
     }
 }
