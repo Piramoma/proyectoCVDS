@@ -17,7 +17,6 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 
 import edu.eci.cvds.managedBeans.BasePageBean;
-import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
@@ -26,9 +25,9 @@ import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
 
-@ManagedBean(name = "recursosMasUsados")
+@ManagedBean(name = "recursosPorUsuario")
 @SessionScoped
-public class recursosMasUsados extends BasePageBean {
+public class recursosPorUsuario extends BasePageBean {
 
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
@@ -50,10 +49,6 @@ public class recursosMasUsados extends BasePageBean {
         return grafico;
     }
 
-    public List<Reserva> consultarrecursosMasUsados() throws PersistenceException {
-        return serviciosBiblioteca.recursosMasUsados();
-    }
-
 
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
@@ -61,7 +56,7 @@ public class recursosMasUsados extends BasePageBean {
         graph.setLabel("Cantidad de reservas");
         List<Reserva> reservas;
         try {
-            reservas = serviciosBiblioteca.recursosMasUsados();
+            reservas = serviciosBiblioteca.consultarReservasPorUsuario();
             ArrayList<Integer> cantidades = new ArrayList<>();
 
             for (Reserva r : reservas) {
@@ -86,7 +81,7 @@ public class recursosMasUsados extends BasePageBean {
 
     private void createBarModel() {
         grafico = initBarModel();
-        grafico.setTitle("Recursos más usados");
+        grafico.setTitle("Reservas Por Usuario");
         grafico.setLegendPosition("ne");
         Axis xAxis = grafico.getAxis(AxisType.X);
         Axis yAxis = grafico.getAxis(AxisType.Y);

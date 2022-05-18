@@ -12,6 +12,9 @@ import java.util.List;
 
 //https://proyecto-cvds-piramoma.herokuapp.com
 public class main {
+    public main() {
+    }
+
     public static void main(String[] args) throws PersistenceException {
         ServiciosBiblioteca instance = ServiciosBibliotecaFactory.getInstance().getServiciosBiblioteca();
 
@@ -92,5 +95,48 @@ public class main {
 //        for (Reserva reserva: instance.consultarPorUsuarioPocaInfo("daniel.ramos")){
 //            System.out.println(reserva.toString());
 //        }
+
+        System.out.println("Recursos mas Usados");
+        List<Reserva> recursosMasUsadas = instance.recursosMasUsados();
+        for(Reserva r: recursosMasUsadas) {
+            System.out.println(r.getCantidad()+" " + r.getTitulo());
+        }
+
+        System.out.println("Recursos menos Usados");
+        List<Reserva> recursosMenosUsadas = instance.recursosMenosUsados();
+        for(Reserva r: recursosMenosUsadas) {
+            System.out.println(r.getCantidad()+" " + r.getTitulo());
+        }
+
+        System.out.println("Recursos Por carrera");
+        List<Reserva> recursosPorCarrera = instance.consultarReservasPorCarrera();
+        for(Reserva r: recursosPorCarrera) {
+            System.out.println(r.getCantidad()+" " + r.getCarrera());
+        }
+
+        System.out.println("Recursos Por Usuarios");
+        List<Reserva> recursosPorUsuarios = instance.consultarReservasPorUsuario();
+        for(Reserva r: recursosPorUsuarios) {
+            System.out.println(r.getCantidad()+" " + r.getTitulo());
+        }
+
+        System.out.println("Horarios con mayor ocupacion");
+        List<Reserva> PorMayorHorario = instance.consultarHorariosMayorOcupacion();
+        for(Reserva r: PorMayorHorario) {
+            System.out.println(r.getInicio()+" "+r.getFin()+" "+r.getCantidad());
+        }
+
+        System.out.println("Horarios con menor ocupacion");
+        List<Reserva> PorMenorHorario = instance.consultarHorariosMenorOcupacion();
+        for(Reserva r: PorMenorHorario) {
+            System.out.println(r.getInicio()+" "+r.getFin()+" "+r.getCantidad());
+        }
+
+
+        System.out.println("Reservas Canceladas Grafico");
+        List<Reserva> reservasCanceladasGrafico = instance.consultarReservasCanceladasGrafico();
+        for(Reserva r: reservasCanceladasGrafico) {
+            System.out.println(r.getCantidad()+" " + r.getTitulo());
+        }
     }
 }

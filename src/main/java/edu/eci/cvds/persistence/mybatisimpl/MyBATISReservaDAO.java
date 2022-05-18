@@ -102,4 +102,76 @@ public class MyBATISReservaDAO implements ReservaDAO {
         }
     }
 
+    @Override
+    public List<Reserva> recursosMasUsados() throws PersistenceException {
+        try {
+            return reservaMapper.recursosMasUsados();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePuedeConsultarLasReservasDeUnRecurso);
+        }
+    }
+
+    @Override
+    public List<Reserva> recursosMenosUsados() throws PersistenceException {
+        try {
+            return reservaMapper.recursosMenosUsados();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePuedeConsultarLasReservasDeUnRecurso);
+        }
+    }
+
+    @Override
+    public List<Reserva> consultarReservasPorCarrera() throws PersistenceException {
+        try {
+            return reservaMapper.consultarReservasPorCarrera();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePuedeConsultarLasReservasDeUnRecurso);
+        }
+    }
+
+    @Override
+    public List<Reserva> consultarReservasPorUsuario() throws PersistenceException {
+        try {
+            return reservaMapper.consultarReservasPorUsuario();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePuedeConsultarLasReservasDeUnRecurso);
+        }
+    }
+
+    @Override
+    public List<Reserva> consultarHorariosMayorOcupacion() throws PersistenceException {
+        try {
+            return reservaMapper.consultarHorariosMayorOcupacion();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePuedeConsultarLasReservasDeUnRecurso);
+        }
+    }
+
+
+    @Override
+    public List<Reserva> consultarHorariosMenorOcupacion() throws PersistenceException {
+        try {
+            return reservaMapper.consultarHorariosMenorOcupacion();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePuedeConsultarLasReservasDeUnRecurso);
+        }
+    }
+
+    @Override
+    public List<Reserva> consultarReservasCanceladasGrafico() throws PersistenceException {
+        try {
+            return reservaMapper.consultarReservasCanceladasGrafico();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePuedeConsultarLasReservasDeUnRecurso);
+        }
+    }
+
+
 }

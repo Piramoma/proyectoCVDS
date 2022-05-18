@@ -32,4 +32,20 @@ public interface ReservaMapper {
                              @Param ("diaactual") Timestamp diaactual) throws PersistenceException;
 
     public void cancelarReserva(@Param("idReserva") int idReserva) throws PersistenceException;
+
+
+    public List<Reserva> recursosMasUsados() throws PersistenceException;
+
+    public List<Reserva> recursosMenosUsados() throws PersistenceException;
+
+    public List<Reserva> consultarReservasPorCarrera() throws PersistenceException;
+
+    public List<Reserva> consultarReservasPorUsuario() throws PersistenceException;
+
+    public List<Reserva> consultarHorariosMayorOcupacion() throws PersistenceException;
+
+    public List<Reserva> consultarHorariosMenorOcupacion() throws PersistenceException;
+
+    public List<Reserva> consultarReservasCanceladasGrafico() throws PersistenceException;
+
 }

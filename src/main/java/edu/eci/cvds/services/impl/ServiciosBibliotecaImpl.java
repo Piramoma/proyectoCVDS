@@ -138,4 +138,39 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
         reservaDAO.cancelarReserva(idReserva);
     }
 
+    @Override
+    public List<Reserva> recursosMasUsados() throws PersistenceException {
+        return reservaDAO.recursosMasUsados();
+    }
+
+    @Override
+    public List<Reserva> recursosMenosUsados() throws PersistenceException {
+        return reservaDAO.recursosMenosUsados();
+    }
+
+    @Override
+    public List<Reserva> consultarReservasPorCarrera() throws PersistenceException {
+        return reservaDAO.consultarReservasPorCarrera();
+    }
+
+    @Override
+    public List<Reserva> consultarReservasPorUsuario() throws PersistenceException {
+        return reservaDAO.consultarReservasPorUsuario();
+    }
+
+    @Override
+    public List<Reserva> consultarHorariosMayorOcupacion() throws PersistenceException {
+        return reservaDAO.consultarHorariosMayorOcupacion();
+    }
+
+    @Override
+    public List<Reserva> consultarHorariosMenorOcupacion() throws PersistenceException {
+        return reservaDAO.consultarHorariosMenorOcupacion();
+    }
+
+    @Override
+    public List<Reserva> consultarReservasCanceladasGrafico() throws PersistenceException {
+        return reservaDAO.consultarReservasCanceladasGrafico();
+    }
+
 }

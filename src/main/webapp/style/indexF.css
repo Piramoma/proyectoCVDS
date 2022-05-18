@@ -52,6 +52,15 @@ body {
   text-decoration: none;
 }
 
+.tittleLogo2 {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 0 40px;
+  line-height: 80px;
+  color: white;
+  text-decoration: none;
+}
+
 .login {
  margin-top: 15px;
  max-width: 120px;

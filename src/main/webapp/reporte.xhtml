@@ -51,12 +51,31 @@
             </nav>
         </h:form>
     </header>
+
     <h:form style="background:linear-gradient(rgba(12,7,12,0.30),rgba(12,7,12,0.30)); margin-top: 10px;">
 
-        <h2 class="grafico">Recursos más usados</h2>
+        <h2 class="grafico">REPORTE DE RECURSOS</h2>
         <br></br>
         <div class="grafico">
             <div><p:chart type="bar" model="#{recursosMasUsados.grafico}"/></div>
+        </div>
+        <br></br>
+
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{recursosMenosUsados.grafico}"/></div>
+        </div>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{recursosPorCarrera.grafico}"/></div>
+        </div>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{recursosPorUsuario.grafico}"/></div>
+        </div>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{reservasCanceladas.grafico}"/></div>
         </div>
     </h:form>
 
