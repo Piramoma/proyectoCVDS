@@ -93,4 +93,13 @@ public class MyBATISReservaDAO implements ReservaDAO {
         }
     }
 
+    @Override
+    public void cancelarReserva(int idReserva) throws PersistenceException {
+        try{
+            reservaMapper.cancelarReserva(idReserva);
+        }catch (Exception e){
+            throw new PersistenceException(PersistenceException.noSeEncuentraReserva);
+        }
+    }
+
 }

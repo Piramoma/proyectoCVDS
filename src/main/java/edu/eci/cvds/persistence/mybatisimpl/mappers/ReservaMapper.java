@@ -30,4 +30,6 @@ public interface ReservaMapper {
                              @Param ("recurrente") boolean recurrente,
                              @Param ("estado") String estado,
                              @Param ("diaactual") Timestamp diaactual) throws PersistenceException;
+
+    public void cancelarReserva(@Param("idReserva") int idReserva) throws PersistenceException;
 }

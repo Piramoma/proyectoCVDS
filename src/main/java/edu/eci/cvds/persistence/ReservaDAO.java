@@ -2,6 +2,7 @@ package edu.eci.cvds.persistence;
 
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.exception.PersistenceException;
+import org.apache.ibatis.annotations.Param;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -23,4 +24,5 @@ public interface ReservaDAO {
 
     public void nuevaReserva(String idusuario, int idrecurso, Date fechasolicitud, Timestamp fechainicioreserva, Timestamp fechafinreserva, boolean recurrente, String estado, Timestamp diaactual) throws PersistenceException;
 
+    public void cancelarReserva(int idReserva) throws PersistenceException;
 }

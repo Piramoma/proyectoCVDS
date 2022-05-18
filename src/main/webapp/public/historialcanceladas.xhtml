@@ -63,7 +63,7 @@
                 <h:form class="data">
 
                     <c:if  test="#{loginBean.isEstudiante()}">
-                        <p:dataTable id="tblA" var="element" value="#{reservasBean.consultarReservasCanceladas(loginBean.user)}" rows="10"
+                        <p:dataTable id="tblE" var="element" value="#{reservasBean.consultarReservasCanceladas(loginBean.user)}" rows="10"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -96,19 +96,19 @@
                                 <center>
                                     <h:panelGrid columns="2" cellpadding="7" style="background: #3FFE0E">
                                         <h:outputLabel for="IdRecurso" value="Id Recurso:" />
-                                        <h:outputText id="IdRecurso" value="#{element.recurso.id}"/>
+                                        <h:outputText id="IdRecursoE" value="#{element.recurso.id}"/>
 
                                         <h:outputLabel for="ubicacion" value="Ubicacion:" />
-                                        <h:outputText id="ubicacion" value="#{element.recurso.ubicacion}"/>
+                                        <h:outputText id="ubicacionE" value="#{element.recurso.ubicacion}"/>
 
                                         <h:outputLabel for="capacidad" value="Capacidad:" />
-                                        <h:outputText id="capacidad" value="#{element.recurso.capacidad}"/>
+                                        <h:outputText id="capacidadE" value="#{element.recurso.capacidad}"/>
 
                                         <h:outputLabel for="Descripcion" value="Descripcion:" />
-                                        <h:outputText id="Descripcion" value="#{element.recurso.descripcion}"/>
+                                        <h:outputText id="DescripcionE" value="#{element.recurso.descripcion}"/>
 
                                         <h:outputLabel for="recurente" value="Recurrente:" />
-                                        <h:outputText id="recurente" value="#{element.recurrente}"/>
+                                        <h:outputText id="recurenteE" value="#{element.recurrente}"/>
 
                                     </h:panelGrid>
                                 </center>
