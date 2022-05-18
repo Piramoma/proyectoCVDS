@@ -24,6 +24,7 @@
     <p:messages id="messages" showDetail="true" closable="true">
         <p:autoUpdate/>
     </p:messages>
+    <p:growl id="confirmMessages" showDetail="true"/>
     <header class="header">
         <h:form>
             <nav class="nav">
@@ -34,7 +35,7 @@
                 </div>
 
                 <button class="nav-toggle" aria-label="Abrir menú">
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars"/>
                 </button>
 
                 <ul class="nav-menu">
@@ -67,7 +68,7 @@
                         <p:panelMenu>
                             <p:submenu label="Sesión" style="width: 165px; ">
                                 <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre} #{usuariosBean.getUsuario(loginBean.user).apellido} "/>
-                                <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/misReservas.xhtml')}" immediate="true"/>
+                                <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
                             </p:submenu>
                         </p:panelMenu>
                     </li>
@@ -98,6 +99,11 @@
                 </c:if>
 
                 <h:form class="data">
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                    </p:confirmDialog>
 
                     <c:if  test="#{loginBean.isAdmin()}">
 
@@ -131,7 +137,11 @@
                             </p:column>
 
                             <p:column headerText="Cancelar" style="text-align: center; width:12rem;" >
-                                <h:commandButton value="Cancelar" style="background: red;" actionListener="#{reservasBean.cancelarReserva(element.id)}"/>
+                                <p:commandButton value="Cancelar" style="background: red;" actionListener="#{reservasBean.cancelarReserva(element.id)}" update="confirmMessages">
+                                    <p:confirm header="Confirmacion" message="Seguro quiere canselar la reserva" icon="pi pi-exclamation-triangl" />
+                                </p:commandButton>
+
+
                             </p:column>
 
                             <p:rowExpansion>
@@ -201,7 +211,9 @@
                             </p:column>
 
                             <p:column headerText="Cancelar" style="text-align: center; width:12rem;" >
-                                <h:commandButton value="Cancelar" style="background: red;" actionListener="#{reservasBean.cancelarReserva(element.id)}"/>
+                                <p:commandButton value="Cancelar" style="background: red;" actionListener="#{reservasBean.cancelarReserva(element.id)}" update="confirmMessages">
+                                    <p:confirm header="Confirmacion" message="Seguro quiere canselar la reserva" icon="pi pi-exclamation-triangl" />
+                                </p:commandButton>
                             </p:column>
 
                             <p:rowExpansion>

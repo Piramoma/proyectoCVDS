@@ -25,6 +25,7 @@ import org.primefaces.model.ScheduleModel;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -322,9 +323,9 @@ public class ReservasBean extends BasePageBean {
 
     public void cancelarReserva(int idRecurso){
         try {
-            System.out.println("F mega F, no quiero sbaer nada de nadie");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/misReservas.xhtml");
             serviciosBiblioteca.cancelarReserva(idRecurso);
-        }catch (PersistenceException e){
+        }catch (PersistenceException | IOException e){
             showErrors(e.getMessage());
         }
     }
