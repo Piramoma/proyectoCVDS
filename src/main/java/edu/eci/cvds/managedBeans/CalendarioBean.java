@@ -15,6 +15,7 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -30,7 +31,7 @@ import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "calendarioBean")
-@ApplicationScoped
+@SessionScoped
 public class CalendarioBean extends BasePageBean {
 
     @Inject

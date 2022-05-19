@@ -42,10 +42,13 @@
 
                     <c:if  test="#{!loginBean.isVisitante()}">
                         <li class="nav-menu_visible" >
+                            <div>
+                                <i class="fas  icon" style="color: white; width: 20px;"/>
+                            </div>
                             <p:panelMenu>
-                                <p:submenu label="Sesión" style="width: 165px; ">
+                                <p:submenu label="Sesión" style="width: 165px;">
                                     <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre}  #{usuariosBean.getUsuario(loginBean.user).apellido}"/>
-                                    <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/verHorarios.xhtml')}" immediate="true"/>
+                                    <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
                                 </p:submenu>
                             </p:panelMenu>
                         </li>
