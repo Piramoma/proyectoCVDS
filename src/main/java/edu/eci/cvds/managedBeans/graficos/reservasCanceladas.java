@@ -102,7 +102,6 @@ public class reservasCanceladas extends BasePageBean {
         grafico = initBarModel();
         grafico.setTitle("Reservas Canceladas");
         grafico.setLegendPosition("ne");
-        Axis xAxis = grafico.getAxis(AxisType.X);
         Axis yAxis = grafico.getAxis(AxisType.Y);
         yAxis.setLabel("Cantidad de reservas");
         yAxis.setMin(0);

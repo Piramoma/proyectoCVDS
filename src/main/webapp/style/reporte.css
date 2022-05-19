@@ -126,9 +126,9 @@ body {
 }
 
 .MyDialog.ui-dialog .ui-dialog-content {
-    padding: 0px !important;
-    background: aliceblue !important;
-    opacity: 1 !important;
+    padding: 0px ;
+    background: aliceblue ;
+    opacity: 1 ;
 }
 .card {
     background-color: #000000;

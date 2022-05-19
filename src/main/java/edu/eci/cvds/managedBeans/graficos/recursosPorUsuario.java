@@ -1,21 +1,8 @@
 package edu.eci.cvds.managedBeans.graficos;
 
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
-
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
-
 import edu.eci.cvds.managedBeans.BasePageBean;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
@@ -24,6 +11,13 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @ManagedBean(name = "recursosPorUsuario")
@@ -106,7 +100,6 @@ public class recursosPorUsuario extends BasePageBean {
         grafico = initBarModel();
         grafico.setTitle("Reservas Por Usuario");
         grafico.setLegendPosition("ne");
-        Axis xAxis = grafico.getAxis(AxisType.X);
         Axis yAxis = grafico.getAxis(AxisType.Y);
         yAxis.setLabel("Cantidad de reservas");
         yAxis.setMin(0);

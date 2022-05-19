@@ -1,6 +1,5 @@
 package edu.eci.cvds.persistence.mybatisimpl;
 
-import edu.eci.cvds.persistence.ReservaDAO;
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.ReservaDAO;

@@ -1,22 +1,14 @@
 package edu.eci.cvds.managedBeans;
 
 import com.google.inject.Inject;
-import com.sun.faces.context.AjaxExceptionHandlerImpl;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.persistence.exception.PersistenceException;
+import edu.eci.cvds.services.ServiciosBiblioteca;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-
-import edu.eci.cvds.persistence.exception.PersistenceException;
-import edu.eci.cvds.services.ServiciosBiblioteca;
-import org.postgresql.util.PSQLException;
-import org.primefaces.component.ajaxexceptionhandler.AjaxExceptionHandler;
-
 import java.io.IOException;
 import java.sql.Time;
 import java.util.List;

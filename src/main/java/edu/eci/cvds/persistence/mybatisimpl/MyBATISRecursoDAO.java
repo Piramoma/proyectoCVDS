@@ -2,13 +2,10 @@ package edu.eci.cvds.persistence.mybatisimpl;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper;
-import org.postgresql.util.PSQLException;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class MyBATISRecursoDAO implements RecursoDAO {

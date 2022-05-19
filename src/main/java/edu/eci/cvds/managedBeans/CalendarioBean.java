@@ -2,10 +2,6 @@ package edu.eci.cvds.managedBeans;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Horario;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.exception.PersistenceException;
@@ -18,12 +14,15 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -166,7 +165,7 @@ public class CalendarioBean extends BasePageBean {
         Timestamp timestampEnd = new Timestamp(fechaDiaSeleccionado.getYear(),fechaDiaSeleccionado.getMonth(),fechaDiaSeleccionado.getDate(),Integer.parseInt(hourEnd[0]),0,0,0);
         Date dateStart = new Date(timestampStart.getTime());
         Date dateEnd = new Date(timestampEnd.getTime());
-       if (errors(hourStart,hourEnd,dateStart,dateEnd,dateHoy)){
+       if (errors(hourStart,hourEnd,dateStart,dateHoy)){
            ScheduleEvent newEvent = new DefaultScheduleEvent("Reserva Activa", dateStart, dateEnd);
            this.eventModel.updateEvent(newEvent);
            try {
@@ -181,7 +180,7 @@ public class CalendarioBean extends BasePageBean {
      * Metodo para verificar errores cuando se va añadir un evento
      * @return
      */
-    private boolean errors(String[] hourStart, String[] hourEnd,Date dateStart,Date dateEnd, Date dateHoy) throws PersistenceException {
+    private boolean errors(String[] hourStart, String[] hourEnd,Date dateStart, Date dateHoy) throws PersistenceException {
         boolean isError = true;
         if (Integer.parseInt(hourStart[0]) > Integer.parseInt(hourEnd[0]))
         { showErrors("La Hora Final Debe ser mayor a la Hora Inicial");
@@ -221,7 +220,7 @@ public class CalendarioBean extends BasePageBean {
         Timestamp timestampEnd = new Timestamp(fechaDiaSeleccionado.getYear(),fechaDiaSeleccionado.getMonth(),fechaDiaSeleccionado.getDate(),Integer.parseInt(hourEnd[0]),0,0,0);
         Date dateStart = new Date(timestampStart.getTime());
         Date dateEnd = new Date(timestampEnd.getTime());
-        if (errors(hourStart,hourEnd,dateStart,dateEnd,dateHoy)){
+        if (errors(hourStart,hourEnd,dateStart,dateHoy)){
             ScheduleEvent newEvent = new DefaultScheduleEvent("Horario Restringido", dateStart, dateEnd);
             this.eventModel.updateEvent(newEvent);
             try {

@@ -1,7 +1,6 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
 import edu.eci.cvds.entities.Horario;
-import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import org.apache.ibatis.annotations.Param;
 

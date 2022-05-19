@@ -5,13 +5,9 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.exception.PersistenceException;
-import org.apache.ibatis.annotations.Param;
-import org.postgresql.util.PSQLException;
-
 
 import java.sql.Date;
 import java.sql.Timestamp;
-
 import java.util.List;
 
 public interface ServiciosBiblioteca {

@@ -5,13 +5,14 @@ import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
-import edu.eci.cvds.persistence.*;
+import edu.eci.cvds.persistence.HorarioDAO;
+import edu.eci.cvds.persistence.RecursoDAO;
+import edu.eci.cvds.persistence.ReservaDAO;
+import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
-import org.postgresql.util.PSQLException;
 
 import javax.ejb.Singleton;
-import javax.xml.rpc.ServiceException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;

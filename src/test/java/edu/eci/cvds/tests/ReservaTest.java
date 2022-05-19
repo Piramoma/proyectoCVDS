@@ -1,16 +1,13 @@
 package edu.eci.cvds.tests;
 
-import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.exception.PersistenceException;
-import edu.eci.cvds.services.ServiciosBibliotecaFactory;
 import edu.eci.cvds.services.ServiciosBiblioteca;
+import edu.eci.cvds.services.ServiciosBibliotecaFactory;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 public class ReservaTest {
 
@@ -18,10 +15,6 @@ public class ReservaTest {
 
     public ReservaTest(){
         serviciosBiblioteca = ServiciosBibliotecaFactory.getInstance().getServiciosBiblioteca();
-    }
-
-    @Before
-    public void setUp(){
     }
 
     @Test

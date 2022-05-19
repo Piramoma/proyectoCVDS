@@ -1,7 +1,6 @@
 package edu.eci.cvds.persistence;
 
 import edu.eci.cvds.entities.Horario;
-import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 
 import java.util.List;

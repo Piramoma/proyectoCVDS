@@ -1,14 +1,10 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
 import edu.eci.cvds.entities.Recurso;
-
-import java.sql.SQLException;
-import java.util.List;
-
-import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import org.apache.ibatis.annotations.Param;
-import org.postgresql.util.PSQLException;
+
+import java.util.List;
 
 public interface RecursoMapper {
 
