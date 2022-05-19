@@ -10,6 +10,5 @@
 
 * Daniel Esteban Ramos Jimenez
 
-* Juan David Martinez Cardozo
-
-* Jhon Sebastian Piñeros Barrera
+###Reporte de calidad Codacy
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f2c21ef911884d8eb83924bda7ec518a)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Piramoma/proyectoCVDS&amp;utm_campaign=Badge_Grade)
