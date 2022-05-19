@@ -41,7 +41,6 @@ public class LoginBean implements Serializable{
         try{
             userActual.login(uPToken);
             userActual.getSession().setAttribute("correo", user);
-            reset();
             FacesContext.getCurrentInstance().getExternalContext().redirect(this.ultimaPagina);
 
         } catch (UnknownAccountException ex) {
