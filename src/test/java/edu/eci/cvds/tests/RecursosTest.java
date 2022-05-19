@@ -1,14 +1,13 @@
 package edu.eci.cvds.tests;
 
 import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.services.ServiciosBibliotecaFactory;
+import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
+import edu.eci.cvds.services.ServiciosBibliotecaFactory;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 public class RecursosTest {
 
@@ -16,10 +15,6 @@ public class RecursosTest {
 
     public RecursosTest(){
         serviciosBiblioteca = ServiciosBibliotecaFactory.getInstance().getServiciosBiblioteca();
-    }
-
-    @Before
-    public void setUp(){
     }
 
     @Test
@@ -48,6 +43,75 @@ public class RecursosTest {
             Assert.assertEquals("disponible", equipo.getEstado());
         }
     }
+    
+    @Test
+    public void deberiaConsultarLibrosAdmin(){
+        List<Recurso> recursosLibros = null;
+        try {
+            recursosLibros = serviciosBiblioteca.consultarTodoLibros();
+            for (Recurso libro:recursosLibros){
+                Assert.assertEquals("libro",libro.getTipo());
+            }
+        } catch (PersistenceException e) {
+            Assert.fail("No se logro consultar todos los libros");
+        }
+    }
 
+    @Test
+    public void deberiaConsultarEquiposAdmin(){
+        List<Recurso> recursosEquipo = null;
+        try {
+            recursosEquipo = serviciosBiblioteca.consultarTodoEquipos();
+            for (Recurso equipo:recursosEquipo){
+                Assert.assertEquals("equipo",equipo.getTipo());
+            }
+        } catch (PersistenceException e) {
+            Assert.fail("No se logro consultar todos los libros");
+        }
+    }
 
+    @Test
+    public void deberiaConsultarSalasAdmin(){
+        List<Recurso> recursosSalas = null;
+        try {
+            recursosSalas = serviciosBiblioteca.consultarTodoSalasEstudio();
+            for (Recurso salas:recursosSalas){
+                Assert.assertEquals("sala",salas.getTipo());
+            }
+        } catch (PersistenceException e) {
+            Assert.fail("No se logro consultar todos las salas");
+        }
+    }
+
+    @Test
+    public void deberiaConsultarSoloUnRecurso(){
+        Recurso recurso = null;
+        try {
+            recurso = serviciosBiblioteca.consultarRecurso(9);
+            Assert.assertEquals(9,recurso.getId());
+            Assert.assertEquals(201, recurso.getIdInterno());
+        } catch (PersistenceException e) {
+            Assert.fail("No se logro consultar todos las salas");
+        }
+    }
+
+    @Test
+    public void deberiaCambiarEstadoDeRecurso(){
+        try {
+            serviciosBiblioteca.cambiarEstadoRecurso("Test",63);
+            Assert.assertEquals("Test",serviciosBiblioteca.consultarRecurso(63).getEstado());
+        } catch (PersistenceException e) {
+            Assert.fail("No se logra cambiar el estado de un recurso");
+        }
+    }
+
+    @Test
+    public void deberiaAgegarRecurso(){
+        try {
+            serviciosBiblioteca.nuevoRecurso(1000,"Tests","Tests","Tests","Tests",0,"Solo para tests");
+            Assert.assertEquals(1000,serviciosBiblioteca.consultarRecurso(64).getIdInterno());
+        } catch (PersistenceException e) {
+            Assert.assertEquals(PersistenceException.idInternoRepetido,e.getMessage());
+        }
+    }
 }

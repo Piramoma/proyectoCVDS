@@ -9,4 +9,6 @@ public interface UsuarioDAO {
 
     public List<Usuario> consultarUsuariosConReservas() throws PersistenceException;
 
+    public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException;
+
 }

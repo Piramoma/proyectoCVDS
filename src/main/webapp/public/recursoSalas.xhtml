@@ -22,49 +22,68 @@
 </h:head>
 <h:body >
     <header class="header">
-        <nav class="nav">
-            <div class="logos">
-                <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
-                <h1 class="tittleLogo" >Biblioteca ECI</h1>
-            </div>
+        <h:form>
+            <nav class="nav">
+                <div class="logos">
+                    <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                    <h1 class="tittleLogo" >Biblioteca ECI</h1>
+                </div>
 
-            <button class="nav-toggle" aria-label="Abrir menú">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-menu">
-                <li class="nav-menu-item">
-                    <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
-                </li>
-
-                <c:if  test="#{loginBean.isVisitante()}">
+                <button class="nav-toggle" aria-label="Abrir menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
                     <li class="nav-menu-item">
-                        <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/recursoSalas.xhtml')}" >Iniciar Sesion</a>
-                    </li>
-                </c:if>
-
-                <c:if  test="#{loginBean.isEstudiante()}">
-                    <li class="nav-menu-item">
-                        <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link">Mis Reservas</a>
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
                     </li>
 
-                    <li class="nav-menu-item">
-                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoSalas.xhtml')}"/>
-                    </li>
-                </c:if>
+                    <c:if  test="#{loginBean.isVisitante()}">
+                        <li class="nav-menu-item">
+                            <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/recursoSalas.xhtml')}" >Iniciar Sesion</a>
+                        </li>
+                    </c:if>
 
-                <c:if  test="#{loginBean.isAdmin()}">
-                    <li class="nav-menu-item">
-                        <a href="/faces/admin/addRecurso.xhtml" class="nav-menu-link nav-link">Añadir</a>
-                    </li>
-                    <li class="nav-menu-item">
-                        <a href="/faces/admin/deleteLibro.xhtml" class="nav-menu-link nav-link">Eliminar</a>
-                    </li>
-                    <li class="nav-menu-item">
-                        <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoSalas.xhtml')}"/>
-                    </li>
-                </c:if>
-            </ul>
-        </nav>
+                    <c:if  test="#{loginBean.isEstudiante()}">
+                        <li class="nav-menu-item">
+                            <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link">Mis Reservas</a>
+                        </li>
+
+                        <li class="nav-menu_visible" >
+                            <div>
+                                <i class="fas  icon" style="color: white;"/>
+                            </div>
+                            <p:panelMenu>
+                                <p:submenu label="Sesión" style="width: 165px; ">
+                                    <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre}  #{usuariosBean.getUsuario(loginBean.user).apellido}"/>
+                                    <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoSalas.xhtml')}" immediate="true"/>
+                                </p:submenu>
+                            </p:panelMenu>
+                        </li>
+                    </c:if>
+
+                    <c:if  test="#{loginBean.isAdmin()}">
+                        <li class="nav-menu-item">
+                            <a href="/faces/admin/addRecurso.xhtml" class="nav-menu-link nav-link">Añadir</a>
+                        </li>
+                        <li class="nav-menu-item">
+                            <a href="/faces/admin/deleteLibro.xhtml" class="nav-menu-link nav-link">Eliminar</a>
+                        </li>
+                        <li class="nav-menu_visible" >
+                            <div>
+                                <i class="fas  icon" style="color: white;"/>
+                            </div>
+                            <p:panelMenu>
+                                <p:submenu label="Sesión" style="width: 165px; ">
+                                    <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre}"/>
+                                    <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/recursoSalas.xhtml')}" immediate="true"/>
+                                </p:submenu>
+                            </p:panelMenu>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
+        </h:form>
+
     </header>
 
     <div class="container h-100">
@@ -78,39 +97,83 @@
                 </div>
 
                 <h:form class="data">
-                    <p:dataTable id="tbl" var="element" value="#{recursosBean.getSalasEstudio()}" rows="10"
-                                 paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                                 rowsPerPageTemplate="5,10,15"
-                                 styleClass="table-dark table-striped table-bordered justify-content-center"
-                                 class="valor">
+                    <c:if test="#{loginBean.isAdmin()}">
+                        <p:dataTable id="tblAdmin" var="element" value="#{recursosBean.getTodasSalasEstudio()}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15"
+                                     styleClass="table-dark table-striped table-bordered justify-content-center"
+                                     class="valor">
 
-                        <p:column headerText="Id" style="text-align: center" >
-                            <h:outputText value="#{element.id}"/>
-                        </p:column>
+                            <p:column headerText="Id" style="text-align: center" >
+                                <h:outputText value="#{element.id}"/>
+                            </p:column>
 
-                        <p:column headerText="Nombre" style="text-align: center" filterBy="#{element.nombre}" filterStyle="width: 100px;" filterMatchMode="contains">
-                            <h:outputText value="#{element.nombre}"/>
-                        </p:column>
+                            <p:column headerText="Nombre" style="text-align: center" filterBy="#{element.nombre}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.nombre}"/>
+                            </p:column>
 
-                        <p:column headerText="Ubicacion" style="text-align: center" filterBy="#{element.ubicacion}" filterStyle="width: 100px;" filterMatchMode="contains">
-                            <h:outputText value="#{element.ubicacion}"/>
-                        </p:column>
+                            <p:column headerText="Autor" style="text-align: center" filterBy="#{element.descripcion}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.descripcion}"/>
+                            </p:column>
 
-                        <p:column headerText="Capacidad" style="text-align: center" sortBy="#{element.capacidad}" filterBy="#{element.capacidad}" filterStyle="width: 100px;" filterMatchMode="contains">
-                            <h:outputText value="#{element.capacidad}"/>
-                        </p:column>
+                            <p:column headerText="Ubicacion" style="text-align: center" filterBy="#{element.ubicacion}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.ubicacion}"/>
+                            </p:column>
 
-                        <p:column headerText="Caracteristicas" style="text-align: center" >
-                            <h:outputText value="#{element.descripcion}"/>
-                        </p:column>
+                            <p:column headerText="Estado" style="text-align: center" filterBy="#{element.estado}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.estado}"/>
+                            </p:column>
 
-                        <p:column headerText="Haga su reserva" style="text-align: center">
-                            <p:commandButton value="Ver horarios" title="View" actionListener="#{reservasBean.saveIdRecurso(element.id)}"></p:commandButton>
-                        </p:column>
+                            <p:column headerText="Unidades" style="text-align: center" sortBy="#{element.capacidad}" filterBy="#{element.capacidad}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.capacidad}"/>
+                            </p:column>
 
-                    </p:dataTable>
+                            <p:column headerText="Haga su reserva" style="text-align: center">
+                                <p:commandButton value="Ver horarios" title="View" actionListener="#{calendarioBean.inicializarHorario(element.id)}"/>
+                            </p:column>
+
+                            <p:column headerText="Cambiar estado" style="text-align: center">
+                                <p:commandButton value="Cambiar Estado" title="View" actionListener="#{recursosBean.seleccionarRecurso(element.id)}"/>
+                            </p:column>
+
+                        </p:dataTable>
+                    </c:if>
+                    <c:if test="#{!loginBean.isAdmin()}">
+                        <p:dataTable id="tbl" var="element" value="#{recursosBean.getSalasEstudio()}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,15"
+                                     styleClass="table-dark table-striped table-bordered justify-content-center"
+                                     class="valor">
+
+                            <p:column headerText="Id" style="text-align: center" >
+                                <h:outputText value="#{element.id}"/>
+                            </p:column>
+
+                            <p:column headerText="Nombre" style="text-align: center" filterBy="#{element.nombre}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.nombre}"/>
+                            </p:column>
+
+                            <p:column headerText="Autor" style="text-align: center" filterBy="#{element.descripcion}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.descripcion}"/>
+                            </p:column>
+
+                            <p:column headerText="Ubicacion" style="text-align: center" filterBy="#{element.ubicacion}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.ubicacion}"/>
+                            </p:column>
+
+                            <p:column headerText="Unidades" style="text-align: center" sortBy="#{element.capacidad}" filterBy="#{element.capacidad}" filterStyle="width: 100px;" filterMatchMode="contains">
+                                <h:outputText value="#{element.capacidad}"/>
+                            </p:column>
+
+                            <p:column headerText="Haga su reserva" style="text-align: center">
+                                <p:commandButton value="Ver horarios" title="View" actionListener="#{calendarioBean.inicializarHorario(element.id)}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </c:if>
                 </h:form>
             </div>
         </div>

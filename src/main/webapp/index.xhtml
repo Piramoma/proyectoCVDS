@@ -20,13 +20,16 @@
 <h:body>
     <header class="header">
         <h:form>
+            <p:growl>
+                <p:autoUpdate/>
+            </p:growl>
             <nav class="nav">
                 <div class="logos">
                     <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
                     <h1 class="tittleLogo" >Biblioteca ECI</h1>
                 </div>
 
-                <ul class="nav-menu">
+                <ul class="nav-menu" >
 
                     <c:if  test="#{loginBean.isVisitante()}">
                         <li class="nav-menu-item">
@@ -38,8 +41,17 @@
                         <li class="nav-menu-item">
                             <a href="/faces/public/misReservas.xhtml" class="nav-menu-link nav-link" action="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Mis Reservas</a>
                         </li>
-                        <li class="nav-menu-item">
-                            <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" inmediate="true"/>
+
+                        <li class="nav-menu_visible" >
+                            <div>
+                            <i class="fas  icon" style="color: white; width: 20px;"/>
+                            </div>
+                            <p:panelMenu>
+                                <p:submenu label="Sesión" style="width: 165px;">
+                                    <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre}  #{usuariosBean.getUsuario(loginBean.user).apellido}"/>
+                                    <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
+                                </p:submenu>
+                            </p:panelMenu>
                         </li>
                     </c:if>
 
@@ -48,12 +60,21 @@
                             <a href="/faces/admin/userReservas.xhtml" class="nav-menu-link nav-link" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Consultar Reservas</a>
                         </li>
                         <li class="nav-menu-item">
-                            <a href="#" class="nav-menu-link nav-link">Reporte</a>
+                            <a href="/faces/admin/reporte.xhtml" class="nav-menu-link nav-link">Reporte</a>
                         </li>
-                        <li class="nav-menu-item">
-                            <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
+                        <li class="nav-menu_visible" >
+                            <div>
+                                <i class="fas  icon" style="color: white; width: 20px;"/>
+                            </div>
+                            <p:panelMenu>
+                                <p:submenu label="Sesión" style="width: 165px; ">
+                                    <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre}"/>
+                                    <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
+                                </p:submenu>
+                            </p:panelMenu>
                         </li>
                     </c:if>
+
                 </ul>
             </nav>
         </h:form>

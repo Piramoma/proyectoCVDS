@@ -5,12 +5,9 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.exception.PersistenceException;
-import org.postgresql.util.PSQLException;
-
 
 import java.sql.Date;
 import java.sql.Timestamp;
-
 import java.util.List;
 
 public interface ServiciosBiblioteca {
@@ -47,5 +44,37 @@ public interface ServiciosBiblioteca {
 
     public void nuevaReserva(String idusuario, int idrecurso, Date fechasolicitud, Timestamp fechainicioreserva, Timestamp fechafinreserva, boolean recurrente, String estado, Timestamp diaactual) throws PersistenceException;
 
+    public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException;
 
+    //public List<Reserva> reservasMasUsadas() throws PersistenceException;
+
+    //public List<Reserva> reservasMenosUsadas() throws PersistenceException;
+
+    //public List<Reserva> horariosMayorOcupacion() throws PersistenceException;
+
+    //public List<Reserva> horariosMenorOcupacion() throws PersistenceException;
+
+    public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException;
+
+    public List<Recurso> consultarTodoLibros() throws PersistenceException;
+
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException;
+
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException;
+
+    public void cancelarReserva(int idReserva) throws PersistenceException;
+
+    public List<Reserva> recursosMasUsados() throws PersistenceException;
+
+    public List<Reserva> recursosMenosUsados() throws PersistenceException;
+
+    public List<Reserva> consultarReservasPorCarrera() throws  PersistenceException;
+
+    public List<Reserva> consultarReservasPorUsuario() throws  PersistenceException;
+
+    public List<Reserva> consultarHorariosMayorOcupacion() throws PersistenceException;
+
+    public List<Reserva> consultarHorariosMenorOcupacion() throws PersistenceException;
+
+    public List<Reserva> consultarReservasCanceladasGrafico() throws PersistenceException;
 }

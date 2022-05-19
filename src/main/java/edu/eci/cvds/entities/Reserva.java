@@ -19,6 +19,16 @@ public class Reserva {
     private Timestamp diaactual;
     private Timestamp proximaocurrencia;
 
+    private int cantidad;
+
+    private String titulo;
+
+    private String carrera;
+
+    private Timestamp inicio;
+
+    private Timestamp fin;
+
     private Recurso recurso;
 
     private Usuario usuario;
@@ -40,8 +50,40 @@ public class Reserva {
         super();
     }
 
+    public Timestamp getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(Timestamp inicio) {
+        this.inicio = inicio;
+    }
+
+    public Timestamp getFin() {
+        return fin;
+    }
+
+    public void setFin(Timestamp fin) {
+        this.fin = fin;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
     }
 
     public void setId(int id) {
@@ -62,6 +104,15 @@ public class Reserva {
 
     public void setIdRecurso(int idRecurso) {
         this.idRecurso = idRecurso;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public Date getFechaSolicitud() {

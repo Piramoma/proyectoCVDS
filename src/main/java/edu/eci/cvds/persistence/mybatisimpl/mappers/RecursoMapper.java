@@ -1,14 +1,10 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
 import edu.eci.cvds.entities.Recurso;
-
-import java.sql.SQLException;
-import java.util.List;
-
-import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import org.apache.ibatis.annotations.Param;
-import org.postgresql.util.PSQLException;
+
+import java.util.List;
 
 public interface RecursoMapper {
 
@@ -47,5 +43,40 @@ public interface RecursoMapper {
                              @Param("capacidad")int capacidad,
                              @Param("descripcion")String descripcion) throws PersistenceException;
 
+    /**
+     * Metodo para consultar Recurso especifico
+     * @param idrecurso id recurso
+     * @return Recurso
+     * @throws PersistenceException excepciones
+     */
     public Recurso consultarRecurso(@Param("idrecurso") int idrecurso) throws PersistenceException;
+
+    /**
+     * Metodo para cambiar estado de recurso
+     * @param newEstado nuevo estado
+     * @param idRecurso id recurso
+     * @throws PersistenceException excepciones
+     */
+    public void cambiarEstadoRecurso(@Param("newEstado") String newEstado, @Param("idRecurso") int idRecurso) throws PersistenceException;
+
+    /**
+     * Metodo para cosultar libros
+     * @return Lista de libros
+     * @throws PersistenceException excepciones
+     */
+    public List<Recurso> consultarTodoLibros() throws PersistenceException;
+
+    /**
+     * Metodo para cosultar Equipos
+     * @return Lista de Equipos
+     * @throws PersistenceException excepciones
+     */
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException;
+
+    /**
+     * Metodo para cosultar Salas
+     * @return Lista de Salas
+     * @throws PersistenceException excepciones
+     */
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException;
 }

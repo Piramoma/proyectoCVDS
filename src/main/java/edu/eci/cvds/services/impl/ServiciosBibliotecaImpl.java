@@ -5,13 +5,14 @@ import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
-import edu.eci.cvds.persistence.*;
+import edu.eci.cvds.persistence.HorarioDAO;
+import edu.eci.cvds.persistence.RecursoDAO;
+import edu.eci.cvds.persistence.ReservaDAO;
+import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
-import org.postgresql.util.PSQLException;
 
 import javax.ejb.Singleton;
-import javax.xml.rpc.ServiceException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -106,6 +107,71 @@ public class ServiciosBibliotecaImpl implements ServiciosBiblioteca {
     @Override
     public void nuevaReserva(String idusuario, int idrecurso, Date fechasolicitud, Timestamp fechainicioreserva, Timestamp fechafinreserva, boolean recurrente, String estado, Timestamp diaactual) throws PersistenceException {
         reservaDAO.nuevaReserva(idusuario,idrecurso,fechasolicitud,fechainicioreserva,fechafinreserva,recurrente,estado,diaactual);
+    }
+
+    @Override
+    public Usuario consultarNombreUsuario(String idUsuario) throws PersistenceException {
+        return usuarioDAO.consultarNombreUsuario(idUsuario);
+    }
+
+    @Override
+    public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException {
+        recursoDAO.cambiarEstadoRecurso(newEstado,idRecurso);
+    }
+
+    @Override
+    public List<Recurso> consultarTodoLibros() throws PersistenceException {
+        return recursoDAO.consultarTodoLibros();
+    }
+
+    @Override
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException {
+        return recursoDAO.consultarTodoEquipos();
+    }
+
+    @Override
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException {
+        return recursoDAO.consultarTodoSalasEstudio();
+    }
+
+    @Override
+    public void cancelarReserva(int idReserva) throws PersistenceException {
+        reservaDAO.cancelarReserva(idReserva);
+    }
+
+    @Override
+    public List<Reserva> recursosMasUsados() throws PersistenceException {
+        return reservaDAO.recursosMasUsados();
+    }
+
+    @Override
+    public List<Reserva> recursosMenosUsados() throws PersistenceException {
+        return reservaDAO.recursosMenosUsados();
+    }
+
+    @Override
+    public List<Reserva> consultarReservasPorCarrera() throws PersistenceException {
+        return reservaDAO.consultarReservasPorCarrera();
+    }
+
+    @Override
+    public List<Reserva> consultarReservasPorUsuario() throws PersistenceException {
+        return reservaDAO.consultarReservasPorUsuario();
+    }
+
+    @Override
+    public List<Reserva> consultarHorariosMayorOcupacion() throws PersistenceException {
+        return reservaDAO.consultarHorariosMayorOcupacion();
+    }
+
+    @Override
+    public List<Reserva> consultarHorariosMenorOcupacion() throws PersistenceException {
+        return reservaDAO.consultarHorariosMenorOcupacion();
+    }
+
+    @Override
+    public List<Reserva> consultarReservasCanceladasGrafico() throws PersistenceException {
+        return reservaDAO.consultarReservasCanceladasGrafico();
     }
 
 }

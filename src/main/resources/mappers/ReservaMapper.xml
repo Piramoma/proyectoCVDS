@@ -16,34 +16,102 @@
         <result property='proximaocurrencia' column='proximaocurrencia' />
         <result property='estado' column='estado' />
         <result property='diaactual' column='diaactual' />
-        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" />
+        <result property='cantidad' column='cantidad' />
+        <result property='titulo' column='titulo' />
+        <result property='carrera' column='carrera' />
+        <result property='inicio' column='inicio' />
+        <result property='fin' column='fin' />
+        <association property="recurso" javaType="Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" columnPrefix="rc_"/>
     </resultMap>
 
     <select id="consultarPorUsuarioPocaInfo" resultMap="ReservaResult" parameterType="map">
-        SELECT *
-        FROM public.reservas
-        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
-        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
-        where public.reservas.estado = 'activa' and idUsuario = #{idUsuario}
-        order by fechainicioreserva
+        SELECT
+        rv.id,
+        rv.estado,
+        rv.idUsuario,
+        rv.idRecurso,
+        rv.fechaSolicitud,
+        rv.fechaInicioReserva,
+        rv.fechaFinReserva,
+        rv.recurrente,
+        rv.proximaocurrencia,
+        rv.diaactual,
+
+        rc.id as rc_id,
+        rc.idInterno as rc_idInterno,
+        rc.estado as rc_estado,
+        rc.nombre as rc_nombre,
+        rc.ubicacion as rc_ubicacion,
+        rc.tipo as rc_tipo,
+        rc.capacidad as rc_capacidad,
+        rc.descripcion as rc_descripcion
+
+        FROM reservas as rv
+        JOIN recursos rc ON rc.id = rv.idRecurso
+        JOIN usuarios u ON u.email = rv.idUsuario
+
+        where rv.estado = 'activa' and rv.idUsuario = #{idUsuario}
+        order by rv.fechainicioreserva
     </select>
 
     <select id="consultarReservasPasadas" resultMap="ReservaResult" parameterType="map">
-        SELECT *
-        FROM public.reservas
-        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
-        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
-        where public.reservas.estado = 'terminada' and idUsuario = #{idUsuario}
-        order by fechainicioreserva
+        SELECT
+            rv.id,
+            rv.estado,
+            rv.idUsuario,
+            rv.idRecurso,
+            rv.fechaSolicitud,
+            rv.fechaInicioReserva,
+            rv.fechaFinReserva,
+            rv.recurrente,
+            rv.proximaocurrencia,
+            rv.diaactual,
+
+            rc.id as rc_id,
+            rc.idInterno as rc_idInterno,
+            rc.estado as rc_estado,
+            rc.nombre as rc_nombre,
+            rc.ubicacion as rc_ubicacion,
+            rc.tipo as rc_tipo,
+            rc.capacidad as rc_capacidad,
+            rc.descripcion as rc_descripcion
+
+        FROM reservas as rv
+                 JOIN recursos rc ON rc.id = rv.idRecurso
+                 JOIN usuarios u ON u.email = rv.idUsuario
+
+        where rv.estado = 'terminada' and rv.idUsuario = #{idUsuario}
+        order by rv.fechainicioreserva
     </select>
 
     <select id="consultarReservasCanceladas" resultMap="ReservaResult" parameterType="map">
-        SELECT *
-        FROM public.reservas
-        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
-        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
-        where public.reservas.estado = 'cancelado' and idUsuario = #{idUsuario}
-        order by fechainicioreserva
+        SELECT
+            rv.id,
+            rv.estado,
+            rv.idUsuario,
+            rv.idRecurso,
+            rv.fechaSolicitud,
+            rv.fechaInicioReserva,
+            rv.fechaFinReserva,
+            rv.recurrente,
+            rv.proximaocurrencia,
+            rv.diaactual,
+
+            rc.id as rc_id,
+            rc.idInterno as rc_idInterno,
+            rc.estado as rc_estado,
+            rc.nombre as rc_nombre,
+            rc.ubicacion as rc_ubicacion,
+            rc.tipo as rc_tipo,
+            rc.capacidad as rc_capacidad,
+            rc.descripcion as rc_descripcion
+
+        FROM reservas as rv
+                 JOIN recursos rc ON rc.id = rv.idRecurso
+                 JOIN usuarios u ON u.email = rv.idUsuario
+
+        where rv.estado = 'cancelado' and rv.idUsuario = #{idUsuario}
+        order by rv.fechainicioreserva
     </select>
 
     <select id="listarReservasRecurso" resultMap="ReservaResult" parameterType="map">
@@ -55,15 +123,121 @@
     </select>
 
     <select id="consultarReserva" resultMap="ReservaResult" parameterType="map">
-        SELECT *
-        FROM public.reservas
-        INNER JOIN public.recursos ON public.recursos.id = public.reservas.idrecurso
-        INNER JOIN public.usuarios ON public.usuarios.email = public.reservas.idusuario
-        where (public.reservas.estado = 'activa' or public.reservas.estado = 'restringido') and idrecurso = #{idrecurso} and reservas.id = #{idreserva}
+        SELECT
+        rv.id,
+        rv.estado,
+        rv.idUsuario,
+        rv.idRecurso,
+        rv.fechaSolicitud,
+        rv.fechaInicioReserva,
+        rv.fechaFinReserva,
+        rv.recurrente,
+        rv.proximaocurrencia,
+        rv.diaactual,
+
+        rc.id as rc_id,
+        rc.idInterno as rc_idInterno,
+        rc.estado as rc_estado,
+        rc.nombre as rc_nombre,
+        rc.ubicacion as rc_ubicacion,
+        rc.tipo as rc_tipo,
+        rc.capacidad as rc_capacidad,
+        rc.descripcion as rc_descripcion
+
+        FROM reservas as rv
+        JOIN recursos rc ON rc.id = rv.idRecurso
+        JOIN usuarios u ON u.email = rv.idUsuario
+        where (rv.estado = 'activa' or rv.estado = 'restringido') and rv.id = #{idreserva} and rv.idrecurso = #{idrecurso}
     </select>
 
     <insert parameterType="map" id="nuevaReserva">
         insert into Reservas (idUsuario, idRecurso,  fechaSolicitud, fechaInicioReserva, fechaFinReserva, recurrente, estado, diaactual)  values (#{idusuario},#{idrecurso}, #{fechasolicitud}, #{fechainicioreserva}, #{fechafinreserva},  #{recurrente}, #{estado}, #{diaactual});
     </insert>
+
+    <update id="cancelarReserva" parameterType="map">
+        UPDATE public.Reservas SET estado = 'cancelado' WHERE id = #{idReserva}
+    </update>
+
+    <select id="recursosMasUsados" resultMap="ReservaResult">
+        SELECT
+        recursos.nombre AS titulo,
+        COUNT(recursos.id) AS cantidad
+        FROM
+        reservas as r join recursos
+        on r.idrecurso = recursos.id
+        GROUP BY recursos.nombre
+        ORDER BY cantidad desc
+        FETCH FIRST 5 ROWS ONLY
+    </select>
+
+    <select id="recursosMenosUsados" resultMap="ReservaResult">
+        SELECT
+        recursos.nombre AS titulo,
+        COUNT(recursos.id) AS cantidad
+        FROM
+        reservas as r join recursos
+        on r.idrecurso = recursos.id
+        GROUP BY recursos.nombre
+        ORDER BY cantidad asc
+        FETCH FIRST 5 ROWS ONLY
+    </select>
+
+    <select id="consultarReservasPorCarrera" resultMap="ReservaResult">
+        select u.programa as carrera, count(id) as cantidad
+        from reservas, usuarios as u
+        where reservas.idusuario = u.email
+        group by u.programa
+        order by count(id) desc
+        limit 5;
+    </select>
+
+    <select id="consultarReservasPorUsuario" resultMap="ReservaResult">
+        SELECT
+        usuarios.nombre AS titulo,
+        COUNT(r.idusuario) AS cantidad
+        FROM
+        reservas as r join usuarios
+        on r.idusuario = usuarios.email
+        GROUP BY usuarios.nombre
+        ORDER BY cantidad desc
+        limit 5;
+    </select>
+
+    <select id="consultarHorariosMayorOcupacion" resultMap="ReservaResult">
+        SELECT
+        r.fechainicioreserva AS inicio ,
+        r.fechafinreserva AS fin,
+        COUNT(r.fechainicioreserva) AS cantidad
+        FROM
+        reservas as r
+        GROUP BY r.fechainicioreserva,r.fechafinreserva
+        ORDER BY cantidad desc
+        FETCH FIRST 5 ROWS ONLY
+    </select>
+
+    <select id="consultarHorariosMenorOcupacion" resultMap="ReservaResult">
+        SELECT
+        r.fechainicioreserva AS inicio ,
+        r.fechafinreserva AS fin,
+        COUNT(r.fechainicioreserva) AS cantidad
+        FROM
+        reservas as r
+        GROUP BY r.fechainicioreserva,r.fechafinreserva
+        ORDER BY cantidad asc
+        FETCH FIRST 5 ROWS ONLY
+    </select>
+
+    <select id="consultarReservasCanceladasGrafico" resultMap="ReservaResult">
+        SELECT
+        recursos.nombre AS titulo,
+        COUNT(r.id) AS cantidad
+        FROM
+        reservas as r join recursos
+        on r.idrecurso = recursos.id
+        where r.estado = 'cancelado'
+        group by recursos.nombre
+        order by cantidad desc
+        limit 5
+    </select>
 
 </mapper>

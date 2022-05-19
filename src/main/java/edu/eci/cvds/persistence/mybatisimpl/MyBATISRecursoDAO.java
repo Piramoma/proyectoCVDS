@@ -2,13 +2,10 @@ package edu.eci.cvds.persistence.mybatisimpl;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper;
-import org.postgresql.util.PSQLException;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class MyBATISRecursoDAO implements RecursoDAO {
@@ -49,6 +46,46 @@ public class MyBATISRecursoDAO implements RecursoDAO {
         }catch (org.apache.ibatis.exceptions.PersistenceException e) {
             if (e.getLocalizedMessage().contains("uk_recursos_idinterno")) { throw new PersistenceException(PersistenceException.idInternoRepetido); }
             throw new PersistenceException(PersistenceException.errorAlRegistrarNuevoRecurso);
+        }
+    }
+
+    @Override
+    public void cambiarEstadoRecurso(String newEstado, int idRecurso) throws PersistenceException {
+        try{
+            recursoMapper.cambiarEstadoRecurso(newEstado,idRecurso);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoActualizarEstadoRecurso);
+        }
+    }
+
+    @Override
+    public List<Recurso> consultarTodoLibros() throws PersistenceException {
+        try {
+            return recursoMapper.consultarTodoLibros();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoConsultarRecursos);
+        }
+    }
+
+    @Override
+    public List<Recurso> consultarTodoEquipos() throws PersistenceException {
+        try {
+            return recursoMapper.consultarTodoEquipos();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoConsultarRecursos);
+        }
+    }
+
+    @Override
+    public List<Recurso> consultarTodoSalasEstudio() throws PersistenceException {
+        try {
+            return recursoMapper.consultarTodoSalasEstudio();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.noSePudoConsultarRecursos);
         }
     }
 

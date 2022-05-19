@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AddRecurso</title>
+    <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script
+            src="https://kit.fontawesome.com/7e5b2d153f.js"
+            crossorigin="anonymous"
+    ></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../style/adminF.css" />
+
+</h:head>
+<h:body >
+    <header class="header">
+        <h:form>
+            <nav class="nav">
+                <div class="logos">
+                    <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                    <h1 class="tittleLogo" >Biblioteca ECI</h1>
+                </div>
+
+                <ul class="nav-menu">
+                    <li class="nav-menu-item">
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
+                    </li>
+
+                    <li class="nav-menu-item">
+                        <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
+                    </li>
+
+                    <li class="nav-menu_visible" >
+                        <div>
+                            <i class="fas  icon" style="color: white; width: 20px;"/>
+                        </div>
+                        <p:panelMenu>
+                            <p:submenu label="Sesión" style="width: 165px; ">
+                                <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre}  #{usuariosBean.getUsuario(loginBean.user).apellido}"/>
+                                <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
+                            </p:submenu>
+                        </p:panelMenu>
+                    </li>
+                </ul>
+            </nav>
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+        </h:form>
+    </header>
+
+    <h:form class="formulario">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+        <h1>Cambiar el estado del recurso</h1>
+        <div class="contenedor">
+            <div class="input-contenedor" style="text-align: center">
+                <i class="fas fa fa-check-square icon"/>
+                <p:outputLabel type="String" value="ID del recurso: #{recursosBean.idRecursoSeleccionado}" />
+            </div>
+            <div class="input-contenedor" style="text-align: center">
+                <i class="fas fa fa-check-square icon"/>
+                <p:selectOneMenu id="Ubicacion" value="#{recursosBean.estado}">
+                    <p:ajax update="@this" process="@this"/>
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Disponible" itemValue="disponible"/>
+                    <f:selectItem itemLabel="No disponible" itemValue="no disponible"/>
+                </p:selectOneMenu>
+            </div>
+
+            <p:commandButton class="button" value="Cambiar Estado" actionListener="#{recursosBean.cambiarEstadoRecurso('/faces/public/recursoLibros.xhtml')}"/>
+            <p:commandButton  class="buttonCancel" value="Cancelar" onclick="history.back()" />
+        </div>
+    </h:form>
+
+</h:body>
+</html>

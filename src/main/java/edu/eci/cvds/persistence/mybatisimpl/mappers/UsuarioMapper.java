@@ -1,8 +1,5 @@
 package edu.eci.cvds.persistence.mybatisimpl.mappers;
 
-import edu.eci.cvds.entities.Horario;
-import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import org.apache.ibatis.annotations.Param;
@@ -16,5 +13,13 @@ public interface UsuarioMapper {
      * @return lista de usuarios con reservas activas
      */
     public List<Usuario> consultarUsuariosConReservas() throws PersistenceException;
+
+    /**
+     * Consultar Nombre de usuario
+     * @param idUsuario nombre de usuario
+     * @return Nombre de usuario
+     * @throws PersistenceException excepciones
+     */
+    public Usuario consultarNombreUsuario(@Param("idUsuario") String idUsuario) throws PersistenceException;
 
 }

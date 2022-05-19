@@ -22,32 +22,43 @@
 </h:head>
 <h:body >
     <header class="header">
-        <nav class="nav">
-            <div class="logos">
-                <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
-                <h1 class="tittleLogo" >Biblioteca</h1>
-                <h1 class="tittleLogo2" >ECI</h1>
-            </div>
+        <h:form>
+            <nav class="nav">
+                <div class="logos">
+                    <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                    <h1 class="tittleLogo" >Biblioteca</h1>
+                    <h1 class="tittleLogo2" >ECI</h1>
+                </div>
 
-            <button class="nav-toggle" aria-label="Abrir menú">
-                <i class="fas fa-bars"></i>
-            </button>
+                <button class="nav-toggle" aria-label="Abrir menú">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-            <ul class="nav-menu">
-                <li class="nav-menu-item">
-                    <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
-                </li>
+                <ul class="nav-menu">
+                    <li class="nav-menu-item">
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link">Home</a>
+                    </li>
 
-                <li class="nav-menu-item">
-                    <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
-                </li>
+                    <li class="nav-menu-item">
+                        <a onclick="history.back()" class="nav-menu-link nav-link">Atras</a>
+                    </li>
 
-                <li class="nav-menu-item">
-                    <p:commandButton value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}"/>
-                </li>
+                    <li class="nav-menu_visible" >
+                        <div>
+                            <i class="fas  icon" style="color: white;"/>
+                        </div>
+                        <p:panelMenu>
+                            <p:submenu label="Sesión" style="width: 165px; ">
+                                <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre} #{usuariosBean.getUsuario(loginBean.user).apellido} "/>
+                                <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/public/historialterminadas.xhtml')}" immediate="true"/>
+                            </p:submenu>
+                        </p:panelMenu>
+                    </li>
 
-            </ul>
-        </nav>
+                </ul>
+            </nav>
+        </h:form>
+
     </header>
 
     <div class="container h-100">
