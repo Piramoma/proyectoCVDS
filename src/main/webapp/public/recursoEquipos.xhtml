@@ -131,7 +131,7 @@
                             </p:column>
 
                             <p:column headerText="Haga su reserva" style="text-align: center">
-                                <p:commandButton value="Ver horarios" title="View" actionListener="#{reservasBean.saveIdRecurso(element.id)}"/>
+                                <p:commandButton value="Ver horarios" title="View" actionListener="#{calendarioBean.inicializarHorario(element.id)}"/>
                             </p:column>
 
                             <p:column headerText="Cambiar estado" style="text-align: center">
@@ -170,7 +170,7 @@
                             </p:column>
 
                             <p:column headerText="Haga su reserva" style="text-align: center">
-                                <p:commandButton value="Ver horarios" title="View" actionListener="#{reservasBean.saveIdRecurso(element.id)}"/>
+                                <p:commandButton value="Ver horarios" title="View" actionListener="#{calendarioBean.inicializarHorario(element.id)}"/>
                             </p:column>
                         </p:dataTable>
                     </c:if>
