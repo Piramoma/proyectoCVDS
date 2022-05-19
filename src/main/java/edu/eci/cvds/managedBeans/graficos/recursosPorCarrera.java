@@ -17,6 +17,7 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 
 import edu.eci.cvds.managedBeans.BasePageBean;
+import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
@@ -77,6 +78,10 @@ public class recursosPorCarrera extends BasePageBean {
         }
 
         return model;
+    }
+
+    public List<Reserva> consultarReservasPorCarrera() throws PersistenceException {
+        return serviciosBiblioteca.consultarReservasPorCarrera();
     }
 
     private void createBarModel() {

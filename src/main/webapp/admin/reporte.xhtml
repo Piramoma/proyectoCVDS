@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Reporte</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <link rel = "icon" href ="https://yt3.ggpht.com/ytc/AKedOLQQOBfPPzh-vTH-tz76NykBAc2aU9r4z4UkeJog=s900-c-k-c0x00ffffff-no-rj"/>
+    <link rel="stylesheet" href="style/reporte.css" />
+</h:head>
+<h:body>
+    <header class="header">
+        <h:form>
+            <p:growl>
+                <p:autoUpdate/>
+            </p:growl>
+            <nav class="nav">
+                <div class="logos">
+                    <img class="login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg/1280px-Logo_de_la_Escuela_Colombiana_de_Ingenier%C3%ADa.svg.png" />
+                    <h1 class="tittleLogo" >Biblioteca ECI</h1>
+                </div>
+
+                <ul class="nav-menu" >
+
+                    <li class="nav-menu-item">
+                        <a href="/faces/index.xhtml" class="nav-menu-link nav-link" onclick="#{loginBean.setUltimaPagina('/faces/index.xhtml')}">Home</a>
+                    </li>
+
+                    <li class="nav-menu_visible" >
+                        <div>
+                            <i class="fas  icon" style="color: white; width: 20px;"/>
+                        </div>
+                        <p:panelMenu>
+                            <p:submenu label="Sesión" style="width: 165px; ">
+                                <p:menuitem icon="fas fa-user icon" value="#{usuariosBean.getUsuario(loginBean.user).nombre}  #{usuariosBean.getUsuario(loginBean.user).apellido}"/>
+                                <p:menuitem icon="fas fa-check-circle icon" value="Cerrar Sesion" action="#{loginBean.logOut('/faces/index.xhtml')}" immediate="true"/>
+                            </p:submenu>
+                        </p:panelMenu>
+                    </li>
+
+                </ul>
+            </nav>
+        </h:form>
+
+    </header>
+
+    <h:form style="background:linear-gradient(rgba(12,7,12,0.30),rgba(12,7,12,0.30)); margin-top: 10px;">
+
+        <h2 class="grafico">REPORTE DE RECURSOS MAS USADOS</h2>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{recursosMasUsados.grafico}"/></div>
+        </div>
+        <br></br>
+        <p:dataTable id="tblAdmin" style ="width:1000px;margin-left:250px;" var="element" value="#{recursosMasUsados.consultarrecursosMasUsados()}">
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.titulo}"/>
+            </p:column>
+            <p:column headerText="Cantidad" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.cantidad}"/>
+            </p:column>
+        </p:dataTable>
+        <br></br>
+        <h:commandLink>
+            <p:graphicImage url="https://cdn.discordapp.com/attachments/690979978824777744/976664707400368188/excel.png"
+                            style="background-color: transparent; vertical-align: middle; border: none"
+                            width="40" height="40"/>
+            <p:dataExporter type="xls" target="tblAdmin" fileName="ExcelRecursosMasUsados" pageOnly="true"/>
+        </h:commandLink>
+        <br></br>
+
+        <h2 class="grafico">REPORTE DE RECURSOS MENOS USADOS</h2>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{recursosMenosUsados.grafico}"/></div>
+        </div>
+        <br></br>
+        <p:dataTable id="tblmenos" style ="width:1000px;margin-left:250px;" var="element" value="#{recursosMenosUsados.consultarRecursosMenosUsados()}">
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.titulo}"/>
+            </p:column>
+            <p:column headerText="Cantidad" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.cantidad}"/>
+            </p:column>
+        </p:dataTable>
+        <br></br>
+        <h:commandLink>
+            <p:graphicImage url="https://cdn.discordapp.com/attachments/690979978824777744/976664707400368188/excel.png"
+                            style="background-color: transparent; vertical-align: middle; border: none"
+                            width="40" height="40"/>
+            <p:dataExporter type="xls" target="tblmenos" fileName="ExcelRecursosMenosUsados" pageOnly="true"/>
+        </h:commandLink>
+        <br></br>
+
+        <h2 class="grafico">REPORTE DE RESERVAS POR CARRERA</h2>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{recursosPorCarrera.grafico}"/></div>
+        </div>
+        <br></br>
+        <p:dataTable id="tblcarrera" style ="width:1000px;margin-left:250px;" var="element" value="#{recursosPorCarrera.consultarReservasPorCarrera()}">
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.carrera}"/>
+            </p:column>
+            <p:column headerText="Cantidad" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.cantidad}"/>
+            </p:column>
+        </p:dataTable>
+        <br></br>
+        <h:commandLink>
+            <p:graphicImage url="https://cdn.discordapp.com/attachments/690979978824777744/976664707400368188/excel.png"
+                            style="background-color: transparent; vertical-align: middle; border: none"
+                            width="40" height="40"/>
+            <p:dataExporter type="xls" target="tblcarrera" fileName="ExcelReservaCarrera" pageOnly="true"/>
+        </h:commandLink>
+        <br></br>
+
+        <h2 class="grafico">REPORTE DE RESERVAS POR USUARIOS</h2>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{recursosPorUsuario.grafico}"/></div>
+        </div>
+        <br></br>
+        <p:dataTable id="tblusuario" style ="width:1000px;margin-left:250px;" var="element" value="#{recursosPorUsuario.consultarReservasPorUsuario()}">
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.titulo}"/>
+            </p:column>
+            <p:column headerText="Cantidad" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.cantidad}"/>
+            </p:column>
+        </p:dataTable>
+        <br></br>
+        <h:commandLink>
+            <p:graphicImage url="https://cdn.discordapp.com/attachments/690979978824777744/976664707400368188/excel.png"
+                            style="background-color: transparent; vertical-align: middle; border: none"
+                            width="40" height="40"/>
+            <p:dataExporter type="xls" target="tblusuario" fileName="ExcelReservaUsuarios" pageOnly="true"/>
+        </h:commandLink>
+        <br></br>
+
+        <h2 class="grafico">REPORTE DE RESERVAS CANCELADAS</h2>
+        <br></br>
+        <div class="grafico">
+            <div><p:chart type="bar" model="#{reservasCanceladas.grafico}"/></div>
+        </div>
+        <br></br>
+        <p:dataTable id="tblcanceladas" style ="width:1000px;margin-left:250px;" var="element" value="#{reservasCanceladas.consultarReservasCanceladasGrafico()}">
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.titulo}"/>
+            </p:column>
+            <p:column headerText="Cantidad" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.cantidad}"/>
+            </p:column>
+        </p:dataTable>
+        <br></br>
+        <h:commandLink>
+            <p:graphicImage url="https://cdn.discordapp.com/attachments/690979978824777744/976664707400368188/excel.png"
+                            style="background-color: transparent; vertical-align: middle; border: none"
+                            width="40" height="40"/>
+            <p:dataExporter type="xls" target="tblcanceladas" fileName="ExcelReservaCanceladas" pageOnly="true"/>
+        </h:commandLink>
+        <br></br>
+
+        <h2 class="grafico">REPORTE HORARIOS MAYOR OCUPACION</h2>
+        <br></br>
+        <p:dataTable id="tblmayorOcupacion" style ="width:1000px;margin-left:250px;" var="element" value="#{reservasBean.consultarHorariosMayorOcupacion()}">
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.inicio}"/>
+            </p:column>
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.fin}"/>
+            </p:column>
+            <p:column headerText="Cantidad" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.cantidad}"/>
+            </p:column>
+        </p:dataTable>
+        <br></br>
+        <h:commandLink>
+            <p:graphicImage url="https://cdn.discordapp.com/attachments/690979978824777744/976664707400368188/excel.png"
+                            style="background-color: transparent; vertical-align: middle; border: none"
+                            width="40" height="40"/>
+            <p:dataExporter type="xls" target="tblmayorOcupacion" fileName="ExcelHorariosMayorOcupacion" pageOnly="true"/>
+        </h:commandLink>
+        <br></br>
+
+            <h2 class="grafico">REPORTE HORARIOS MENOR OCUPACION</h2>
+        <br></br>
+        <p:dataTable id="tblmenorOcupacion" style ="width:1000px;margin-left:250px;" var="element" value="#{reservasBean.consultarHorariosMenorOcupacion()}">
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.inicio}"/>
+            </p:column>
+            <p:column headerText="Titulo" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.fin}"/>
+            </p:column>
+            <p:column headerText="Cantidad" style="text-align: center;width:100px;" >
+                <h:outputText value="#{element.cantidad}"/>
+            </p:column>
+        </p:dataTable>
+        <br></br>
+        <h:commandLink>
+            <p:graphicImage url="https://cdn.discordapp.com/attachments/690979978824777744/976664707400368188/excel.png"
+                            style="background-color: transparent; vertical-align: middle; border: none"
+                            width="40" height="40"/>
+            <p:dataExporter type="xls" target="tblmenorOcupacion" fileName="ExcelHorariosMenorOcupacion" pageOnly="true"/>
+        </h:commandLink>
+        <br></br>
+
+    </h:form>
+
+</h:body>
+</html>
+

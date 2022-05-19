@@ -88,4 +88,12 @@ public class ReservasBean extends BasePageBean {
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));
     }
 
+    public List<Reserva> consultarHorariosMayorOcupacion() throws PersistenceException {
+        return serviciosBiblioteca.consultarHorariosMayorOcupacion();
+    }
+
+    public List<Reserva> consultarHorariosMenorOcupacion() throws PersistenceException {
+        return serviciosBiblioteca.consultarHorariosMenorOcupacion();
+    }
+
 }

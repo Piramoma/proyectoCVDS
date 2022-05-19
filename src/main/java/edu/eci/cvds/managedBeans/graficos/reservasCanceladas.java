@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.PUT;
 
 
 import com.google.inject.Inject;
@@ -17,6 +18,7 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 
 import edu.eci.cvds.managedBeans.BasePageBean;
+import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.Axis;
@@ -49,6 +51,9 @@ public class reservasCanceladas extends BasePageBean {
         return grafico;
     }
 
+    public List<Reserva> consultarReservasCanceladasGrafico() throws PersistenceException {
+        return serviciosBiblioteca.consultarReservasCanceladasGrafico();
+    }
 
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();

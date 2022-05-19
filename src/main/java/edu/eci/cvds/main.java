@@ -132,7 +132,6 @@ public class main {
             System.out.println(r.getInicio()+" "+r.getFin()+" "+r.getCantidad());
         }
 
-
         System.out.println("Reservas Canceladas Grafico");
         List<Reserva> reservasCanceladasGrafico = instance.consultarReservasCanceladasGrafico();
         for(Reserva r: reservasCanceladasGrafico) {
