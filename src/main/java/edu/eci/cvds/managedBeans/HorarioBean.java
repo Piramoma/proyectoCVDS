@@ -5,7 +5,6 @@ import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "horarioBean")
-@SessionScoped
+@ApplicationScoped
 public class HorarioBean extends BasePageBean {
 
     @Inject

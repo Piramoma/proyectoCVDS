@@ -9,7 +9,6 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +19,7 @@ import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="loginBean")
-@SessionScoped
+@ApplicationScoped
 public class LoginBean implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(LoginBean.class);
     private String user;

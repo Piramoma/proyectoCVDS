@@ -6,7 +6,6 @@ import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.exception.PersistenceException;
 import edu.eci.cvds.services.ServiciosBiblioteca;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -17,7 +16,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "reservasBean")
-@SessionScoped
+@ApplicationScoped
 public class ReservasBean extends BasePageBean {
 
     @Inject
