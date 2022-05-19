@@ -37,6 +37,10 @@ public class recursosPorCarrera extends BasePageBean {
 
     private BarChartModel grafico;
 
+    /**
+     * Netodo que selecciona el item del evento
+     * @param event evento
+     */
     public void itemSelect(ItemSelectEvent event) {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
                 "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());
@@ -44,13 +48,19 @@ public class recursosPorCarrera extends BasePageBean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-
+    /**
+     * Retorna el Grafico
+     * @return Grafico
+     */
     public BarChartModel getGrafico() {
         createBarModel();
         return grafico;
     }
 
-
+    /**
+     * Metodo para iniciar BarChartModel
+     * @return BarChartModel
+     */
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
         ChartSeries graph = new ChartSeries();
@@ -80,10 +90,18 @@ public class recursosPorCarrera extends BasePageBean {
         return model;
     }
 
+    /**
+     * Metodo para consultar Reservas Por Carrera
+     * @return Lista de reservas por carrera
+     * @throws PersistenceException clase errores
+     */
     public List<Reserva> consultarReservasPorCarrera() throws PersistenceException {
         return serviciosBiblioteca.consultarReservasPorCarrera();
     }
 
+    /**
+     * Metodo para crear el grafico
+     */
     private void createBarModel() {
         grafico = initBarModel();
         grafico.setTitle("Reservas Por Carrera");

@@ -37,6 +37,10 @@ public class recursosPorUsuario extends BasePageBean {
 
     private BarChartModel grafico;
 
+    /**
+     * Netodo que selecciona el item del evento
+     * @param event evento
+     */
     public void itemSelect(ItemSelectEvent event) {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
                 "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());
@@ -44,16 +48,28 @@ public class recursosPorUsuario extends BasePageBean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-
+    /**
+     * Retorna el Grafico
+     * @return Grafico
+     */
     public BarChartModel getGrafico() {
         createBarModel();
         return grafico;
     }
 
+    /**
+     * Metodo para consultar Reservas Por Usuario
+     * @return Lista de reservas por usuario
+     * @throws PersistenceException clase errores
+     */
     public List<Reserva> consultarReservasPorUsuario() throws PersistenceException {
         return serviciosBiblioteca.consultarReservasPorUsuario();
     }
 
+    /**
+     * Metodo para iniciar BarChartModel
+     * @return BarChartModel
+     */
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
         ChartSeries graph = new ChartSeries();
@@ -83,6 +99,9 @@ public class recursosPorUsuario extends BasePageBean {
         return model;
     }
 
+    /**
+     * Metodo para crear el grafico
+     */
     private void createBarModel() {
         grafico = initBarModel();
         grafico.setTitle("Reservas Por Usuario");

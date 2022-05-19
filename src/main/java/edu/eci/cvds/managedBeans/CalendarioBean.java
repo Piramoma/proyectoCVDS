@@ -203,53 +203,34 @@ public class CalendarioBean extends BasePageBean {
         return isError;
     }
 
-    public boolean verificarHorariosIncorrectos(Date dateStartSolicitud, int hourInicio, int hourFin) throws PersistenceException {
-        boolean isCorrect = false;
-        List<Reserva> horarios = serviciosBiblioteca.listarReservasRecurso(this.idRecurso);
-        System.out.println("LEN HORARIOS " + horarios.size());
-        for (Reserva h : horarios) {
-            Date dateHorario = new Date(h.getFechaInicioReserva().getYear(), h.getFechaInicioReserva().getMonth(), h.getFechaInicioReserva().getDate());
-            System.out.println("DATE HORARIO " + dateHorario);
-            System.out.println("DATE RESERVA " + dateStartSolicitud);
-            if (dateHorario == dateStartSolicitud) {
-                System.out.println("SI HAY RESERVA EN EL MISMO DIA");
-                int inicio_Hora = h.getFechaInicioReserva().getHours();
-                int fin_Hora = h.getFechaFinReserva().getHours();
-                if ((inicio_Hora <= hourInicio || hourInicio <= fin_Hora) && (hourFin >= inicio_Hora)){
-                    isCorrect = true;
-                    break;
-                }
-            }
-        }
-        return isCorrect;
-    }
-
 
     /**
-     * Metodo para que al admin añada un evento
-     * @param usuario Admin
+     * Metodo para que la comunidad añada un evento nuevo
+     * @param usuario Usuario que quiere hacer el evento
      */
-    public void addEventAdmin(String usuario) {
-        boolean perro = true;
-
-        if (perro){
-            ScheduleEvent newEvent = new DefaultScheduleEvent();
-            newEvent = new DefaultScheduleEvent("Restringido", event.getStartDate(), event.getEndDate());
-            this.eventModel.updateEvent(event);
-            Timestamp timeStampInicio = new Timestamp(event.getStartDate().getTime());
-            Timestamp timeStampFin = new Timestamp(event.getEndDate().getTime());
-            LocalDate localDateHoy = LocalDate.now();
-            java.sql.Date dateHoy = Date.valueOf(localDateHoy);
-            Timestamp timestampHoy = new Timestamp(dateHoy.getTime());
+    public void addEventAdmin(String usuario) throws ParseException, PersistenceException {
+        //Horas Seleecionadas
+        String[] hourStart = selectedHourStart.split(":");
+        String[] hourEnd = selectedHourEnd.split(":");
+        //Fecha Actual
+        LocalDate localDateHoy = LocalDate.now();
+        java.sql.Date dateHoy = Date.valueOf(localDateHoy);
+        Timestamp timestampHoy = new Timestamp(dateHoy.getTime());
+        //Timestamp Evento
+        Timestamp timestampStart = new Timestamp(fechaDiaSeleccionado.getYear(),fechaDiaSeleccionado.getMonth(),fechaDiaSeleccionado.getDate(),Integer.parseInt(hourStart[0]),0,0,0);
+        Timestamp timestampEnd = new Timestamp(fechaDiaSeleccionado.getYear(),fechaDiaSeleccionado.getMonth(),fechaDiaSeleccionado.getDate(),Integer.parseInt(hourEnd[0]),0,0,0);
+        Date dateStart = new Date(timestampStart.getTime());
+        Date dateEnd = new Date(timestampEnd.getTime());
+        if (errors(hourStart,hourEnd,dateStart,dateEnd,dateHoy)){
+            ScheduleEvent newEvent = new DefaultScheduleEvent("Horario Restringido", dateStart, dateEnd);
+            this.eventModel.updateEvent(newEvent);
             try {
-                serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), dateHoy, timeStampInicio, timeStampFin, false, "restringido", timestampHoy);
+                serviciosBiblioteca.nuevaReserva(usuario, this.recursoactual.getId(), dateHoy, timestampStart, timestampEnd, false, "restringido", timestampHoy);
             } catch (PersistenceException e) {
                 showErrors(e.getMessage());
             }
         }
     }
-
-
 
     /**
      * Metodo para mostrar errores en pantalla
@@ -268,12 +249,20 @@ public class CalendarioBean extends BasePageBean {
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));
     }
 
+    /**
+     * Metodo para mover el Evento
+     * @param event evento
+     */
     public void onEventMove(ScheduleEntryMoveEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
         PrimeFaces.current().dialog().showMessageDynamic(message);
         addMessage(message);
     }
 
+    /**
+     * Metodo para cambiar tamaño del evento
+     * @param event evento
+     */
     public void onEventResize(ScheduleEntryResizeEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
         PrimeFaces.current().dialog().showMessageDynamic(message);

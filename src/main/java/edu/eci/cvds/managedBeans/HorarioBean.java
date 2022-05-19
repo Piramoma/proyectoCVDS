@@ -24,6 +24,10 @@ public class HorarioBean extends BasePageBean {
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
 
+    /**
+     * Metodo para consultar Horarios
+     * @return lista de horarios
+     */
     public List<Horario> consultarHorarios() {
         try {
             return serviciosBiblioteca.consultarHorarios();
@@ -33,6 +37,10 @@ public class HorarioBean extends BasePageBean {
         return null;
     }
 
+    /**
+     * Metodo para mostrar errores en pantalla
+     * @param error error
+     */
     public void showErrors(String error){
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));

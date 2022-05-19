@@ -37,6 +37,10 @@ public class recursosMenosUsados extends BasePageBean {
 
     private BarChartModel grafico;
 
+    /**
+     * Netodo que selecciona el item del evento
+     * @param event evento
+     */
     public void itemSelect(ItemSelectEvent event) {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
                 "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());
@@ -44,12 +48,20 @@ public class recursosMenosUsados extends BasePageBean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
+    /**
+     * Retorna el Grafico
+     * @return Grafico
+     */
     public BarChartModel getGrafico() {
         createBarModel();
         return grafico;
     }
 
 
+    /**
+     * Metodo para iniciar BarChartModel
+     * @return BarChartModel
+     */
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
         ChartSeries graph = new ChartSeries();
@@ -79,10 +91,18 @@ public class recursosMenosUsados extends BasePageBean {
         return model;
     }
 
+    /**
+     * Metodo para consultar Reservas menos usadas
+     * @return Lista de reservas menos Usadas
+     * @throws PersistenceException clase errores
+     */
     public List<Reserva> consultarRecursosMenosUsados() throws PersistenceException {
         return serviciosBiblioteca.recursosMenosUsados();
     }
 
+    /**
+     * Metodo para crear el grafico
+     */
     private void createBarModel() {
         grafico = initBarModel();
         grafico.setTitle("Recursos menos usados");

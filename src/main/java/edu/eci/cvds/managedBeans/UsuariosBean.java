@@ -27,6 +27,18 @@ public class UsuariosBean extends BasePageBean {
     @Inject
     private ServiciosBiblioteca serviciosBiblioteca;
 
+    public String getUsuarioReservas() {
+        return usuarioReservas;
+    }
+
+    public void setUsuarioReservas(String usuarioReservas) {
+        this.usuarioReservas = usuarioReservas;
+    }
+
+    /**
+     * Metodo para consultar Usuarios con reservas
+     * @return Lista de usuarios
+     */
     public List<Usuario> getUsuariosConReservas() {
         try {
             return serviciosBiblioteca.consultarUsuariosConReservas();
@@ -36,6 +48,10 @@ public class UsuariosBean extends BasePageBean {
         return null;
     }
 
+    /**
+     * Metodo para consultar mas informacion de las reservas
+     * @param usuarioReservas usuario
+     */
     public void masInfoReserva(String usuarioReservas) {
         this.usuarioReservas = usuarioReservas;
         try {
@@ -45,10 +61,11 @@ public class UsuariosBean extends BasePageBean {
         }
     }
 
-    public String getUsuarioReservas() {
-        return usuarioReservas;
-    }
-
+    /**
+     * Metodo para consultar objeto usuaro
+     * @param idUsuario id usuario
+     * @return Usuario
+     */
     public Usuario getUsuario(String idUsuario){
         try {
             return serviciosBiblioteca.consultarNombreUsuario(idUsuario);
@@ -58,6 +75,10 @@ public class UsuariosBean extends BasePageBean {
         return null;
     }
 
+    /**
+     * Metodo para mostrar errores en pantalla
+     * @param error erroes
+     */
     public void showErrors(String error){
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));

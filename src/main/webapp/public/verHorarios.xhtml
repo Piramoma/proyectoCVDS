@@ -56,10 +56,8 @@
                             <a href="/faces/login.xhtml" class="nav-menu-link nav-link nav-menu-link_active" action="#{loginBean.setUltimaPagina('/faces/public/verHorarios.xhtml')}" >Iniciar Sesion</a>
                         </li>
                     </c:if>
-
                 </ul>
             </nav>
-
 
         </h:form>
     </header>
@@ -213,12 +211,31 @@
         </c:if>
 
         <c:if  test="#{loginBean.isAdmin()}">
-            <p:dialog widgetVar="eventDialog" header="Restringir Horario" showEffect="clip" hideEffect="clip" modal="true">
+            <p:dialog widgetVar="eventDialog" header="Reservar Recurso" showEffect="clip" hideEffect="clip" modal="true">
 
                 <h:panelGrid id="eventDetails" columns="2">
 
                     <p:outputLabel value="Id: "/>
                     <p:outputLabel value="#{calendarioBean.getRecursoactual().id}" required="true"/>
+
+                    <p:outputLabel value="Recurso: "/>
+                    <p:outputLabel value="#{calendarioBean.getRecursoactual().tipo}" required="true"/>
+
+                    <p:outputLabel value="Nombre: "/>
+                    <p:outputLabel value="#{calendarioBean.getRecursoactual().nombre}" required="true"/>
+
+                    <c:if  test="#{calendarioBean.getRecursoactual().tipo == 'libro'}">
+                        <p:outputLabel value="Unidades: "/>
+                        <p:outputLabel value="#{calendarioBean.getRecursoactual().capacidad}" required="true"/>
+                    </c:if>
+
+                    <c:if  test="#{calendarioBean.getRecursoactual().tipo == 'sala'}">
+                        <p:outputLabel value="Capacidad: "/>
+                        <p:outputLabel value="#{calendarioBean.getRecursoactual().capacidad}" required="true"/>
+                    </c:if>
+
+                    <p:outputLabel value="Descripcion: "/>
+                    <p:outputLabel value="#{calendarioBean.getRecursoactual().descripcion}" required="true"/>
 
                     <p:outputLabel value="Fecha Reserva:"/>
                     <p:outputLabel value="#{calendarioBean.getFechaDiaSeleccionado()}"  required="true"/>
@@ -259,10 +276,14 @@
                         <f:selectItem itemLabel="19:00" itemValue="19:00"/>
                     </p:selectOneMenu>
 
-                    <p:commandButton id="addButton" value="Reservar" action="#{calendarioBean.addEvent(loginBean.user)}"
+                    <p:commandButton id="addButton" value="Reservar" action="#{calendarioBean.addEventAdmin(loginBean.user)}"
                                      oncomplete="PF('myschedule').update();PF('eventDialog').hide);"/>
 
                 </h:panelGrid>
+
+                <p:messages id="messagesError" showDetail="true" closable="true">
+                    <p:autoUpdate/>
+                </p:messages>
 
             </p:dialog>
         </c:if>

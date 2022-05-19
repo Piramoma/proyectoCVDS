@@ -4,17 +4,11 @@ package edu.eci.cvds.managedBeans.graficos;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.ws.rs.PUT;
-
-
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 
 import edu.eci.cvds.managedBeans.BasePageBean;
@@ -38,6 +32,10 @@ public class reservasCanceladas extends BasePageBean {
 
     private BarChartModel grafico;
 
+    /**
+     * Netodo que selecciona el item del evento
+     * @param event evento
+     */
     public void itemSelect(ItemSelectEvent event) {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
                 "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());
@@ -46,15 +44,28 @@ public class reservasCanceladas extends BasePageBean {
     }
 
 
+    /**
+     * Retorna el Grafico
+     * @return Grafico
+     */
     public BarChartModel getGrafico() {
         createBarModel();
         return grafico;
     }
 
+    /**
+     * Consulta Reservas Canceladas
+     * @return Lista de reservas Canceladas
+     * @throws PersistenceException clase errores
+     */
     public List<Reserva> consultarReservasCanceladasGrafico() throws PersistenceException {
         return serviciosBiblioteca.consultarReservasCanceladasGrafico();
     }
 
+    /**
+     * Metodo para iniciar BarChartModel
+     * @return BarChartModel
+     */
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
         ChartSeries graph = new ChartSeries();
@@ -84,6 +95,9 @@ public class reservasCanceladas extends BasePageBean {
         return model;
     }
 
+    /**
+     * Metodo para crear el grafico
+     */
     private void createBarModel() {
         grafico = initBarModel();
         grafico.setTitle("Reservas Canceladas");

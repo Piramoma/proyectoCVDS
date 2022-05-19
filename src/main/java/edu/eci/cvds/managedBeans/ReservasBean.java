@@ -39,6 +39,11 @@ public class ReservasBean extends BasePageBean {
     private ServiciosBiblioteca serviciosBiblioteca;
 
 
+    /**
+     * Metodo para consultar Usuarios con poca Informacin
+     * @param idUsuario usuario
+     * @return Lista de reservas
+     */
     public List<Reserva> consultarPorUsuarioPocaInfo(String idUsuario) {
         try {
             return serviciosBiblioteca.consultarPorUsuarioPocaInfo(idUsuario);
@@ -48,6 +53,11 @@ public class ReservasBean extends BasePageBean {
         return null;
     }
 
+    /**
+     * Metodo para consultar Reservas Pasadas
+     * @param idUsuario usuario
+     * @return Lista de Reservas
+     */
     public List<Reserva> consultarReservasPasadas(String idUsuario) {
         try {
             return serviciosBiblioteca.consultarReservasPasadas(idUsuario);
@@ -57,6 +67,11 @@ public class ReservasBean extends BasePageBean {
         return null;
     }
 
+    /**
+     * Metodo para consultar Reservas Canceladas
+     * @param idUsuario usuario
+     * @return Lista de Reservas
+     */
     public List<Reserva> consultarReservasCanceladas(String idUsuario) {
         try {
             return serviciosBiblioteca.consultarReservasCanceladas(idUsuario);
@@ -66,6 +81,12 @@ public class ReservasBean extends BasePageBean {
         return null;
     }
 
+    /**
+     * Metodo para consultar Horarios
+     * @param idrecurso recurso
+     * @param idhorario horario
+     * @return Horario
+     */
     public Horario consultarHorario(int idrecurso, int idhorario) {
         try {
             return serviciosBiblioteca.consultarHorario(idrecurso, idhorario);
@@ -75,6 +96,10 @@ public class ReservasBean extends BasePageBean {
         return null;
     }
 
+    /**
+     * Metodo para cancelar Reserva
+     * @param idRecurso recurso
+     */
     public void cancelarReserva(int idRecurso){
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/public/misReservas.xhtml");
@@ -83,15 +108,30 @@ public class ReservasBean extends BasePageBean {
             showErrors(e.getMessage());
         }
     }
+
+    /**
+     * Metodo para mostrar errores en pantalla
+     * @param error erroes
+     */
     public void showErrors(String error) {
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));
     }
 
+    /**
+     * Metodo para consultar Horarios con mucha ocupacin
+     * @return Lista de reservas
+     * @throws PersistenceException exepciones
+     */
     public List<Reserva> consultarHorariosMayorOcupacion() throws PersistenceException {
         return serviciosBiblioteca.consultarHorariosMayorOcupacion();
     }
 
+    /**
+     * Metodo para consultar Horarios con poca ocupacin
+     * @return Lista de reservas
+     * @throws PersistenceException exepciones
+     */
     public List<Reserva> consultarHorariosMenorOcupacion() throws PersistenceException {
         return serviciosBiblioteca.consultarHorariosMenorOcupacion();
     }

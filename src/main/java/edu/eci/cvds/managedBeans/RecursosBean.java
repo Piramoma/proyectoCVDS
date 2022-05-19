@@ -135,6 +135,56 @@ public class RecursosBean extends BasePageBean {
         return serviciosBiblioteca.consultarSalasEstudio();
     }
 
+    public int getIdRecursoSeleccionado() {
+        return idRecursoSeleccionado;
+    }
+
+    public void setIdRecursoSeleccionado(int idRecursoSeleccionado) {
+        this.idRecursoSeleccionado = idRecursoSeleccionado;
+    }
+
+    /**
+     * Metodo para listar Equipos
+     * @return lista de Equipos
+     */
+    public List<Recurso> getTodosLosEquipos(){
+        try {
+            return serviciosBiblioteca.consultarTodoEquipos();
+        }catch (PersistenceException e){
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * Metodo para listar Libros
+     * @return lista de Libros
+     */
+    public List<Recurso> getTodosLosLibros(){
+        try {
+            return serviciosBiblioteca.consultarTodoLibros();
+        }catch (PersistenceException e){
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * Metodo para listar Salas de Estudio
+     * @return lista de Salas de Estudio
+     */
+    public List<Recurso> getTodasSalasEstudio(){
+        try {
+            return serviciosBiblioteca.consultarTodoSalasEstudio();
+        } catch (PersistenceException e) {
+            showErrors(e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * Metodo para añadir un nuevo recurso
+     */
     public void nuevoRecurso() {
         boolean noError = true;
         if (idInterno == 0) { showErrors("Ingresar Idinterno diferente de 0"); noError=false;}
@@ -164,6 +214,10 @@ public class RecursosBean extends BasePageBean {
         description = "";
     }
 
+    /**
+     * Metodo para cambiar estado de recurso
+     * @param redirect pagina a reidreccionar
+     */
     public void cambiarEstadoRecurso(String redirect){
         try {
             serviciosBiblioteca.cambiarEstadoRecurso(estado,idRecursoSeleccionado);
@@ -175,6 +229,10 @@ public class RecursosBean extends BasePageBean {
         }
     }
 
+    /**
+     * Metodo para selecionar un recurso
+     * @param idRecursoSeleccionadod id
+     */
     public void seleccionarRecurso(int idRecursoSeleccionadod){
         setIdRecursoSeleccionado(idRecursoSeleccionadod);
         try {
@@ -184,43 +242,12 @@ public class RecursosBean extends BasePageBean {
         }
     }
 
+    /**
+     * Metodo para mostrar errores en pantalla
+     * @param error erroes
+     */
     public void showErrors(String error){
         FacesContext.getCurrentInstance().addMessage("Shiro",
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intente de nuevo: ", error));
-    }
-
-    public int getIdRecursoSeleccionado() {
-        return idRecursoSeleccionado;
-    }
-
-    public void setIdRecursoSeleccionado(int idRecursoSeleccionado) {
-        this.idRecursoSeleccionado = idRecursoSeleccionado;
-    }
-
-    public List<Recurso> getTodosLosEquipos(){
-        try {
-            return serviciosBiblioteca.consultarTodoEquipos();
-        }catch (PersistenceException e){
-            showErrors(e.getMessage());
-        }
-        return null;
-    }
-
-    public List<Recurso> getTodosLosLibros(){
-        try {
-            return serviciosBiblioteca.consultarTodoLibros();
-        }catch (PersistenceException e){
-            showErrors(e.getMessage());
-        }
-        return null;
-    }
-
-    public List<Recurso> getTodasSalasEstudio(){
-        try {
-            return serviciosBiblioteca.consultarTodoSalasEstudio();
-        } catch (PersistenceException e) {
-            showErrors(e.getMessage());
-        }
-        return null;
     }
 }
