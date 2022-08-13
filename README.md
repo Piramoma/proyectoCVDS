@@ -20,3 +20,7 @@ Se puede encontrar el documento como un archivo .docs en el repositorio, el cual
 ### Manual de usuario
 
 El manual de usuario lo puedes encontrar adjunto a este repositorio como un archivo .pdf llamado Manual-Plataforma-Biblioteca
+
+### Link de la Aplicacion
+
+http://proyecto-cvds-piramoma.herokuapp.com/
