@@ -1,8 +1,11 @@
 ## Escuela Colombiana de Ingeniería
 
 ### CVDS – Ciclos de Vida del desarrollo de Software
-### Proyecto Final - Sprint No. 1
 
+La Plataforma Gestión de Recursos Biblioteca, es una herramienta donde el personal de
+la biblioteca pertenecientes a la Escuela Colombiana de Ingeniería Julio Garavito, pueden
+registrar las salas de estudio, equipos de cómputo y demás recursos con los que cuenta la
+biblioteca, junto con los horarios de disponibilidad y demás información importante.
 
 **INTEGRANTES**
 
@@ -20,7 +23,20 @@ Se puede encontrar el documento como un archivo .docs en el repositorio, el cual
 ### Manual de usuario
 
 El manual de usuario lo puedes encontrar adjunto a este repositorio como un archivo .pdf llamado Manual-Plataforma-Biblioteca
+[Manual](https://github.com/Piramoma/proyectoCVDS-PlataformaRecursosBibliotecaECI/blob/main/Manual-Plataforma-BibliotecaECI.pdf)
 
 ### Link de la Aplicacion
 
 http://proyecto-cvds-piramoma.herokuapp.com/
+
+## Credenciales:
+
+Admin: 
+
+- User: admin
+- Password: admin
+
+Client
+
+- User: yesid.mora
+- Password: 12345
